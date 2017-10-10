@@ -15,22 +15,22 @@ class InternalApiStub(object):
       channel: A grpc.Channel.
     """
     self.Read = channel.unary_stream(
-        '/main.InternalApi/Read',
+        '/synse.InternalApi/Read',
         request_serializer=synse__pb2.ReadRequest.SerializeToString,
         response_deserializer=synse__pb2.ReadResponse.FromString,
         )
     self.Write = channel.unary_unary(
-        '/main.InternalApi/Write',
+        '/synse.InternalApi/Write',
         request_serializer=synse__pb2.WriteRequest.SerializeToString,
         response_deserializer=synse__pb2.TransactionId.FromString,
         )
     self.Metainfo = channel.unary_stream(
-        '/main.InternalApi/Metainfo',
+        '/synse.InternalApi/Metainfo',
         request_serializer=synse__pb2.MetainfoRequest.SerializeToString,
         response_deserializer=synse__pb2.MetainfoResponse.FromString,
         )
     self.TransactionCheck = channel.unary_unary(
-        '/main.InternalApi/TransactionCheck',
+        '/synse.InternalApi/TransactionCheck',
         request_serializer=synse__pb2.TransactionId.SerializeToString,
         response_deserializer=synse__pb2.WriteResponse.FromString,
         )
@@ -94,5 +94,5 @@ def add_InternalApiServicer_to_server(servicer, server):
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'main.InternalApi', rpc_method_handlers)
+      'synse.InternalApi', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))
