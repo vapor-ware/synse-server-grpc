@@ -1,8 +1,8 @@
 """ Synse Server gRPC internal plugin API.
 """
 
-import synse_pb2 as api
-import synse_pb2_grpc as grpc
+from . import synse_pb2 as api
+from . import synse_pb2_grpc as grpc
 
 
 __title__ = 'synse_plugin'

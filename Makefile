@@ -6,10 +6,13 @@ python:  ## Build the GRPC source for Python
 	docker run \
 	    -v `pwd`:/build \
 	    grpc/python:1.4 \
-	    python -m grpc_tools.protoc -I/build \
+	    python3 -m grpc_tools.protoc -I/build \
 	        --python_out=/build/python/synse_plugin \
 	        --grpc_python_out=/build/python/synse_plugin \
-	        /build/synse.proto
+	        /build/synse.proto && \
+	sed -i -e 's/import synse_pb2 as synse__pb2/from . import synse_pb2 as synse__pb2/g' python/synse_plugin/synse_pb2_grpc.py && \
+	if [ -f "python/synse_plugin/synse_pb2_grpc.py-e" ]; then rm python/synse_plugin/synse_pb2_grpc.py-e; fi;
+
 
 
 go:  ## Build the GRPC source for Go
@@ -30,6 +33,7 @@ pip-package:
 	cd python ; python setup.py sdist
 
 pip-install:
+	@# this could also be done from here with pip install -I -e ./python -- this  makes it editable..
 	cd python ; pip install dist/synse_plugin-*.tar.gz
 
 pip-uninstall:
