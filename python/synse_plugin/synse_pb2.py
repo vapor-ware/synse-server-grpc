@@ -3,7 +3,6 @@
 
 import sys
 _b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
-from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
@@ -20,59 +19,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='synse.proto',
   package='synse',
   syntax='proto3',
-  serialized_pb=_b('\n\x0bsynse.proto\x12\x05synse\"\x1a\n\x0bReadRequest\x12\x0b\n\x03uid\x18\x01 \x01(\t\")\n\x0cWriteRequest\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x03(\t\".\n\x0fMetainfoRequest\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\"\x1b\n\rTransactionId\x12\n\n\x02id\x18\x01 \x01(\t\"R\n\x0cReadResponse\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12 \n\x04type\x18\x02 \x01(\x0e\x32\x12.synse.ReadingType\x12\r\n\x05value\x18\x03 \x01(\t\"\xe0\x01\n\x10MetainfoResponse\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0b\n\x03uid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\r\n\x05model\x18\x04 \x01(\t\x12\x14\n\x0cmanufacturer\x18\x05 \x01(\t\x12\x10\n\x08protocol\x18\x06 \x01(\t\x12\x0c\n\x04info\x18\x07 \x01(\t\x12\x0f\n\x07\x63omment\x18\x08 \x01(\t\x12%\n\x08location\x18\t \x01(\x0b\x32\x13.synse.MetaLocation\x12!\n\x06output\x18\n \x03(\x0b\x32\x11.synse.MetaOutput\"\xe5\x01\n\rWriteResponse\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x30\n\x06status\x18\x02 \x01(\x0e\x32 .synse.WriteResponse.WriteStatus\x12.\n\x05state\x18\x03 \x01(\x0e\x32\x1f.synse.WriteResponse.WriteState\">\n\x0bWriteStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0b\n\x07WRITING\x10\x02\x12\x08\n\x04\x44ONE\x10\x03\"\x1f\n\nWriteState\x12\x06\n\x02OK\x10\x00\x12\t\n\x05\x45RROR\x10\x01\".\n\x0eMetaOutputUnit\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t\"+\n\x0fMetaOutputRange\x12\x0b\n\x03min\x18\x01 \x01(\x05\x12\x0b\n\x03max\x18\x02 \x01(\x05\"y\n\nMetaOutput\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x11\n\tprecision\x18\x02 \x01(\x05\x12#\n\x04unit\x18\x03 \x01(\x0b\x32\x15.synse.MetaOutputUnit\x12%\n\x05range\x18\x04 \x01(\x0b\x32\x16.synse.MetaOutputRange\";\n\x0cMetaLocation\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x03 \x01(\t*\x7f\n\x0bReadingType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0bTEMPERATURE\x10\x01\x12\x19\n\x15\x44IFFERENTIAL_PRESSURE\x10\x02\x12\x0b\n\x07\x41IRFLOW\x10\x03\x12\x0c\n\x08HUMIDITY\x10\x04\x12\r\n\tLED_STATE\x10\x05\x12\r\n\tLED_BLINK\x10\x06\x32\xfb\x01\n\x0bInternalApi\x12\x33\n\x04Read\x12\x12.synse.ReadRequest\x1a\x13.synse.ReadResponse\"\x00\x30\x01\x12\x34\n\x05Write\x12\x13.synse.WriteRequest\x1a\x14.synse.TransactionId\"\x00\x12?\n\x08Metainfo\x12\x16.synse.MetainfoRequest\x1a\x17.synse.MetainfoResponse\"\x00\x30\x01\x12@\n\x10TransactionCheck\x12\x14.synse.TransactionId\x1a\x14.synse.WriteResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0bsynse.proto\x12\x05synse\"\x1a\n\x0bReadRequest\x12\x0b\n\x03uid\x18\x01 \x01(\t\";\n\x0cWriteRequest\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12\x1e\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x10.synse.WriteData\".\n\x0fMetainfoRequest\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\"\x1b\n\rTransactionId\x12\n\n\x02id\x18\x01 \x01(\t\">\n\x0cReadResponse\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t\"\x92\x01\n\x0cTransactions\x12;\n\x0ctransactions\x18\x01 \x03(\x0b\x32%.synse.Transactions.TransactionsEntry\x1a\x45\n\x11TransactionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1f\n\x05value\x18\x02 \x01(\x0b\x32\x10.synse.WriteData:\x02\x38\x01\"\xe0\x01\n\x10MetainfoResponse\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0b\n\x03uid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\r\n\x05model\x18\x04 \x01(\t\x12\x14\n\x0cmanufacturer\x18\x05 \x01(\t\x12\x10\n\x08protocol\x18\x06 \x01(\t\x12\x0c\n\x04info\x18\x07 \x01(\t\x12\x0f\n\x07\x63omment\x18\x08 \x01(\t\x12%\n\x08location\x18\t \x01(\x0b\x32\x13.synse.MetaLocation\x12!\n\x06output\x18\n \x03(\x0b\x32\x11.synse.MetaOutput\"\x85\x02\n\rWriteResponse\x12\x0f\n\x07\x63reated\x18\x01 \x01(\t\x12\x0f\n\x07updated\x18\x02 \x01(\t\x12\x30\n\x06status\x18\x03 \x01(\x0e\x32 .synse.WriteResponse.WriteStatus\x12.\n\x05state\x18\x04 \x01(\x0e\x32\x1f.synse.WriteResponse.WriteState\x12\x0f\n\x07message\x18\x05 \x01(\t\">\n\x0bWriteStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0b\n\x07WRITING\x10\x02\x12\x08\n\x04\x44ONE\x10\x03\"\x1f\n\nWriteState\x12\x06\n\x02OK\x10\x00\x12\t\n\x05\x45RROR\x10\x01\"(\n\tWriteData\x12\x0b\n\x03raw\x18\x01 \x03(\x0c\x12\x0e\n\x06\x61\x63tion\x18\x02 \x01(\t\".\n\x0eMetaOutputUnit\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t\"+\n\x0fMetaOutputRange\x12\x0b\n\x03min\x18\x01 \x01(\x05\x12\x0b\n\x03max\x18\x02 \x01(\x05\"y\n\nMetaOutput\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x11\n\tprecision\x18\x02 \x01(\x05\x12#\n\x04unit\x18\x03 \x01(\x0b\x32\x15.synse.MetaOutputUnit\x12%\n\x05range\x18\x04 \x01(\x0b\x32\x16.synse.MetaOutputRange\";\n\x0cMetaLocation\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x03 \x01(\t2\xfa\x01\n\x0bInternalApi\x12\x33\n\x04Read\x12\x12.synse.ReadRequest\x1a\x13.synse.ReadResponse\"\x00\x30\x01\x12\x33\n\x05Write\x12\x13.synse.WriteRequest\x1a\x13.synse.Transactions\"\x00\x12?\n\x08Metainfo\x12\x16.synse.MetainfoRequest\x1a\x17.synse.MetainfoResponse\"\x00\x30\x01\x12@\n\x10TransactionCheck\x12\x14.synse.TransactionId\x1a\x14.synse.WriteResponse\"\x00\x62\x06proto3')
 )
 
-_READINGTYPE = _descriptor.EnumDescriptor(
-  name='ReadingType',
-  full_name='synse.ReadingType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='UNKNOWN', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='TEMPERATURE', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='DIFFERENTIAL_PRESSURE', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='AIRFLOW', index=3, number=3,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='HUMIDITY', index=4, number=4,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='LED_STATE', index=5, number=5,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='LED_BLINK', index=6, number=6,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=990,
-  serialized_end=1117,
-)
-_sym_db.RegisterEnumDescriptor(_READINGTYPE)
-
-ReadingType = enum_type_wrapper.EnumTypeWrapper(_READINGTYPE)
-UNKNOWN = 0
-TEMPERATURE = 1
-DIFFERENTIAL_PRESSURE = 2
-AIRFLOW = 3
-HUMIDITY = 4
-LED_STATE = 5
-LED_BLINK = 6
 
 
 _WRITERESPONSE_WRITESTATUS = _descriptor.EnumDescriptor(
@@ -100,8 +49,8 @@ _WRITERESPONSE_WRITESTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=616,
-  serialized_end=678,
+  serialized_start=795,
+  serialized_end=857,
 )
 _sym_db.RegisterEnumDescriptor(_WRITERESPONSE_WRITESTATUS)
 
@@ -122,8 +71,8 @@ _WRITERESPONSE_WRITESTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=680,
-  serialized_end=711,
+  serialized_start=859,
+  serialized_end=890,
 )
 _sym_db.RegisterEnumDescriptor(_WRITERESPONSE_WRITESTATE)
 
@@ -175,7 +124,7 @@ _WRITEREQUEST = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='data', full_name='synse.WriteRequest.data', index=1,
-      number=2, type=9, cpp_type=9, label=3,
+      number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -193,7 +142,7 @@ _WRITEREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=50,
-  serialized_end=91,
+  serialized_end=109,
 )
 
 
@@ -230,8 +179,8 @@ _METAINFOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=93,
-  serialized_end=139,
+  serialized_start=111,
+  serialized_end=157,
 )
 
 
@@ -261,8 +210,8 @@ _TRANSACTIONID = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=141,
-  serialized_end=168,
+  serialized_start=159,
+  serialized_end=186,
 )
 
 
@@ -282,8 +231,8 @@ _READRESPONSE = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='type', full_name='synse.ReadResponse.type', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -306,8 +255,76 @@ _READRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=170,
-  serialized_end=252,
+  serialized_start=188,
+  serialized_end=250,
+)
+
+
+_TRANSACTIONS_TRANSACTIONSENTRY = _descriptor.Descriptor(
+  name='TransactionsEntry',
+  full_name='synse.Transactions.TransactionsEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='synse.Transactions.TransactionsEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='synse.Transactions.TransactionsEntry.value', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=_descriptor._ParseOptions(descriptor_pb2.MessageOptions(), _b('8\001')),
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=330,
+  serialized_end=399,
+)
+
+_TRANSACTIONS = _descriptor.Descriptor(
+  name='Transactions',
+  full_name='synse.Transactions',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='transactions', full_name='synse.Transactions.transactions', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_TRANSACTIONS_TRANSACTIONSENTRY, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=253,
+  serialized_end=399,
 )
 
 
@@ -400,8 +417,8 @@ _METAINFORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=255,
-  serialized_end=479,
+  serialized_start=402,
+  serialized_end=626,
 )
 
 
@@ -413,23 +430,37 @@ _WRITERESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='synse.WriteResponse.timestamp', index=0,
+      name='created', full_name='synse.WriteResponse.created', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='status', full_name='synse.WriteResponse.status', index=1,
-      number=2, type=14, cpp_type=8, label=1,
+      name='updated', full_name='synse.WriteResponse.updated', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='synse.WriteResponse.status', index=2,
+      number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='state', full_name='synse.WriteResponse.state', index=2,
-      number=3, type=14, cpp_type=8, label=1,
+      name='state', full_name='synse.WriteResponse.state', index=3,
+      number=4, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='message', full_name='synse.WriteResponse.message', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -447,8 +478,46 @@ _WRITERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=482,
-  serialized_end=711,
+  serialized_start=629,
+  serialized_end=890,
+)
+
+
+_WRITEDATA = _descriptor.Descriptor(
+  name='WriteData',
+  full_name='synse.WriteData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='raw', full_name='synse.WriteData.raw', index=0,
+      number=1, type=12, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='action', full_name='synse.WriteData.action', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=892,
+  serialized_end=932,
 )
 
 
@@ -485,8 +554,8 @@ _METAOUTPUTUNIT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=713,
-  serialized_end=759,
+  serialized_start=934,
+  serialized_end=980,
 )
 
 
@@ -523,8 +592,8 @@ _METAOUTPUTRANGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=761,
-  serialized_end=804,
+  serialized_start=982,
+  serialized_end=1025,
 )
 
 
@@ -575,8 +644,8 @@ _METAOUTPUT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=806,
-  serialized_end=927,
+  serialized_start=1027,
+  serialized_end=1148,
 )
 
 
@@ -620,11 +689,14 @@ _METALOCATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=929,
-  serialized_end=988,
+  serialized_start=1150,
+  serialized_end=1209,
 )
 
-_READRESPONSE.fields_by_name['type'].enum_type = _READINGTYPE
+_WRITEREQUEST.fields_by_name['data'].message_type = _WRITEDATA
+_TRANSACTIONS_TRANSACTIONSENTRY.fields_by_name['value'].message_type = _WRITEDATA
+_TRANSACTIONS_TRANSACTIONSENTRY.containing_type = _TRANSACTIONS
+_TRANSACTIONS.fields_by_name['transactions'].message_type = _TRANSACTIONS_TRANSACTIONSENTRY
 _METAINFORESPONSE.fields_by_name['location'].message_type = _METALOCATION
 _METAINFORESPONSE.fields_by_name['output'].message_type = _METAOUTPUT
 _WRITERESPONSE.fields_by_name['status'].enum_type = _WRITERESPONSE_WRITESTATUS
@@ -638,13 +710,14 @@ DESCRIPTOR.message_types_by_name['WriteRequest'] = _WRITEREQUEST
 DESCRIPTOR.message_types_by_name['MetainfoRequest'] = _METAINFOREQUEST
 DESCRIPTOR.message_types_by_name['TransactionId'] = _TRANSACTIONID
 DESCRIPTOR.message_types_by_name['ReadResponse'] = _READRESPONSE
+DESCRIPTOR.message_types_by_name['Transactions'] = _TRANSACTIONS
 DESCRIPTOR.message_types_by_name['MetainfoResponse'] = _METAINFORESPONSE
 DESCRIPTOR.message_types_by_name['WriteResponse'] = _WRITERESPONSE
+DESCRIPTOR.message_types_by_name['WriteData'] = _WRITEDATA
 DESCRIPTOR.message_types_by_name['MetaOutputUnit'] = _METAOUTPUTUNIT
 DESCRIPTOR.message_types_by_name['MetaOutputRange'] = _METAOUTPUTRANGE
 DESCRIPTOR.message_types_by_name['MetaOutput'] = _METAOUTPUT
 DESCRIPTOR.message_types_by_name['MetaLocation'] = _METALOCATION
-DESCRIPTOR.enum_types_by_name['ReadingType'] = _READINGTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ReadRequest = _reflection.GeneratedProtocolMessageType('ReadRequest', (_message.Message,), dict(
@@ -682,6 +755,21 @@ ReadResponse = _reflection.GeneratedProtocolMessageType('ReadResponse', (_messag
   ))
 _sym_db.RegisterMessage(ReadResponse)
 
+Transactions = _reflection.GeneratedProtocolMessageType('Transactions', (_message.Message,), dict(
+
+  TransactionsEntry = _reflection.GeneratedProtocolMessageType('TransactionsEntry', (_message.Message,), dict(
+    DESCRIPTOR = _TRANSACTIONS_TRANSACTIONSENTRY,
+    __module__ = 'synse_pb2'
+    # @@protoc_insertion_point(class_scope:synse.Transactions.TransactionsEntry)
+    ))
+  ,
+  DESCRIPTOR = _TRANSACTIONS,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.Transactions)
+  ))
+_sym_db.RegisterMessage(Transactions)
+_sym_db.RegisterMessage(Transactions.TransactionsEntry)
+
 MetainfoResponse = _reflection.GeneratedProtocolMessageType('MetainfoResponse', (_message.Message,), dict(
   DESCRIPTOR = _METAINFORESPONSE,
   __module__ = 'synse_pb2'
@@ -695,6 +783,13 @@ WriteResponse = _reflection.GeneratedProtocolMessageType('WriteResponse', (_mess
   # @@protoc_insertion_point(class_scope:synse.WriteResponse)
   ))
 _sym_db.RegisterMessage(WriteResponse)
+
+WriteData = _reflection.GeneratedProtocolMessageType('WriteData', (_message.Message,), dict(
+  DESCRIPTOR = _WRITEDATA,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.WriteData)
+  ))
+_sym_db.RegisterMessage(WriteData)
 
 MetaOutputUnit = _reflection.GeneratedProtocolMessageType('MetaOutputUnit', (_message.Message,), dict(
   DESCRIPTOR = _METAOUTPUTUNIT,
@@ -725,6 +820,8 @@ MetaLocation = _reflection.GeneratedProtocolMessageType('MetaLocation', (_messag
 _sym_db.RegisterMessage(MetaLocation)
 
 
+_TRANSACTIONS_TRANSACTIONSENTRY.has_options = True
+_TRANSACTIONS_TRANSACTIONSENTRY._options = _descriptor._ParseOptions(descriptor_pb2.MessageOptions(), _b('8\001'))
 try:
   # THESE ELEMENTS WILL BE DEPRECATED.
   # Please use the generated *_pb2_grpc.py files instead.
@@ -753,7 +850,7 @@ try:
       self.Write = channel.unary_unary(
           '/synse.InternalApi/Write',
           request_serializer=WriteRequest.SerializeToString,
-          response_deserializer=TransactionId.FromString,
+          response_deserializer=Transactions.FromString,
           )
       self.Metainfo = channel.unary_stream(
           '/synse.InternalApi/Metainfo',
@@ -811,7 +908,7 @@ try:
         'Write': grpc.unary_unary_rpc_method_handler(
             servicer.Write,
             request_deserializer=WriteRequest.FromString,
-            response_serializer=TransactionId.SerializeToString,
+            response_serializer=Transactions.SerializeToString,
         ),
         'Metainfo': grpc.unary_stream_rpc_method_handler(
             servicer.Metainfo,
@@ -901,7 +998,7 @@ try:
       ('synse.InternalApi', 'Metainfo'): MetainfoResponse.SerializeToString,
       ('synse.InternalApi', 'Read'): ReadResponse.SerializeToString,
       ('synse.InternalApi', 'TransactionCheck'): WriteResponse.SerializeToString,
-      ('synse.InternalApi', 'Write'): TransactionId.SerializeToString,
+      ('synse.InternalApi', 'Write'): Transactions.SerializeToString,
     }
     method_implementations = {
       ('synse.InternalApi', 'Metainfo'): face_utilities.unary_stream_inline(servicer.Metainfo),
@@ -929,7 +1026,7 @@ try:
       ('synse.InternalApi', 'Metainfo'): MetainfoResponse.FromString,
       ('synse.InternalApi', 'Read'): ReadResponse.FromString,
       ('synse.InternalApi', 'TransactionCheck'): WriteResponse.FromString,
-      ('synse.InternalApi', 'Write'): TransactionId.FromString,
+      ('synse.InternalApi', 'Write'): Transactions.FromString,
     }
     cardinalities = {
       'Metainfo': cardinality.Cardinality.UNARY_STREAM,

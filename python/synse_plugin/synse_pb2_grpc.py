@@ -22,7 +22,7 @@ class InternalApiStub(object):
     self.Write = channel.unary_unary(
         '/synse.InternalApi/Write',
         request_serializer=synse__pb2.WriteRequest.SerializeToString,
-        response_deserializer=synse__pb2.TransactionId.FromString,
+        response_deserializer=synse__pb2.Transactions.FromString,
         )
     self.Metainfo = channel.unary_stream(
         '/synse.InternalApi/Metainfo',
@@ -80,7 +80,7 @@ def add_InternalApiServicer_to_server(servicer, server):
       'Write': grpc.unary_unary_rpc_method_handler(
           servicer.Write,
           request_deserializer=synse__pb2.WriteRequest.FromString,
-          response_serializer=synse__pb2.TransactionId.SerializeToString,
+          response_serializer=synse__pb2.Transactions.SerializeToString,
       ),
       'Metainfo': grpc.unary_stream_rpc_method_handler(
           servicer.Metainfo,
