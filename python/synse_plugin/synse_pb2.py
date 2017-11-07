@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='synse.proto',
   package='synse',
   syntax='proto3',
-  serialized_pb=_b('\n\x0bsynse.proto\x12\x05synse\"\x1a\n\x0bReadRequest\x12\x0b\n\x03uid\x18\x01 \x01(\t\";\n\x0cWriteRequest\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12\x1e\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x10.synse.WriteData\".\n\x0fMetainfoRequest\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\"\x1b\n\rTransactionId\x12\n\n\x02id\x18\x01 \x01(\t\">\n\x0cReadResponse\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t\"\x92\x01\n\x0cTransactions\x12;\n\x0ctransactions\x18\x01 \x03(\x0b\x32%.synse.Transactions.TransactionsEntry\x1a\x45\n\x11TransactionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1f\n\x05value\x18\x02 \x01(\x0b\x32\x10.synse.WriteData:\x02\x38\x01\"\xe0\x01\n\x10MetainfoResponse\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0b\n\x03uid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\r\n\x05model\x18\x04 \x01(\t\x12\x14\n\x0cmanufacturer\x18\x05 \x01(\t\x12\x10\n\x08protocol\x18\x06 \x01(\t\x12\x0c\n\x04info\x18\x07 \x01(\t\x12\x0f\n\x07\x63omment\x18\x08 \x01(\t\x12%\n\x08location\x18\t \x01(\x0b\x32\x13.synse.MetaLocation\x12!\n\x06output\x18\n \x03(\x0b\x32\x11.synse.MetaOutput\"\x85\x02\n\rWriteResponse\x12\x0f\n\x07\x63reated\x18\x01 \x01(\t\x12\x0f\n\x07updated\x18\x02 \x01(\t\x12\x30\n\x06status\x18\x03 \x01(\x0e\x32 .synse.WriteResponse.WriteStatus\x12.\n\x05state\x18\x04 \x01(\x0e\x32\x1f.synse.WriteResponse.WriteState\x12\x0f\n\x07message\x18\x05 \x01(\t\">\n\x0bWriteStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0b\n\x07WRITING\x10\x02\x12\x08\n\x04\x44ONE\x10\x03\"\x1f\n\nWriteState\x12\x06\n\x02OK\x10\x00\x12\t\n\x05\x45RROR\x10\x01\"(\n\tWriteData\x12\x0b\n\x03raw\x18\x01 \x03(\x0c\x12\x0e\n\x06\x61\x63tion\x18\x02 \x01(\t\".\n\x0eMetaOutputUnit\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t\"+\n\x0fMetaOutputRange\x12\x0b\n\x03min\x18\x01 \x01(\x05\x12\x0b\n\x03max\x18\x02 \x01(\x05\"y\n\nMetaOutput\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x11\n\tprecision\x18\x02 \x01(\x05\x12#\n\x04unit\x18\x03 \x01(\x0b\x32\x15.synse.MetaOutputUnit\x12%\n\x05range\x18\x04 \x01(\x0b\x32\x16.synse.MetaOutputRange\";\n\x0cMetaLocation\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x03 \x01(\t2\xfa\x01\n\x0bInternalApi\x12\x33\n\x04Read\x12\x12.synse.ReadRequest\x1a\x13.synse.ReadResponse\"\x00\x30\x01\x12\x33\n\x05Write\x12\x13.synse.WriteRequest\x1a\x13.synse.Transactions\"\x00\x12?\n\x08Metainfo\x12\x16.synse.MetainfoRequest\x1a\x17.synse.MetainfoResponse\"\x00\x30\x01\x12@\n\x10TransactionCheck\x12\x14.synse.TransactionId\x1a\x14.synse.WriteResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0bsynse.proto\x12\x05synse\"\x1a\n\x0bReadRequest\x12\x0b\n\x03uid\x18\x01 \x01(\t\";\n\x0cWriteRequest\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12\x1e\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x10.synse.WriteData\".\n\x0fMetainfoRequest\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\"\x1b\n\rTransactionId\x12\n\n\x02id\x18\x01 \x01(\t\">\n\x0cReadResponse\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t\"\x92\x01\n\x0cTransactions\x12;\n\x0ctransactions\x18\x01 \x03(\x0b\x32%.synse.Transactions.TransactionsEntry\x1a\x45\n\x11TransactionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1f\n\x05value\x18\x02 \x01(\x0b\x32\x10.synse.WriteData:\x02\x38\x01\"\xe0\x01\n\x10MetainfoResponse\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0b\n\x03uid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\r\n\x05model\x18\x04 \x01(\t\x12\x14\n\x0cmanufacturer\x18\x05 \x01(\t\x12\x10\n\x08protocol\x18\x06 \x01(\t\x12\x0c\n\x04info\x18\x07 \x01(\t\x12\x0f\n\x07\x63omment\x18\x08 \x01(\t\x12%\n\x08location\x18\t \x01(\x0b\x32\x13.synse.MetaLocation\x12!\n\x06output\x18\n \x03(\x0b\x32\x11.synse.MetaOutput\"\x85\x02\n\rWriteResponse\x12\x0f\n\x07\x63reated\x18\x01 \x01(\t\x12\x0f\n\x07updated\x18\x02 \x01(\t\x12\x30\n\x06status\x18\x03 \x01(\x0e\x32 .synse.WriteResponse.WriteStatus\x12.\n\x05state\x18\x04 \x01(\x0e\x32\x1f.synse.WriteResponse.WriteState\x12\x0f\n\x07message\x18\x05 \x01(\t\">\n\x0bWriteStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0b\n\x07WRITING\x10\x02\x12\x08\n\x04\x44ONE\x10\x03\"\x1f\n\nWriteState\x12\x06\n\x02OK\x10\x00\x12\t\n\x05\x45RROR\x10\x01\"(\n\tWriteData\x12\x0b\n\x03raw\x18\x01 \x03(\x0c\x12\x0e\n\x06\x61\x63tion\x18\x02 \x01(\t\".\n\x0eMetaOutputUnit\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t\"+\n\x0fMetaOutputRange\x12\x0b\n\x03min\x18\x01 \x01(\x05\x12\x0b\n\x03max\x18\x02 \x01(\x05\"\x8c\x01\n\nMetaOutput\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x11\n\tdata_type\x18\x02 \x01(\t\x12\x11\n\tprecision\x18\x03 \x01(\x05\x12#\n\x04unit\x18\x04 \x01(\x0b\x32\x15.synse.MetaOutputUnit\x12%\n\x05range\x18\x05 \x01(\x0b\x32\x16.synse.MetaOutputRange\";\n\x0cMetaLocation\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x03 \x01(\t2\xfa\x01\n\x0bInternalApi\x12\x33\n\x04Read\x12\x12.synse.ReadRequest\x1a\x13.synse.ReadResponse\"\x00\x30\x01\x12\x33\n\x05Write\x12\x13.synse.WriteRequest\x1a\x13.synse.Transactions\"\x00\x12?\n\x08Metainfo\x12\x16.synse.MetainfoRequest\x1a\x17.synse.MetainfoResponse\"\x00\x30\x01\x12@\n\x10TransactionCheck\x12\x14.synse.TransactionId\x1a\x14.synse.WriteResponse\"\x00\x62\x06proto3')
 )
 
 
@@ -612,22 +612,29 @@ _METAOUTPUT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='precision', full_name='synse.MetaOutput.precision', index=1,
-      number=2, type=5, cpp_type=1, label=1,
+      name='data_type', full_name='synse.MetaOutput.data_type', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='precision', full_name='synse.MetaOutput.precision', index=2,
+      number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='unit', full_name='synse.MetaOutput.unit', index=2,
-      number=3, type=11, cpp_type=10, label=1,
+      name='unit', full_name='synse.MetaOutput.unit', index=3,
+      number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='range', full_name='synse.MetaOutput.range', index=3,
-      number=4, type=11, cpp_type=10, label=1,
+      name='range', full_name='synse.MetaOutput.range', index=4,
+      number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -644,8 +651,8 @@ _METAOUTPUT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1027,
-  serialized_end=1148,
+  serialized_start=1028,
+  serialized_end=1168,
 )
 
 
@@ -689,8 +696,8 @@ _METALOCATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1150,
-  serialized_end=1209,
+  serialized_start=1170,
+  serialized_end=1229,
 )
 
 _WRITEREQUEST.fields_by_name['data'].message_type = _WRITEDATA
