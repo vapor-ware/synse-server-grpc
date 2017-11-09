@@ -6,7 +6,7 @@ from . import synse_pb2_grpc as grpc
 
 
 __title__ = 'synse_plugin'
-__version__ = '1.0.0'
+__version__ = '0.0.1'
 
 __description__ = 'Internal gRPC API for communication between plugins and Synse Server.'
 __author__ = 'Vapor IO'
