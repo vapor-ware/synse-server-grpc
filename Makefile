@@ -25,23 +25,54 @@ go:  ## Build the GRPC source for Go
 all: python go  ## Build source for all supported languages
 
 
-help:  ## Print usage information
-	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort
+
+# Packaging for Python
+
+# this currently goes on the assumption that python 2 is run via the `python`
+# binary, and python3 is run by the `python3` binary. this is not the best way
+# of doing this, but it is a start.
+HAS_PY2 := $(shell command -v python)
+HAS_PY3 := $(shell command -v python3)
 
 
-pip-package:
+pip-package:  ## Package the python package into a tarball
 	cd python ; python setup.py sdist
 
-pip-install:
-	@# this could also be done from here with pip install -I -e ./python -- this  makes it editable..
+
+pip-install:  ## Install the python package from tarball
+ifdef HAS_PY2
 	cd python ; pip install dist/synse_plugin-*.tar.gz
+endif
+ifdef HAS_PY3
+	cd python ; pip3 install dist/synse_plugin-*.tar.gz
+endif
 
-pip-uninstall:
+
+pip-einstall:  ## Install the python package in editable mode
+ifdef HAS_PY2
+	pip install -I -e ./python
+endif
+ifdef HAS_PY3
+	pip3 install -I -e ./python
+endif
+
+
+pip-uninstall:  ## Uninstall the synse_plugin package via pip
+ifdef HAS_PY2
 	cd python ; pip uninstall -y synse_plugin
+endif
+ifdef HAS_PY3
+	cd python ; pip3 uninstall -y synse_plugin
+endif
 
-pip-clean:
+
+pip-clean:  ## Remove the python packaging build artifacts
 	cd python ; rm -rf build dist synse_plugin.egg-info
 
 
-.PHONY: all go help python
+help:  ## Print usage information
+	@awk 'BEGIN {FS = ":.*?## "} /^[0-9a-zA-Z_-]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort
+
+
+.PHONY: all go help python pip-package pip-install pip-einstall pip-uninstall pip-clean
 .DEFAULT_GOAL := help

@@ -279,19 +279,23 @@ message MetaOutputRange {
 // the specification for one of a device's reading outputs.
 message MetaOutput {
 
-    // the type of the reading output.
+    // the type of the reading output (e.g. 'temperature',
+    // 'humidity', etc).
     string type = 1;
+
+    // the data type of the output (e.g. int, string, bool).
+    string data_type = 2;
 
     // the decimal precision of the output. if the output is
     // non-numeric, this can be left unspecified and will be
     // ignored.
-    int32 precision = 2;
+    int32 precision = 3;
 
     // the unit of measure for the reading.
-    MetaOutputUnit unit = 3;
+    MetaOutputUnit unit = 4;
 
     // the acceptable range of values for the reading.
-    MetaOutputRange range = 4;
+    MetaOutputRange range = 5;
 }
 
 // the location specification for a device.
