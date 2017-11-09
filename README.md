@@ -97,6 +97,42 @@ make pip-uninstall
 make pip-clean
 ``` 
 
+## Releasing
+To release a new version of Synse Server gRPC, you must have the correct permissions on the repo.
+Assuming that you do, a few steps need to be taken. First, you need to know what version number is
+to be released. Ideally, this should already be checked in to the repo. The version is currently
+defined in `python/synse_plugin/__init__.py` under the `__version__` variable. 
+
+The version can be verified by running 
+```bash
+make version
+```
+
+Then, clean out any of the previously build packages which may exist.
+```bash
+make pip-clean
+```
+
+Next, rebuild the packages. Make sure that the repo is up to date prior to this.
+```bash
+make pip-package
+```
+
+This should create the `python/dist` directory which contains a tarball with the version
+number in the tarball name.
+
+Finally, run
+```bash
+make release-github
+```
+
+This will build a docker image that will install `hub` and create a new release draft under
+the specified version. It will include the python package tarball in the release distribution.
+
+Once that is done, you can go to the [GitHub release page](release-page) and should see that a new release
+draft was created. You can then edit this draft and publish it.
+
+
 ## Troubleshooting
 To see a list of available make targets and a brief description, use
 ```bash
@@ -109,3 +145,4 @@ as much context around the bug/issue as possible.
 
 
 [api-spec]: https://github.com/vapor-ware/synse-server-grpc/blob/master/synse.proto
+[release-page]: https://github.com/vapor-ware/synse-server-grpc/releases
