@@ -306,7 +306,4 @@ message MetaLocation {
 
     // the board which the device belongs to.
     string board = 2;
-
-    // the device itself.
-    string device = 3;
 }
