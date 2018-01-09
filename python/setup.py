@@ -2,15 +2,20 @@
 """
 
 from setuptools import setup, find_packages
-import synse_plugin as pkg
+
+version = '0.0.1'
+description = 'Internal gRPC API for communication between plugins and Synse Server.'
+author = 'Vapor IO'
+author_email = 'vapor@vapor.io'
+url = 'https://github.com/vapor-ware/synse-server-grpc'
 
 setup(
     name='synse_plugin',
-    version=pkg.__version__,
-    description=pkg.__description__,
-    url=pkg.__url__,
-    author=pkg.__author__,
-    author_email=pkg.__author_email__,
+    version=version,
+    description=description,
+    url=url,
+    author=author,
+    author_email=author_email,
     license='Vapor IO Proprietary',  # fixme - will need to change eventually
     packages=find_packages()
 )
