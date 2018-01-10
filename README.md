@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/vapor-ware/synse-server-grpc.svg?style=svg&circle-token=5c8fc7e65c9363a99cc224ee349ab7e72e39742c)](https://circleci.com/gh/vapor-ware/synse-server-grpc)
+
 # synse-server-grpc
 The internal gRPC API for Synse Server and its plugins.
 
