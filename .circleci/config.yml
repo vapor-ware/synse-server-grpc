@@ -1,0 +1,150 @@
+version: 2
+jobs:
+
+  # build the python server/client source from the protobuf spec
+  py-build:
+    working_directory: ~/code
+    docker:
+      - image: grpc/python:1.4
+    steps:
+      - checkout
+      - run:
+          name: Build Python Proto
+          command: |
+            mkdir -p /tmp/python/synse_plugin
+            python3 -m grpc_tools.protoc -I. \
+              --python_out=/tmp/python/synse_plugin \
+              --grpc_python_out=/tmp/python/synse_plugin \
+              synse.proto
+            sed -i -e 's/import synse_pb2 as synse__pb2/from . import synse_pb2 as synse__pb2/g' /tmp/python/synse_plugin/synse_pb2_grpc.py
+            if [ -f "/tmp/python/synse_plugin/synse_pb2_grpc.py-e" ]; then rm /tmp/python/synse_plugin/synse_pb2_grpc.py-e; fi;
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - python
+
+  # build the golang server/client source from the protobuf spec
+  go-build:
+    woring_directory: ~/code
+    docker:
+      - image: grpc/go:1.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp
+      - run:
+          name: Build Go Proto
+          command: |
+            mkdir -p /tmp/go
+            protoc -I . synse.proto --go_out=plugins=grpc:/tmp/go
+
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - go
+
+  # get the diff of the build and the existing. if there is any diff, we want to fail.
+  # the reason being that the code in the repo should be up-to-date with the protobuf
+  # spec changes. if the committed source is not the same as the generated source, then
+  # when we go to cut a release/tag, the source(s) will not be representative of the
+  # protobuf spec.
+  diff:
+    working_directory: ~/code
+    docker:
+      - image: buildpack-deps:jessie
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp
+      - run:
+          name: diff
+          command: |
+            git --no-pager diff --no-index /tmp/python/synse_plugin/synse_pb2.py ./python/synse_plugin/synse_pb2.py
+            git --no-pager diff --no-index /tmp/python/synse_plugin/synse_pb2_grpc.py ./python/synse_plugin/synse_pb2_grpc.py
+            git --no-pager diff --no-index /tmp/go ./go
+      - run:
+          name: Diff Failure
+          when: on_fail
+          command: |
+            echo "Diff between committed source and generated source did not match up."
+            echo "To remedy, build the source locally (make all) and commit the generated"
+            echo "source. This will keep the source up to date with the proto spec."
+
+  # py-dist creates a distribution for the python source in the form of a pip tarball
+  py-dist:
+    working_dir: ~/code
+    docker:
+      - image: circleci/python:3-stretch
+    steps:
+      - checkout
+      - run:
+          name: Setup
+          command: |
+            mkdir -p /tmp/bin
+      - run:
+          name: Build Python Tarball
+          command: |
+            cd python
+            python setup.py sdist
+            cp dist/synse_plugin-*.tar.gz /tmp/bin
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - bin
+      - store_artifacts:
+          path: /tmp/bin
+          destination: binaries
+
+  # release creates a github release draft for the changes
+  release:
+    working_dir: ~/code
+    docker:
+      - image: circleci/golang:latest
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp
+      - run:
+          name: Get GHR Distributor
+          command: |
+            go get -v github.com/tcnksm/ghr
+      - run:
+          name: Create Release
+          command: |
+            if git describe --exact-match --tags HEAD; then
+              CIRCLE_TAG=$(git describe --exact-match --tags HEAD)
+            fi
+
+            ghr \
+              -u ${GITHUB_USER} \
+              -t ${GITHUB_TOKEN} \
+              -replace \
+              -draft \
+              ${CIRCLE_TAG} /tmp/bin/
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - py-build
+      - go-build
+      - diff:
+          requires:
+            - py-build
+            - go-build
+      - py-dist:
+          requires:
+            - diff
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^[0-9]*(\.[0-9]*)*$/
+      - release:
+          requires:
+            - py-dist
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^[0-9]*(\.[0-9]*)*$/
