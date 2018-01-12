@@ -133,16 +133,12 @@ workflows:
             - py-build
             - go-build
       - py-dist:
-          requires:
-            - diff
           filters:
             branches:
               ignore: /.*/
             tags:
               only: /^[0-9]*(\.[0-9]*)*$/
       - release:
-          requires:
-            - py-dist
           filters:
             branches:
               ignore: /.*/
