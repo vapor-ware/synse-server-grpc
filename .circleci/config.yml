@@ -133,8 +133,6 @@ workflows:
             - py-build
             - go-build
       - py-dist:
-          requires:
-            - diff
           filters:
             branches:
               ignore: /.*/
