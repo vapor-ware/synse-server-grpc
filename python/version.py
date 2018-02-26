@@ -19,5 +19,6 @@ def find_version():
         return version.group(1)
     raise RuntimeError('Unable to find version in setup.py file.')
 
+
 if __name__ == '__main__':
     print(find_version())
