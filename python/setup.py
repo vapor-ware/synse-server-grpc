@@ -16,6 +16,6 @@ setup(
     url=url,
     author=author,
     author_email=author_email,
-    license='Vapor IO Proprietary',  # fixme - will need to change eventually
+    license='GNU General Public License v2.0',
     packages=find_packages()
 )
