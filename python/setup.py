@@ -11,6 +11,6 @@ setup(
     url=pkg.__url__,
     author=pkg.__author__,
     author_email=pkg.__author_email__,
-    license='Vapor IO Proprietary',  # fixme - will need to change eventually
+    license='GNU General Public License v2.0',
     packages=find_packages()
 )
