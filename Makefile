@@ -12,9 +12,9 @@ PKG_VER := $(shell python python/version.py)
 .PHONY: py-publish
 py-publish: ## Build and publish the python package to PyPi
 	pip install 'twine>=1.5.0'
-	python python/setup.py sdist bdist_wheel --universal
-	twine upload dist/*
-	rm -rf build dist .egg synse_plugin.egg-info
+	cd python ; python setup.py sdist bdist_wheel --universal
+	cd python ; twine upload dist/*
+	cd python ; rm -rf build dist .egg synse_plugin.egg-info
 
 .PHONY: version
 version:  ## Print the current version of Synse Server gRPC
