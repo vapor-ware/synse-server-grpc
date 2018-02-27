@@ -10,7 +10,7 @@ description = 'Internal gRPC API for communication between plugins and Synse Ser
 url = 'https://github.com/vapor-ware/synse-server-grpc'
 email = 'vapor@vapor.io'
 author = 'Vapor IO'
-version = '0.0.2'
+version = '0.0.3'
 
 # packages required for this module to run
 required = [
