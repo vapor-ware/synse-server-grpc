@@ -27,9 +27,9 @@ setup(
     packages=find_packages(),
     install_requires=required,
     include_package_data=True,
-    license='GNU General Public License v2.0',
+    license='GNU General Public License v3.0',
     classifiers=[
-        'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
