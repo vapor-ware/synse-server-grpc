@@ -18,7 +18,7 @@ go:  ## Build the GRPC source for Go
 	@printf "Generating Go source."
 	@docker run \
 	    -v `pwd`:/build \
-	    grpc/go:1.0 \
+	    grpc/go:latest \
 	    protoc -I /build /build/synse.proto --go_out=plugins=grpc:/build/go
 	@printf " [done]\n"
 
