@@ -296,19 +296,16 @@ message Output {
     // The type of the output. This is the last element of the namespace.
     string type = 2;
 
-    // The data type of the output (e.g. int, string, bool, etc).
-    string dataType = 3;
-
     // The decimal precision of the output. This is ignored if the output
     // dataType is not a float.
-    int32 precision = 4;
+    int32 precision = 3;
 
     // The scaling factor to multiply the reading result by. This can be
     // positive or negative, whole or decimal.
-    double scalingFactor = 5;
+    double scalingFactor = 4;
 
     // The unit of measure for the reading.
-    Unit unit = 6;
+    Unit unit = 5;
 }
 
 // Unit is the unit specification for a reading output.
