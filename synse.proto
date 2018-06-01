@@ -17,6 +17,10 @@ service Plugin {
     // Health returns the health status of a plugin.
     rpc Health(Empty) returns (PluginHealth) {}
 
+    // Metainfo gets the metainfo for the plugin. This info provides details
+    // about the plugin itself.
+    rpc Metainfo(Empty) returns (Metadata) {}
+
     // Capabilities returns the collection of capabilities that a plugin
     // exposes. More specifically, this means types of devices supported
     // and the readings supported for each of those devices.
@@ -25,10 +29,6 @@ service Plugin {
     // Devices gets info for all of the devices that the plugin manages.
     // This rpc call is the plugin's equivalent to a Synse Server scan.
     rpc Devices(DeviceFilter) returns (stream Device) {}
-
-    // Metainfo gets the metainfo for the plugin. This info provides details
-    // about the plugin itself.
-    rpc Metainfo(DeviceFilter) returns (stream Metadata) {}
 
     // Read returns the reading data for the specified device.
     rpc Read(DeviceFilter) returns (stream Reading) {}

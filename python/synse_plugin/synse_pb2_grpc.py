@@ -29,6 +29,11 @@ class PluginStub(object):
         request_serializer=synse__pb2.Empty.SerializeToString,
         response_deserializer=synse__pb2.PluginHealth.FromString,
         )
+    self.Metainfo = channel.unary_unary(
+        '/synse.Plugin/Metainfo',
+        request_serializer=synse__pb2.Empty.SerializeToString,
+        response_deserializer=synse__pb2.Metadata.FromString,
+        )
     self.Capabilities = channel.unary_stream(
         '/synse.Plugin/Capabilities',
         request_serializer=synse__pb2.Empty.SerializeToString,
@@ -38,11 +43,6 @@ class PluginStub(object):
         '/synse.Plugin/Devices',
         request_serializer=synse__pb2.DeviceFilter.SerializeToString,
         response_deserializer=synse__pb2.Device.FromString,
-        )
-    self.Metainfo = channel.unary_stream(
-        '/synse.Plugin/Metainfo',
-        request_serializer=synse__pb2.DeviceFilter.SerializeToString,
-        response_deserializer=synse__pb2.Metadata.FromString,
         )
     self.Read = channel.unary_stream(
         '/synse.Plugin/Read',
@@ -89,6 +89,14 @@ class PluginServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Metainfo(self, request, context):
+    """Metainfo gets the metainfo for the plugin. This info provides details
+    about the plugin itself.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def Capabilities(self, request, context):
     """Capabilities returns the collection of capabilities that a plugin
     exposes. More specifically, this means types of devices supported
@@ -101,14 +109,6 @@ class PluginServicer(object):
   def Devices(self, request, context):
     """Devices gets info for all of the devices that the plugin manages.
     This rpc call is the plugin's equivalent to a Synse Server scan.
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def Metainfo(self, request, context):
-    """Metainfo gets the metainfo for the plugin. This info provides details
-    about the plugin itself.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -153,6 +153,11 @@ def add_PluginServicer_to_server(servicer, server):
           request_deserializer=synse__pb2.Empty.FromString,
           response_serializer=synse__pb2.PluginHealth.SerializeToString,
       ),
+      'Metainfo': grpc.unary_unary_rpc_method_handler(
+          servicer.Metainfo,
+          request_deserializer=synse__pb2.Empty.FromString,
+          response_serializer=synse__pb2.Metadata.SerializeToString,
+      ),
       'Capabilities': grpc.unary_stream_rpc_method_handler(
           servicer.Capabilities,
           request_deserializer=synse__pb2.Empty.FromString,
@@ -162,11 +167,6 @@ def add_PluginServicer_to_server(servicer, server):
           servicer.Devices,
           request_deserializer=synse__pb2.DeviceFilter.FromString,
           response_serializer=synse__pb2.Device.SerializeToString,
-      ),
-      'Metainfo': grpc.unary_stream_rpc_method_handler(
-          servicer.Metainfo,
-          request_deserializer=synse__pb2.DeviceFilter.FromString,
-          response_serializer=synse__pb2.Metadata.SerializeToString,
       ),
       'Read': grpc.unary_stream_rpc_method_handler(
           servicer.Read,
