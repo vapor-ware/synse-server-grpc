@@ -94,6 +94,14 @@ message HealthCheck {
 
     // Any additional info associated with the health check.
     string message = 3;
+
+    // The time at which the health check was completed.
+    string timestamp = 4;
+
+    // The type of the health check. These are left as arbitrary strings
+    // instead of enums to make it easier to support new types of health
+    // checks in the future, without having to update the GRPC API.
+    string type = 5;
 }
 
 // DeviceCapability identifies a device kind and the potential kinds of readings
