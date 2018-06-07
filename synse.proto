@@ -200,24 +200,27 @@ message WriteResponse {
         ERROR = 1;
     }
 
+    // The id of the write transaction.
+    string id = 1;
+
     // The time at which the write transaction was created.
-    string created = 1;
+    string created = 2;
 
     // The time at which the write transaction state/status was last updated.
-    string updated = 2;
+    string updated = 3;
 
     // The status of the transaction. This describes what stage of processing
     // the transaction is at.
-    WriteStatus status = 3;
+    WriteStatus status = 4;
 
     // The state of the transaction. This describes the so called "health"
     // of the transaction.
-    WriteState state = 4;
+    WriteState state = 5;
 
     // The message field will be used to specify any context information
     // when the state is ERROR. If the state is OK, this field will
     // remain empty.
-    string message = 5;
+    string message = 6;
 }
 
 // TransactionFilter is a filter for transaction checks. If its id field is
