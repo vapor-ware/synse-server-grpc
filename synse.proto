@@ -118,10 +118,11 @@ message DeviceCapability {
 message Metadata {
     string name = 1;
     string maintainer = 2;
-    string description = 3;
-    string vcs = 4;
+    string tag = 3;
+    string description = 4;
+    string vcs = 5;
 
-    VersionInfo version = 5;
+    VersionInfo version = 6;
 }
 
 // VersionInfo is the response to the `Version` rpc call.
