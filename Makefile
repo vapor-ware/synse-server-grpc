@@ -11,11 +11,11 @@ python:  ## Build the GRPC source for Python
 	    -v `pwd`:/build \
 	    grpc/python:1.4 \
 	    python3 -m grpc_tools.protoc -I/build \
-	        --python_out=/build/python/synse_plugin \
-	        --grpc_python_out=/build/python/synse_plugin \
+	        --python_out=/build/python/synse_grpc \
+	        --grpc_python_out=/build/python/synse_grpc \
 	        /build/synse.proto && \
-	sed -i -e 's/import synse_pb2 as synse__pb2/from . import synse_pb2 as synse__pb2/g' python/synse_plugin/synse_pb2_grpc.py && \
-	if [ -f "python/synse_plugin/synse_pb2_grpc.py-e" ]; then rm python/synse_plugin/synse_pb2_grpc.py-e; fi;
+	sed -i -e 's/import synse_pb2 as synse__pb2/from . import synse_pb2 as synse__pb2/g' python/synse_grpc/synse_pb2_grpc.py && \
+	if [ -f "python/synse_grpc/synse_pb2_grpc.py-e" ]; then rm python/synse_grpc/synse_pb2_grpc.py-e; fi;
 	@printf " [done]\n"
 
 .PHONY: go
@@ -35,7 +35,7 @@ py-publish: ## Build and publish the python package to PyPi
 	pip install 'twine>=1.5.0'
 	cd python ; python setup.py sdist bdist_wheel --universal
 	cd python ; twine upload dist/*
-	cd python ; rm -rf build dist .egg synse_plugin.egg-info
+	cd python ; rm -rf build dist .egg synse_grpc.egg-info
 
 .PHONY: version
 version:  ## Print the current version of Synse Server gRPC
