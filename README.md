@@ -1,6 +1,7 @@
 <p align="center"><a href="https://www.vapor.io/"><img src="assets/logo.png" width="360"></a></p>
 <p align="center">
     <a href="https://circleci.com/gh/vapor-ware/synse-server-grpc"><img src="https://circleci.com/gh/vapor-ware/synse-server-grpc.svg?style=shield"></a>
+    <a href="https://pypi.python.org/pypi/synse-grpc"><img src="https://img.shields.io/pypi/v/synse-grpc.svg"></a>
         
 <h1 align="center">Synse GRPC</h1>
 </p>
