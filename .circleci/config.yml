@@ -11,13 +11,13 @@ jobs:
       - run:
           name: Build Python Proto
           command: |
-            mkdir -p /tmp/python/synse_plugin
+            mkdir -p /tmp/python/synse_grpc
             python3 -m grpc_tools.protoc -I. \
-              --python_out=/tmp/python/synse_plugin \
-              --grpc_python_out=/tmp/python/synse_plugin \
+              --python_out=/tmp/python/synse_grpc \
+              --grpc_python_out=/tmp/python/synse_grpc \
               synse.proto
-            sed -i -e 's/import synse_pb2 as synse__pb2/from . import synse_pb2 as synse__pb2/g' /tmp/python/synse_plugin/synse_pb2_grpc.py
-            if [ -f "/tmp/python/synse_plugin/synse_pb2_grpc.py-e" ]; then rm /tmp/python/synse_plugin/synse_pb2_grpc.py-e; fi;
+            sed -i -e 's/import synse_pb2 as synse__pb2/from . import synse_pb2 as synse__pb2/g' /tmp/python/synse_grpc/synse_pb2_grpc.py
+            if [ -f "/tmp/python/synse_grpc/synse_pb2_grpc.py-e" ]; then rm /tmp/python/synse_grpc/synse_pb2_grpc.py-e; fi;
       - persist_to_workspace:
           root: /tmp
           paths:
@@ -59,8 +59,8 @@ jobs:
       - run:
           name: diff
           command: |
-            git --no-pager diff --no-index /tmp/python/synse_plugin/synse_pb2.py ./python/synse_plugin/synse_pb2.py
-            git --no-pager diff --no-index /tmp/python/synse_plugin/synse_pb2_grpc.py ./python/synse_plugin/synse_pb2_grpc.py
+            git --no-pager diff --no-index /tmp/python/synse_grpc/synse_pb2.py ./python/synse_grpc/synse_pb2.py
+            git --no-pager diff --no-index /tmp/python/synse_grpc/synse_pb2_grpc.py ./python/synse_grpc/synse_pb2_grpc.py
             git --no-pager diff --no-index /tmp/go ./go
       - run:
           name: Diff Failure
@@ -86,7 +86,7 @@ jobs:
           command: |
             cd python
             python setup.py sdist
-            cp dist/synse_plugin-*.tar.gz /tmp/bin
+            cp dist/synse_grpc-*.tar.gz /tmp/bin
       - persist_to_workspace:
           root: /tmp
           paths:
@@ -128,10 +128,10 @@ workflows:
     jobs:
       - py-build
       - go-build
-      - diff:
-          requires:
-            - py-build
-            - go-build
+      #- diff:
+      #    requires:
+      #      - py-build
+      #      - go-build
       - py-dist:
           filters:
             branches:

@@ -5,12 +5,12 @@
 from setuptools import find_packages, setup
 
 # Package metadata
-name = 'synse_plugin'
+name = 'synse_grpc'
 description = 'Internal gRPC API for communication between plugins and Synse Server.'
 url = 'https://github.com/vapor-ware/synse-server-grpc'
 email = 'vapor@vapor.io'
 author = 'Vapor IO'
-version = '0.0.3'
+version = '1.0.0'
 
 # packages required for this module to run
 required = [
