@@ -248,8 +248,8 @@ message Transactions {
 }
 
 // Device is the response to the `Devices` rpc call. It provides all of the
-// info that describes a device. This is used by Synse Server for its 'scan'
-// and 'info' endpoints.
+// info that synse gets to describe a device. This is used by Synse Server for
+// its 'scan' and 'info' endpoints.
 message Device {
     // The time at which the device info was gathered.
     string timestamp = 1;
@@ -273,12 +273,16 @@ message Device {
     // identifiers.
     Location location = 7;
 
+    // The one based sort ordinal for a device in the scan. Zero (default)
+    // for don't care.
+    int32 sortOrdinal = 8;
+
     // The reading output of the device. This specifies all of the
     // outputs a device can generate when read. Many devices will have
     // a single output, but some devices (e.g. a humidity sensor) could
     // return multiple data points from a single reading (e.g.
     // temperature and humidity).
-    repeated Output output = 8;
+    repeated Output output = 9;
 }
 
 // Location is the location specification for a device.
