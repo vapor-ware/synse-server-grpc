@@ -33,11 +33,29 @@ service Plugin {
     // Read returns the reading data for the specified device.
     rpc Read(DeviceFilter) returns (stream Reading) {}
 
+    // ReadCached returns the reading data that is cached by the plugin.
+    // If caching is not enabled on the plugin, this will just return the
+    // current readings.
+    rpc ReadCached(Bounds) returns (stream DeviceReading) {}
+
     // Write issues an asynchronous write command to the specified device.
     rpc Write(WriteInfo) returns (Transactions) {}
 
     // Transactiong gets the state/status of an asynchronous write transaction.
     rpc Transaction(TransactionFilter) returns (stream WriteResponse) {}
+}
+
+// Bounds is a message that allow you to specify bounding timestamps to
+// the ReadCached rpc route. If no bounds are specified, all of the cached
+// data is returned.
+message Bounds {
+    // An RFC3339-formatted timestamp which specifies the beginning of
+    // the time bound. If not specified, there is no starting bound.
+    string start = 1;
+
+    // An RFC3339-formatted timestamp which specifies the ending of the
+    // time bound. If not specified, there is no ending bound.
+    string end = 2;
 }
 
 // DeviceFilter is a message that specifies the routing information for
@@ -162,6 +180,23 @@ message Reading {
         uint32 uint32_value  = 12;
         uint64 uint64_value  = 13;
     }
+}
+
+// DeviceReading is a wrapper around a Reading which associates that
+// reading with its originating device by providing the device routing
+// information (rack, board, and device id).
+message DeviceReading {
+    // The rack id associated with the reading.
+    string rack = 1;
+
+    // The board id associated with the reading.
+    string board = 2;
+
+    // The device id associated with the reading.
+    string device = 3;
+
+    // The reading itself.
+    Reading reading = 4;
 }
 
 // WriteInfo is the request message for the `Write` rpc call. It specifies a

@@ -49,6 +49,11 @@ class PluginStub(object):
         request_serializer=synse__pb2.DeviceFilter.SerializeToString,
         response_deserializer=synse__pb2.Reading.FromString,
         )
+    self.ReadCached = channel.unary_stream(
+        '/synse.Plugin/ReadCached',
+        request_serializer=synse__pb2.Bounds.SerializeToString,
+        response_deserializer=synse__pb2.DeviceReading.FromString,
+        )
     self.Write = channel.unary_unary(
         '/synse.Plugin/Write',
         request_serializer=synse__pb2.WriteInfo.SerializeToString,
@@ -121,6 +126,15 @@ class PluginServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def ReadCached(self, request, context):
+    """ReadCached returns the reading data that is cached by the plugin.
+    If caching is not enabled on the plugin, this will just return the
+    current readings.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def Write(self, request, context):
     """Write issues an asynchronous write command to the specified device.
     """
@@ -172,6 +186,11 @@ def add_PluginServicer_to_server(servicer, server):
           servicer.Read,
           request_deserializer=synse__pb2.DeviceFilter.FromString,
           response_serializer=synse__pb2.Reading.SerializeToString,
+      ),
+      'ReadCached': grpc.unary_stream_rpc_method_handler(
+          servicer.ReadCached,
+          request_deserializer=synse__pb2.Bounds.FromString,
+          response_serializer=synse__pb2.DeviceReading.SerializeToString,
       ),
       'Write': grpc.unary_unary_rpc_method_handler(
           servicer.Write,

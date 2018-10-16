@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='synse.proto',
   package='synse',
   syntax='proto3',
-  serialized_pb=_b('\n\x0bsynse.proto\x12\x05synse\";\n\x0c\x44\x65viceFilter\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x03 \x01(\t\"\x07\n\x05\x45mpty\"\x14\n\x06Status\x12\n\n\x02ok\x18\x01 \x01(\x08\"\xb5\x01\n\x0cPluginHealth\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12*\n\x06status\x18\x02 \x01(\x0e\x32\x1a.synse.PluginHealth.Status\x12\"\n\x06\x63hecks\x18\x03 \x03(\x0b\x32\x12.synse.HealthCheck\"B\n\x06Status\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x16\n\x12PARTIALLY_DEGRADED\x10\x03\x12\x0b\n\x07\x46\x41ILING\x10\x04\"y\n\x0bHealthCheck\x12\x0c\n\x04name\x18\x01 \x01(\t\x12*\n\x06status\x18\x02 \x01(\x0e\x32\x1a.synse.PluginHealth.Status\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\"1\n\x10\x44\x65viceCapability\x12\x0c\n\x04kind\x18\x01 \x01(\t\x12\x0f\n\x07outputs\x18\x02 \x03(\t\"\x80\x01\n\x08Metadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nmaintainer\x18\x02 \x01(\t\x12\x0b\n\x03tag\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x0b\n\x03vcs\x18\x05 \x01(\t\x12#\n\x07version\x18\x06 \x01(\x0b\x32\x12.synse.VersionInfo\"\x88\x01\n\x0bVersionInfo\x12\x15\n\rpluginVersion\x18\x01 \x01(\t\x12\x12\n\nsdkVersion\x18\x02 \x01(\t\x12\x11\n\tbuildDate\x18\x03 \x01(\t\x12\x11\n\tgitCommit\x18\x04 \x01(\t\x12\x0e\n\x06gitTag\x18\x05 \x01(\t\x12\x0c\n\x04\x61rch\x18\x06 \x01(\t\x12\n\n\x02os\x18\x07 \x01(\t\"\xb1\x02\n\x07Reading\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x0c\n\x04info\x18\x03 \x01(\t\x12\x19\n\x04unit\x18\x04 \x01(\x0b\x32\x0b.synse.Unit\x12\x16\n\x0cstring_value\x18\x05 \x01(\tH\x00\x12\x14\n\nbool_value\x18\x06 \x01(\x08H\x00\x12\x17\n\rfloat32_value\x18\x07 \x01(\x02H\x00\x12\x17\n\rfloat64_value\x18\x08 \x01(\x01H\x00\x12\x15\n\x0bint32_value\x18\t \x01(\x05H\x00\x12\x15\n\x0bint64_value\x18\n \x01(\x03H\x00\x12\x15\n\x0b\x62ytes_value\x18\x0b \x01(\x0cH\x00\x12\x16\n\x0cuint32_value\x18\x0c \x01(\rH\x00\x12\x16\n\x0cuint64_value\x18\r \x01(\x04H\x00\x42\x07\n\x05value\"V\n\tWriteInfo\x12)\n\x0c\x64\x65viceFilter\x18\x01 \x01(\x0b\x32\x13.synse.DeviceFilter\x12\x1e\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x10.synse.WriteData\")\n\tWriteData\x12\x0e\n\x06\x61\x63tion\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\x91\x02\n\rWriteResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07\x63reated\x18\x02 \x01(\t\x12\x0f\n\x07updated\x18\x03 \x01(\t\x12\x30\n\x06status\x18\x04 \x01(\x0e\x32 .synse.WriteResponse.WriteStatus\x12.\n\x05state\x18\x05 \x01(\x0e\x32\x1f.synse.WriteResponse.WriteState\x12\x0f\n\x07message\x18\x06 \x01(\t\">\n\x0bWriteStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0b\n\x07WRITING\x10\x02\x12\x08\n\x04\x44ONE\x10\x03\"\x1f\n\nWriteState\x12\x06\n\x02OK\x10\x00\x12\t\n\x05\x45RROR\x10\x01\"\x1f\n\x11TransactionFilter\x12\n\n\x02id\x18\x01 \x01(\t\"\x92\x01\n\x0cTransactions\x12;\n\x0ctransactions\x18\x01 \x03(\x0b\x32%.synse.Transactions.TransactionsEntry\x1a\x45\n\x11TransactionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1f\n\x05value\x18\x02 \x01(\x0b\x32\x10.synse.WriteData:\x02\x38\x01\"\x8b\x02\n\x06\x44\x65vice\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0b\n\x03uid\x18\x02 \x01(\t\x12\x0c\n\x04kind\x18\x03 \x01(\t\x12-\n\x08metadata\x18\x04 \x03(\x0b\x32\x1b.synse.Device.MetadataEntry\x12\x0e\n\x06plugin\x18\x05 \x01(\t\x12\x0c\n\x04info\x18\x06 \x01(\t\x12!\n\x08location\x18\x07 \x01(\x0b\x32\x0f.synse.Location\x12\x13\n\x0bsortOrdinal\x18\x08 \x01(\x05\x12\x1d\n\x06output\x18\t \x03(\x0b\x32\r.synse.Output\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\'\n\x08Location\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\"i\n\x06Output\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x11\n\tprecision\x18\x03 \x01(\x05\x12\x15\n\rscalingFactor\x18\x04 \x01(\x01\x12\x19\n\x04unit\x18\x05 \x01(\x0b\x32\x0b.synse.Unit\"$\n\x04Unit\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t2\xce\x03\n\x06Plugin\x12%\n\x04Test\x12\x0c.synse.Empty\x1a\r.synse.Status\"\x00\x12-\n\x07Version\x12\x0c.synse.Empty\x1a\x12.synse.VersionInfo\"\x00\x12-\n\x06Health\x12\x0c.synse.Empty\x1a\x13.synse.PluginHealth\"\x00\x12+\n\x08Metainfo\x12\x0c.synse.Empty\x1a\x0f.synse.Metadata\"\x00\x12\x39\n\x0c\x43\x61pabilities\x12\x0c.synse.Empty\x1a\x17.synse.DeviceCapability\"\x00\x30\x01\x12\x31\n\x07\x44\x65vices\x12\x13.synse.DeviceFilter\x1a\r.synse.Device\"\x00\x30\x01\x12/\n\x04Read\x12\x13.synse.DeviceFilter\x1a\x0e.synse.Reading\"\x00\x30\x01\x12\x30\n\x05Write\x12\x10.synse.WriteInfo\x1a\x13.synse.Transactions\"\x00\x12\x41\n\x0bTransaction\x12\x18.synse.TransactionFilter\x1a\x14.synse.WriteResponse\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0bsynse.proto\x12\x05synse\"$\n\x06\x42ounds\x12\r\n\x05start\x18\x01 \x01(\t\x12\x0b\n\x03\x65nd\x18\x02 \x01(\t\";\n\x0c\x44\x65viceFilter\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x03 \x01(\t\"\x07\n\x05\x45mpty\"\x14\n\x06Status\x12\n\n\x02ok\x18\x01 \x01(\x08\"\xb5\x01\n\x0cPluginHealth\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12*\n\x06status\x18\x02 \x01(\x0e\x32\x1a.synse.PluginHealth.Status\x12\"\n\x06\x63hecks\x18\x03 \x03(\x0b\x32\x12.synse.HealthCheck\"B\n\x06Status\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x16\n\x12PARTIALLY_DEGRADED\x10\x03\x12\x0b\n\x07\x46\x41ILING\x10\x04\"y\n\x0bHealthCheck\x12\x0c\n\x04name\x18\x01 \x01(\t\x12*\n\x06status\x18\x02 \x01(\x0e\x32\x1a.synse.PluginHealth.Status\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\"1\n\x10\x44\x65viceCapability\x12\x0c\n\x04kind\x18\x01 \x01(\t\x12\x0f\n\x07outputs\x18\x02 \x03(\t\"\x80\x01\n\x08Metadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nmaintainer\x18\x02 \x01(\t\x12\x0b\n\x03tag\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x0b\n\x03vcs\x18\x05 \x01(\t\x12#\n\x07version\x18\x06 \x01(\x0b\x32\x12.synse.VersionInfo\"\x88\x01\n\x0bVersionInfo\x12\x15\n\rpluginVersion\x18\x01 \x01(\t\x12\x12\n\nsdkVersion\x18\x02 \x01(\t\x12\x11\n\tbuildDate\x18\x03 \x01(\t\x12\x11\n\tgitCommit\x18\x04 \x01(\t\x12\x0e\n\x06gitTag\x18\x05 \x01(\t\x12\x0c\n\x04\x61rch\x18\x06 \x01(\t\x12\n\n\x02os\x18\x07 \x01(\t\"\xb1\x02\n\x07Reading\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x0c\n\x04info\x18\x03 \x01(\t\x12\x19\n\x04unit\x18\x04 \x01(\x0b\x32\x0b.synse.Unit\x12\x16\n\x0cstring_value\x18\x05 \x01(\tH\x00\x12\x14\n\nbool_value\x18\x06 \x01(\x08H\x00\x12\x17\n\rfloat32_value\x18\x07 \x01(\x02H\x00\x12\x17\n\rfloat64_value\x18\x08 \x01(\x01H\x00\x12\x15\n\x0bint32_value\x18\t \x01(\x05H\x00\x12\x15\n\x0bint64_value\x18\n \x01(\x03H\x00\x12\x15\n\x0b\x62ytes_value\x18\x0b \x01(\x0cH\x00\x12\x16\n\x0cuint32_value\x18\x0c \x01(\rH\x00\x12\x16\n\x0cuint64_value\x18\r \x01(\x04H\x00\x42\x07\n\x05value\"]\n\rDeviceReading\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x03 \x01(\t\x12\x1f\n\x07reading\x18\x04 \x01(\x0b\x32\x0e.synse.Reading\"V\n\tWriteInfo\x12)\n\x0c\x64\x65viceFilter\x18\x01 \x01(\x0b\x32\x13.synse.DeviceFilter\x12\x1e\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x10.synse.WriteData\")\n\tWriteData\x12\x0e\n\x06\x61\x63tion\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\x91\x02\n\rWriteResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07\x63reated\x18\x02 \x01(\t\x12\x0f\n\x07updated\x18\x03 \x01(\t\x12\x30\n\x06status\x18\x04 \x01(\x0e\x32 .synse.WriteResponse.WriteStatus\x12.\n\x05state\x18\x05 \x01(\x0e\x32\x1f.synse.WriteResponse.WriteState\x12\x0f\n\x07message\x18\x06 \x01(\t\">\n\x0bWriteStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0b\n\x07WRITING\x10\x02\x12\x08\n\x04\x44ONE\x10\x03\"\x1f\n\nWriteState\x12\x06\n\x02OK\x10\x00\x12\t\n\x05\x45RROR\x10\x01\"\x1f\n\x11TransactionFilter\x12\n\n\x02id\x18\x01 \x01(\t\"\x92\x01\n\x0cTransactions\x12;\n\x0ctransactions\x18\x01 \x03(\x0b\x32%.synse.Transactions.TransactionsEntry\x1a\x45\n\x11TransactionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1f\n\x05value\x18\x02 \x01(\x0b\x32\x10.synse.WriteData:\x02\x38\x01\"\x8b\x02\n\x06\x44\x65vice\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0b\n\x03uid\x18\x02 \x01(\t\x12\x0c\n\x04kind\x18\x03 \x01(\t\x12-\n\x08metadata\x18\x04 \x03(\x0b\x32\x1b.synse.Device.MetadataEntry\x12\x0e\n\x06plugin\x18\x05 \x01(\t\x12\x0c\n\x04info\x18\x06 \x01(\t\x12!\n\x08location\x18\x07 \x01(\x0b\x32\x0f.synse.Location\x12\x13\n\x0bsortOrdinal\x18\x08 \x01(\x05\x12\x1d\n\x06output\x18\t \x03(\x0b\x32\r.synse.Output\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\'\n\x08Location\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\"i\n\x06Output\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x11\n\tprecision\x18\x03 \x01(\x05\x12\x15\n\rscalingFactor\x18\x04 \x01(\x01\x12\x19\n\x04unit\x18\x05 \x01(\x0b\x32\x0b.synse.Unit\"$\n\x04Unit\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t2\x85\x04\n\x06Plugin\x12%\n\x04Test\x12\x0c.synse.Empty\x1a\r.synse.Status\"\x00\x12-\n\x07Version\x12\x0c.synse.Empty\x1a\x12.synse.VersionInfo\"\x00\x12-\n\x06Health\x12\x0c.synse.Empty\x1a\x13.synse.PluginHealth\"\x00\x12+\n\x08Metainfo\x12\x0c.synse.Empty\x1a\x0f.synse.Metadata\"\x00\x12\x39\n\x0c\x43\x61pabilities\x12\x0c.synse.Empty\x1a\x17.synse.DeviceCapability\"\x00\x30\x01\x12\x31\n\x07\x44\x65vices\x12\x13.synse.DeviceFilter\x1a\r.synse.Device\"\x00\x30\x01\x12/\n\x04Read\x12\x13.synse.DeviceFilter\x1a\x0e.synse.Reading\"\x00\x30\x01\x12\x35\n\nReadCached\x12\r.synse.Bounds\x1a\x14.synse.DeviceReading\"\x00\x30\x01\x12\x30\n\x05Write\x12\x10.synse.WriteInfo\x1a\x13.synse.Transactions\"\x00\x12\x41\n\x0bTransaction\x12\x18.synse.TransactionFilter\x1a\x14.synse.WriteResponse\"\x00\x30\x01\x62\x06proto3')
 )
 
 
@@ -49,8 +49,8 @@ _PLUGINHEALTH_STATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=230,
-  serialized_end=296,
+  serialized_start=268,
+  serialized_end=334,
 )
 _sym_db.RegisterEnumDescriptor(_PLUGINHEALTH_STATUS)
 
@@ -79,8 +79,8 @@ _WRITERESPONSE_WRITESTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1360,
-  serialized_end=1422,
+  serialized_start=1493,
+  serialized_end=1555,
 )
 _sym_db.RegisterEnumDescriptor(_WRITERESPONSE_WRITESTATUS)
 
@@ -101,10 +101,48 @@ _WRITERESPONSE_WRITESTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1424,
-  serialized_end=1455,
+  serialized_start=1557,
+  serialized_end=1588,
 )
 _sym_db.RegisterEnumDescriptor(_WRITERESPONSE_WRITESTATE)
+
+
+_BOUNDS = _descriptor.Descriptor(
+  name='Bounds',
+  full_name='synse.Bounds',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='start', full_name='synse.Bounds.start', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='end', full_name='synse.Bounds.end', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=22,
+  serialized_end=58,
+)
 
 
 _DEVICEFILTER = _descriptor.Descriptor(
@@ -147,8 +185,8 @@ _DEVICEFILTER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=22,
-  serialized_end=81,
+  serialized_start=60,
+  serialized_end=119,
 )
 
 
@@ -171,8 +209,8 @@ _EMPTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=83,
-  serialized_end=90,
+  serialized_start=121,
+  serialized_end=128,
 )
 
 
@@ -202,8 +240,8 @@ _STATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=92,
-  serialized_end=112,
+  serialized_start=130,
+  serialized_end=150,
 )
 
 
@@ -248,8 +286,8 @@ _PLUGINHEALTH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=115,
-  serialized_end=296,
+  serialized_start=153,
+  serialized_end=334,
 )
 
 
@@ -307,8 +345,8 @@ _HEALTHCHECK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=298,
-  serialized_end=419,
+  serialized_start=336,
+  serialized_end=457,
 )
 
 
@@ -345,8 +383,8 @@ _DEVICECAPABILITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=421,
-  serialized_end=470,
+  serialized_start=459,
+  serialized_end=508,
 )
 
 
@@ -411,8 +449,8 @@ _METADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=473,
-  serialized_end=601,
+  serialized_start=511,
+  serialized_end=639,
 )
 
 
@@ -484,8 +522,8 @@ _VERSIONINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=604,
-  serialized_end=740,
+  serialized_start=642,
+  serialized_end=778,
 )
 
 
@@ -602,8 +640,60 @@ _READING = _descriptor.Descriptor(
       name='value', full_name='synse.Reading.value',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=743,
-  serialized_end=1048,
+  serialized_start=781,
+  serialized_end=1086,
+)
+
+
+_DEVICEREADING = _descriptor.Descriptor(
+  name='DeviceReading',
+  full_name='synse.DeviceReading',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='rack', full_name='synse.DeviceReading.rack', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='board', full_name='synse.DeviceReading.board', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='device', full_name='synse.DeviceReading.device', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='reading', full_name='synse.DeviceReading.reading', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1088,
+  serialized_end=1181,
 )
 
 
@@ -640,8 +730,8 @@ _WRITEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1050,
-  serialized_end=1136,
+  serialized_start=1183,
+  serialized_end=1269,
 )
 
 
@@ -678,8 +768,8 @@ _WRITEDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1138,
-  serialized_end=1179,
+  serialized_start=1271,
+  serialized_end=1312,
 )
 
 
@@ -746,8 +836,8 @@ _WRITERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1182,
-  serialized_end=1455,
+  serialized_start=1315,
+  serialized_end=1588,
 )
 
 
@@ -777,8 +867,8 @@ _TRANSACTIONFILTER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1457,
-  serialized_end=1488,
+  serialized_start=1590,
+  serialized_end=1621,
 )
 
 
@@ -815,8 +905,8 @@ _TRANSACTIONS_TRANSACTIONSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1568,
-  serialized_end=1637,
+  serialized_start=1701,
+  serialized_end=1770,
 )
 
 _TRANSACTIONS = _descriptor.Descriptor(
@@ -845,8 +935,8 @@ _TRANSACTIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1491,
-  serialized_end=1637,
+  serialized_start=1624,
+  serialized_end=1770,
 )
 
 
@@ -883,8 +973,8 @@ _DEVICE_METADATAENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1860,
-  serialized_end=1907,
+  serialized_start=1993,
+  serialized_end=2040,
 )
 
 _DEVICE = _descriptor.Descriptor(
@@ -969,8 +1059,8 @@ _DEVICE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1640,
-  serialized_end=1907,
+  serialized_start=1773,
+  serialized_end=2040,
 )
 
 
@@ -1007,8 +1097,8 @@ _LOCATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1909,
-  serialized_end=1948,
+  serialized_start=2042,
+  serialized_end=2081,
 )
 
 
@@ -1066,8 +1156,8 @@ _OUTPUT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1950,
-  serialized_end=2055,
+  serialized_start=2083,
+  serialized_end=2188,
 )
 
 
@@ -1104,8 +1194,8 @@ _UNIT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2057,
-  serialized_end=2093,
+  serialized_start=2190,
+  serialized_end=2226,
 )
 
 _PLUGINHEALTH.fields_by_name['status'].enum_type = _PLUGINHEALTH_STATUS
@@ -1141,6 +1231,7 @@ _READING.fields_by_name['uint32_value'].containing_oneof = _READING.oneofs_by_na
 _READING.oneofs_by_name['value'].fields.append(
   _READING.fields_by_name['uint64_value'])
 _READING.fields_by_name['uint64_value'].containing_oneof = _READING.oneofs_by_name['value']
+_DEVICEREADING.fields_by_name['reading'].message_type = _READING
 _WRITEINFO.fields_by_name['deviceFilter'].message_type = _DEVICEFILTER
 _WRITEINFO.fields_by_name['data'].message_type = _WRITEDATA
 _WRITERESPONSE.fields_by_name['status'].enum_type = _WRITERESPONSE_WRITESTATUS
@@ -1155,6 +1246,7 @@ _DEVICE.fields_by_name['metadata'].message_type = _DEVICE_METADATAENTRY
 _DEVICE.fields_by_name['location'].message_type = _LOCATION
 _DEVICE.fields_by_name['output'].message_type = _OUTPUT
 _OUTPUT.fields_by_name['unit'].message_type = _UNIT
+DESCRIPTOR.message_types_by_name['Bounds'] = _BOUNDS
 DESCRIPTOR.message_types_by_name['DeviceFilter'] = _DEVICEFILTER
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['Status'] = _STATUS
@@ -1164,6 +1256,7 @@ DESCRIPTOR.message_types_by_name['DeviceCapability'] = _DEVICECAPABILITY
 DESCRIPTOR.message_types_by_name['Metadata'] = _METADATA
 DESCRIPTOR.message_types_by_name['VersionInfo'] = _VERSIONINFO
 DESCRIPTOR.message_types_by_name['Reading'] = _READING
+DESCRIPTOR.message_types_by_name['DeviceReading'] = _DEVICEREADING
 DESCRIPTOR.message_types_by_name['WriteInfo'] = _WRITEINFO
 DESCRIPTOR.message_types_by_name['WriteData'] = _WRITEDATA
 DESCRIPTOR.message_types_by_name['WriteResponse'] = _WRITERESPONSE
@@ -1174,6 +1267,13 @@ DESCRIPTOR.message_types_by_name['Location'] = _LOCATION
 DESCRIPTOR.message_types_by_name['Output'] = _OUTPUT
 DESCRIPTOR.message_types_by_name['Unit'] = _UNIT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+Bounds = _reflection.GeneratedProtocolMessageType('Bounds', (_message.Message,), dict(
+  DESCRIPTOR = _BOUNDS,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.Bounds)
+  ))
+_sym_db.RegisterMessage(Bounds)
 
 DeviceFilter = _reflection.GeneratedProtocolMessageType('DeviceFilter', (_message.Message,), dict(
   DESCRIPTOR = _DEVICEFILTER,
@@ -1237,6 +1337,13 @@ Reading = _reflection.GeneratedProtocolMessageType('Reading', (_message.Message,
   # @@protoc_insertion_point(class_scope:synse.Reading)
   ))
 _sym_db.RegisterMessage(Reading)
+
+DeviceReading = _reflection.GeneratedProtocolMessageType('DeviceReading', (_message.Message,), dict(
+  DESCRIPTOR = _DEVICEREADING,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.DeviceReading)
+  ))
+_sym_db.RegisterMessage(DeviceReading)
 
 WriteInfo = _reflection.GeneratedProtocolMessageType('WriteInfo', (_message.Message,), dict(
   DESCRIPTOR = _WRITEINFO,
@@ -1377,6 +1484,11 @@ try:
           request_serializer=DeviceFilter.SerializeToString,
           response_deserializer=Reading.FromString,
           )
+      self.ReadCached = channel.unary_stream(
+          '/synse.Plugin/ReadCached',
+          request_serializer=Bounds.SerializeToString,
+          response_deserializer=DeviceReading.FromString,
+          )
       self.Write = channel.unary_unary(
           '/synse.Plugin/Write',
           request_serializer=WriteInfo.SerializeToString,
@@ -1449,6 +1561,15 @@ try:
       context.set_details('Method not implemented!')
       raise NotImplementedError('Method not implemented!')
 
+    def ReadCached(self, request, context):
+      """ReadCached returns the reading data that is cached by the plugin.
+      If caching is not enabled on the plugin, this will just return the
+      current readings.
+      """
+      context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+      context.set_details('Method not implemented!')
+      raise NotImplementedError('Method not implemented!')
+
     def Write(self, request, context):
       """Write issues an asynchronous write command to the specified device.
       """
@@ -1500,6 +1621,11 @@ try:
             servicer.Read,
             request_deserializer=DeviceFilter.FromString,
             response_serializer=Reading.SerializeToString,
+        ),
+        'ReadCached': grpc.unary_stream_rpc_method_handler(
+            servicer.ReadCached,
+            request_deserializer=Bounds.FromString,
+            response_serializer=DeviceReading.SerializeToString,
         ),
         'Write': grpc.unary_unary_rpc_method_handler(
             servicer.Write,
@@ -1560,6 +1686,12 @@ try:
       """Read returns the reading data for the specified device.
       """
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
+    def ReadCached(self, request, context):
+      """ReadCached returns the reading data that is cached by the plugin.
+      If caching is not enabled on the plugin, this will just return the
+      current readings.
+      """
+      context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
     def Write(self, request, context):
       """Write issues an asynchronous write command to the specified device.
       """
@@ -1617,6 +1749,12 @@ try:
       """Read returns the reading data for the specified device.
       """
       raise NotImplementedError()
+    def ReadCached(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+      """ReadCached returns the reading data that is cached by the plugin.
+      If caching is not enabled on the plugin, this will just return the
+      current readings.
+      """
+      raise NotImplementedError()
     def Write(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
       """Write issues an asynchronous write command to the specified device.
       """
@@ -1640,6 +1778,7 @@ try:
       ('synse.Plugin', 'Health'): Empty.FromString,
       ('synse.Plugin', 'Metainfo'): Empty.FromString,
       ('synse.Plugin', 'Read'): DeviceFilter.FromString,
+      ('synse.Plugin', 'ReadCached'): Bounds.FromString,
       ('synse.Plugin', 'Test'): Empty.FromString,
       ('synse.Plugin', 'Transaction'): TransactionFilter.FromString,
       ('synse.Plugin', 'Version'): Empty.FromString,
@@ -1651,6 +1790,7 @@ try:
       ('synse.Plugin', 'Health'): PluginHealth.SerializeToString,
       ('synse.Plugin', 'Metainfo'): Metadata.SerializeToString,
       ('synse.Plugin', 'Read'): Reading.SerializeToString,
+      ('synse.Plugin', 'ReadCached'): DeviceReading.SerializeToString,
       ('synse.Plugin', 'Test'): Status.SerializeToString,
       ('synse.Plugin', 'Transaction'): WriteResponse.SerializeToString,
       ('synse.Plugin', 'Version'): VersionInfo.SerializeToString,
@@ -1662,6 +1802,7 @@ try:
       ('synse.Plugin', 'Health'): face_utilities.unary_unary_inline(servicer.Health),
       ('synse.Plugin', 'Metainfo'): face_utilities.unary_unary_inline(servicer.Metainfo),
       ('synse.Plugin', 'Read'): face_utilities.unary_stream_inline(servicer.Read),
+      ('synse.Plugin', 'ReadCached'): face_utilities.unary_stream_inline(servicer.ReadCached),
       ('synse.Plugin', 'Test'): face_utilities.unary_unary_inline(servicer.Test),
       ('synse.Plugin', 'Transaction'): face_utilities.unary_stream_inline(servicer.Transaction),
       ('synse.Plugin', 'Version'): face_utilities.unary_unary_inline(servicer.Version),
@@ -1683,6 +1824,7 @@ try:
       ('synse.Plugin', 'Health'): Empty.SerializeToString,
       ('synse.Plugin', 'Metainfo'): Empty.SerializeToString,
       ('synse.Plugin', 'Read'): DeviceFilter.SerializeToString,
+      ('synse.Plugin', 'ReadCached'): Bounds.SerializeToString,
       ('synse.Plugin', 'Test'): Empty.SerializeToString,
       ('synse.Plugin', 'Transaction'): TransactionFilter.SerializeToString,
       ('synse.Plugin', 'Version'): Empty.SerializeToString,
@@ -1694,6 +1836,7 @@ try:
       ('synse.Plugin', 'Health'): PluginHealth.FromString,
       ('synse.Plugin', 'Metainfo'): Metadata.FromString,
       ('synse.Plugin', 'Read'): Reading.FromString,
+      ('synse.Plugin', 'ReadCached'): DeviceReading.FromString,
       ('synse.Plugin', 'Test'): Status.FromString,
       ('synse.Plugin', 'Transaction'): WriteResponse.FromString,
       ('synse.Plugin', 'Version'): VersionInfo.FromString,
@@ -1705,6 +1848,7 @@ try:
       'Health': cardinality.Cardinality.UNARY_UNARY,
       'Metainfo': cardinality.Cardinality.UNARY_UNARY,
       'Read': cardinality.Cardinality.UNARY_STREAM,
+      'ReadCached': cardinality.Cardinality.UNARY_STREAM,
       'Test': cardinality.Cardinality.UNARY_UNARY,
       'Transaction': cardinality.Cardinality.UNARY_STREAM,
       'Version': cardinality.Cardinality.UNARY_UNARY,
