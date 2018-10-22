@@ -2,7 +2,8 @@
 # Synse Server gRPC
 #
 
-PKG_VER := $(shell python python/version.py)
+PKG_NAME := synse_grpc
+PKG_VER  := $(shell python python/version.py)
 
 .PHONY: python
 python:  ## Build the GRPC source for Python
@@ -29,6 +30,11 @@ go:  ## Build the GRPC source for Go
 
 .PHONY: all
 all: python go  ## Build source for all supported languages
+
+.PHONY: github-tag
+github-tag:  ## Create and push a tag with the current version
+	git tag -a ${PKG_VERSION} -m "${PKG_NAME} version ${PKG_VERSION}"
+	git push -u origin ${PKG_VERSION}
 
 .PHONY: py-publish
 py-publish: ## Build and publish the python package to PyPi
