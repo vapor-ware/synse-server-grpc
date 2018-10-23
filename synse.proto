@@ -349,6 +349,10 @@ message Output {
 
     // The unit of measure for the reading.
     Unit unit = 5;
+
+    // The conversion string. This allows the sdk to perform conversions
+    // on scaled outputs.
+    string conversion = 6;
 }
 
 // Unit is the unit specification for a reading output.
