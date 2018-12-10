@@ -1,0 +1,52 @@
+#!/usr/bin/env groovy
+
+pipeline {
+
+  agent any
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+
+    // Builds a python package for the release
+    stage('Package Python') {
+      agent {
+        docker {
+          image 'vaporio/python:3.6'
+          reuseNode true
+        }
+      }
+      when {
+        // example matches: 1.2.3, 1.2.3-dev
+        tag pattern: '(0|[1-9]*)\\.(0|[1-9]*)\\.(0|[1-9]*)(-(\\S*))?$', comparator: "REGEXP"
+      }
+      steps {
+        sh 'mkdir -p build/'
+
+        // Build the python tarball
+        sh 'cd python && python setup.py sdist'
+        sh 'cp python/dist/synse_grpc-*.tar.gz build'
+      }
+    }
+
+    // Generates and drafts a GitHub release
+    stage('Draft GitHub Release') {
+      when {
+        // example matches: 1.2.3, 1.2.3-dev
+        tag pattern: '(0|[1-9]*)\\.(0|[1-9]*)\\.(0|[1-9]*)(-(\\S*))?$', comparator: "REGEXP"
+      }
+      environment {
+        GITHUB_USER = 'vapor-ware'
+        GITHUB_TOKEN = credentials('1de2c61b-4188-478b-bc65-42b0df860163')
+        GITHUB_REPONAME = 'synse-server-grpc'
+      }
+      steps {
+        sh 'docker pull edaniszewski/ghr'
+        sh 'docker run --rm -v ${WORKSPACE}:/repo edaniszewski/ghr -u ${GITHUB_USER} -r ${GITHUB_REPONAME} -t ${GITHUB_TOKEN} -replace -draft ${TAG_NAME} build/'
+      }
+    }
+  }
+}

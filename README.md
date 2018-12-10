@@ -1,6 +1,6 @@
 <p align="center"><a href="https://www.vapor.io/"><img src="assets/logo.png" width="360"></a></p>
 <p align="center">
-    <a href="https://circleci.com/gh/vapor-ware/synse-server-grpc"><img src="https://circleci.com/gh/vapor-ware/synse-server-grpc.svg?style=shield"></a>
+    <a href="https://build.vio.sh/blue/organizations/jenkins/vapor-ware%2Fsynse-server-grpc/activity"><img src="https://build.vio.sh/buildStatus/icon?job=vapor-ware/synse-server-grpc/master" /></a>
     <a href="https://pypi.python.org/pypi/synse-grpc"><img src="https://img.shields.io/pypi/v/synse-grpc.svg"></a>
 <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fvapor-ware%2Fsynse-server-grpc?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fvapor-ware%2Fsynse-server-grpc.svg?type=shield"/></a>
         
