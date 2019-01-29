@@ -3,360 +3,317 @@ syntax = "proto3";
 package synse;
 
 
-service Plugin {
+// V3Plugin is the API for plugin communication in Synse v3.
+service V3Plugin {
 
-    // Test returns the status of the plugin. This call is intended to
-    // be used in order to check if a plugin is reachable. The status
-    // returned here designates plugin reachability, not plugin health.
-    rpc Test(Empty) returns (Status) {}
+    // Devices gets all devices that a plugin manages.
+    rpc Devices(V3DeviceSelector) returns (stream V3Device) {}
 
-    // Version returns the version info for the plugin. This is not used
-    // by Synse Server, but can be used by the CLI/manual plugin interaction.
-    rpc Version(Empty) returns (VersionInfo) {}
+    // Health gets the health status of a plugin.
+    rpc Health(Empty) returns (V3Health) {}
 
-    // Health returns the health status of a plugin.
-    rpc Health(Empty) returns (PluginHealth) {}
+    // Metadata gets the plugin meta-information.
+    rpc Metadata(Empty) returns (V3Metadata) {}
 
-    // Metainfo gets the metainfo for the plugin. This info provides details
-    // about the plugin itself.
-    rpc Metainfo(Empty) returns (Metadata) {}
+    // Read gets readings from the specified plugin device(s).
+    rpc Read(V3DeviceSelector) returns (stream V3Reading) {}
 
-    // Capabilities returns the collection of capabilities that a plugin
-    // exposes. More specifically, this means types of devices supported
-    // and the readings supported for each of those devices.
-    rpc Capabilities(Empty) returns (stream DeviceCapability) {}
+    // ReadCache gets the cached readings from the plugin. If the plugin
+    // is not configured to cache readings, it will returned the entire
+    // current read state.
+    rpc ReadCache(V3Bounds) returns (stream V3Reading) {}
 
-    // Devices gets info for all of the devices that the plugin manages.
-    // This rpc call is the plugin's equivalent to a Synse Server scan.
-    rpc Devices(DeviceFilter) returns (stream Device) {}
+    // Test checks whether the plugin is reachable and ready.
+    rpc Test(Empty) returns (V3TestStatus) {}
 
-    // Read returns the reading data for the specified device.
-    rpc Read(DeviceFilter) returns (stream Reading) {}
+    // Transaction gets the status of a write transaction for an
+    // asynchronous write.
+    rpc Transaction(V3TransactionSelector) returns (stream V3TransactionStatus) {}
 
-    // ReadCached returns the reading data that is cached by the plugin.
-    // If caching is not enabled on the plugin, this will just return the
-    // current readings.
-    rpc ReadCached(Bounds) returns (stream DeviceReading) {}
+    // Version gets the version information for the plugin.
+    rpc Version(Empty) returns (V3Version) {}
 
-    // Write issues an asynchronous write command to the specified device.
-    rpc Write(WriteInfo) returns (Transactions) {}
+    // WriteAsync writes data to the specified plugin device. A transaction ID
+    // is returned so the write status can be checked asynchronously.
+    rpc WriteAsync(V3WritePayload) returns (V3WriteTransaction) {}
 
-    // Transactiong gets the state/status of an asynchronous write transaction.
-    rpc Transaction(TransactionFilter) returns (stream WriteResponse) {}
+    // WriteSync writes data to the specified plugin device. The request blocks
+    // until the write resolves so no asynchronous checking is required.
+    rpc WriteSync(V3WritePayload) returns (stream V3TransactionStatus) {}
 }
 
-// Bounds is a message that allow you to specify bounding timestamps to
-// the ReadCached rpc route. If no bounds are specified, all of the cached
-// data is returned.
-message Bounds {
-    // An RFC3339-formatted timestamp which specifies the beginning of
-    // the time bound. If not specified, there is no starting bound.
+// HealthStatus is the status of a health check.
+enum HealthStatus {
+    UNKNOWN = 0;
+    OK = 1;
+    FAILING = 2;
+}
+
+// WriteStatus are the statuses of a write as it is processed asynchronously.
+enum WriteStatus {
+    PENDING = 0;
+    WRITING = 1;
+    DONE = 3;
+    ERROR = 4;
+}
+
+// Empty is an empty message (no fields) which is used for RPC routes which
+// do not require any input for the request.
+message Empty {}
+
+// V3Bounds specifies time bounds in RFC3339 format.
+message V3Bounds {
+    // RFC3339 formatted timestamp specifying the beginning of the time bound. If
+    // left unspecified, the start is considered unbound.
     string start = 1;
 
-    // An RFC3339-formatted timestamp which specifies the ending of the
-    // time bound. If not specified, there is no ending bound.
+    // RFC3339 formatted timestamp specifying the ending of the time bound. If
+    // left unspecified, the end is considered unbound.
     string end = 2;
 }
 
-// DeviceFilter is a message that specifies the routing information for
-// a device. This can also be used as a filter for partial routing info
-// by only specifying the rack or the rack+board.
-message DeviceFilter {
-    // The rack identifier.
-    string rack = 1;
-
-    // The board identifier.
-    string board = 2;
-
-    // The device identifier.
-    string device = 3;
+// V3Device contains all of the pertinent known data associated with a device.
+// FIXME: this could still change
+message V3Device {
+    string timestamp = 1;
+    string id = 2;
+    string kind = 3;
+    string type = 4;
+    string plugin = 5;
+    string info = 6;
+    map<string,string> metadata = 7;
+    V3DeviceCapability capabilities = 8;
+    repeated V3Tag tags = 9;
+    repeated V3DeviceOutput outputs = 10;
+    int32 sortIndex = 11;
 }
 
-// Empty is a message that contains no data.
-message Empty {}
+// V3DeviceCapability specifies the capabilities that a device exposes via Synse.
+message V3DeviceCapability {
+    // The capability mode of the device ("r": read only, "w": write only, "rw": read/write)
+    string mode = 1;
 
-// Status is the response of the `Test` rpc call. In general, it should
-// always return with the 'ok' field being true.
-message Status {
-    bool ok = 1;
+    // The write capabilities of the device.
+    V3WriteCapability write = 2;
 }
 
-// PluginHealth is the response to the `Health` rpc call. It provides a
-// health status summarizing the plugin's health, as well as a list of the
-// `HealthCheck`s which make up that status.
-message PluginHealth {
-    enum Status {
-        UNKNOWN = 0;
-        OK = 1;
-        PARTIALLY_DEGRADED = 3;
-        FAILING = 4;
-    }
+// V3DeviceOutput specifies the output types for a device's reading(s).
+// FIXME: this may change
+message V3DeviceOutput {
+    string name = 1;
+    string type = 2;
+    int32 precision = 3;
+    double scalingFactor = 4;
+    V3OutputUnit unit = 5;
+}
 
-    // The time that the health was checked.
+// V3DeviceSelector specifies a selector to identify devices for various actions.
+message V3DeviceSelector {
+    // The tags to use as selectors.
+    repeated V3Tag tags = 1;
+}
+
+// V3Health is the health status for a plugin.
+message V3Health {
+    // FRC3339 formatted timestamp of the time when the health was checked.
     string timestamp = 1;
 
-    // The overall health status.
-    Status status = 2;
+    // The overall health status of a plugin.
+    HealthStatus status = 2;
 
-    // All the health checks of the plugin that make up the overall health.
-    repeated HealthCheck checks = 3;
+    // All of the health checks for a plugin.
+    repeated V3HealthCheck checks = 3;
 }
 
-// HealthCheck is an individual health metric that makes up the plugin health.
-message HealthCheck {
+// V3HealthCheck is the health check status for a plugin.
+message V3HealthCheck {
     // The name of the health check.
     string name = 1;
 
     // The status of the health check.
-    PluginHealth.Status status = 2;
+    HealthStatus status = 2;
 
-    // Any additional info associated with the health check.
+    // Any additional information associated with the health check.
     string message = 3;
 
-    // The time at which the health check was completed.
+    // RFC3339 formatted timestamp at which the check was last completed.
     string timestamp = 4;
 
-    // The type of the health check. These are left as arbitrary strings
-    // instead of enums to make it easier to support new types of health
-    // checks in the future, without having to update the GRPC API.
+    // The type of health check. The different kinds of health check are
+    // defined in the SDK.
     string type = 5;
 }
 
-// DeviceCapability identifies a device kind and the potential kinds of readings
-// that it supports.
-message DeviceCapability {
-    // The kind/type of the device.
-    string kind = 1;
-
-    // The outputs that the device supports.
-    repeated string outputs = 2;
-}
-
-// Metadata is the response to the `Metainfo` rpc call.
-message Metadata {
+// V3Metadata is static metadata about a plugin.
+message V3Metadata {
+    // The name of the plugin.
     string name = 1;
+
+    // The maintainer of the plugin.
     string maintainer = 2;
+
+    // The normalized tag name for plugin meta-info.
     string tag = 3;
+
+    // A brief description of the plugin.
     string description = 4;
+
+    // A link to the plugin's VCS repo.
     string vcs = 5;
-
-    VersionInfo version = 6;
 }
 
-// VersionInfo is the response to the `Version` rpc call.
-message VersionInfo {
-    string pluginVersion = 1;
-    string sdkVersion = 2;
-    string buildDate = 3;
-    string gitCommit = 4;
-    string gitTag = 5;
-    string arch = 6;
-    string os = 7;
+// V3OutputUnit the unit of measure for a reading.
+message V3OutputUnit {
+    // The full name of the unit.
+    string name = 1;
+
+    // The symbolic representation of the unit.
+    string symbol = 2;
 }
 
-// Reading is the response to the `Read` rpc call.
-message Reading {
-    // The time which the reading was taken.
-    string timestamp = 1;
+// V3Reading is a reading response from a device.
+message V3Reading {
+    // The GUID of the device being read from.
+    string id = 1;
 
-    // The type of reading.
-    string type = 2;
+    // RFC3339 formatted timestamp for when the reading was taken.
+    string timestamp = 2;
 
-    // Any info associated with the reading.
-    string info = 3;
+    // FIXME: this may need updating
+    string type = 3;
+    string kind = 4;
 
-    // The unit of the reading.
-    Unit unit = 4;
+    // Any additional information associated with a reading.
+    map<string,string> context = 5;
+
+    // The unit of measure for the reading.
+    V3OutputUnit unit = 6;
 
     // The value of the reading.
     oneof value {
-        string string_value  = 5;
-        bool   bool_value    = 6;
-        float  float32_value = 7;
-        double float64_value = 8;
-        int32  int32_value   = 9;
-        int64  int64_value   = 10;
-        bytes  bytes_value   = 11;
-        uint32 uint32_value  = 12;
-        uint64 uint64_value  = 13;
+        string string_value  = 7;
+        bool   bool_value    = 8;
+        float  float32_value = 9;
+        double float64_value = 10;
+        int32  int32_value   = 11;
+        int64  int64_value   = 12;
+        bytes  bytes_value   = 13;
+        uint32 uint32_value  = 14;
+        uint64 uint64_value  = 15;
     }
 }
 
-// DeviceReading is a wrapper around a Reading which associates that
-// reading with its originating device by providing the device routing
-// information (rack, board, and device id).
-message DeviceReading {
-    // The rack id associated with the reading.
-    string rack = 1;
+// V3Tag is a specification for a single tag.
+message V3Tag {
+    // The namespace of the tag.
+    string namespace = 1;
 
-    // The board id associated with the reading.
-    string board = 2;
+    // The annotation of the tag.
+    string annotation = 2;
 
-    // The device id associated with the reading.
-    string device = 3;
-
-    // The reading itself.
-    Reading reading = 4;
+    // The tag label.
+    string label = 3;
 }
 
-// WriteInfo is the request message for the `Write` rpc call. It specifies a
-// filter for the device to write to, as well as actions/data for the write.
-message WriteInfo {
-    // The specifier for the device to write to.
-    DeviceFilter deviceFilter = 1;
-
-    // The data to write to the device.
-    repeated WriteData data = 2;
+// V3TestStatus is the status response for plugin availability.
+message V3TestStatus {
+    // A flag describing whether the plugin is ready and reachable.
+    bool ok = 1;
 }
 
-// WriteData is the data that gets written on a `Write` rpc call.
-message WriteData {
-    // The action string for the device write.
+// V3TransactionSelector specifies a selector to identify a transaction.
+message V3TransactionSelector {
+    // The ID of a write transaction.
+    string id = 1;
+}
+
+
+// V3TransactionStatus the status of a write transaction.
+message V3TransactionStatus {
+    // The ID of the write transaction.
+    string id = 1;
+
+    // RFC3339 formatted timestamp of when the transaction was created.
+    string created = 2;
+
+    // RFC3339 formatted timestamp of when the transaction was last updated.
+    string updated = 3;
+
+    // Context information for any errors that may have occurred.
+    string message = 4;
+
+    // The timeout within which the transaction remains valid.
+    string timeout = 5;
+
+    // The status of the write (pending, writing, done, error).
+    WriteStatus status = 6;
+
+    // The data that was written for the write transaction.
+    V3WriteData context = 7;
+}
+
+// V3Version provides version information for the plugin.
+message V3Version {
+    // The semantic version of the plugin.
+    string pluginVersion = 1;
+
+    // The version of the SDK the plugin uses.
+    string sdkVersion = 2;
+
+    // The timestamp from when the plugin was built.
+    string buildDate = 3;
+
+    // The commit hash at which the plugin was built.
+    string gitCommit = 4;
+
+    // The tag name at which the plugin was built.
+    string gitTag = 5;
+
+    // The architecture that the plugin was built.
+    string arch = 6;
+
+    // The operating system that the plugin was built for.
+    string os = 7;
+}
+
+// V3WriteCapability specifies the write capabilities for a device.
+message V3WriteCapability {
+    // The write actions supported by a device.
+    repeated string actions = 1;
+}
+
+// V3WriteData is the data to write to a device.
+message V3WriteData {
+    // The action string for the write.
     string action = 1;
 
-    // The data to write.
+    // Additional data for the write action.
     bytes data = 2;
 }
 
-// WriteResponse is the response for a `Transaction` rpc call. It gives the
-// status of the transaction. Transactions correspond with write requests.
-// Since writes are performed asynchronously, the transaction id is used to
-// track the progress of that transaction.
-message WriteResponse {
+// V3WritePayload the payload for a write which specifies the device to
+// write to and the data to write.
+message V3WritePayload {
+    // The selector for the device to write to. This should resolve
+    // to a single device.
+    V3DeviceSelector selector = 1;
 
-    enum WriteStatus {
-        UNKNOWN = 0;
-        PENDING = 1;
-        WRITING = 2;
-        DONE = 3;
-    }
+    // The data to write to the device.
+    repeated V3WriteData data = 2;
+}
 
-    enum WriteState {
-        OK = 0;
-        ERROR = 1;
-    }
-
-    // The id of the write transaction.
+// V3WriteTransaction contains information associating a write action with
+// a transaction for asynchronous tracking.
+message V3WriteTransaction {
+    // The ID of the write transaction.
     string id = 1;
 
-    // The time at which the write transaction was created.
-    string created = 2;
+    // The GUID of the device written to.
+    string device = 2;
 
-    // The time at which the write transaction state/status was last updated.
-    string updated = 3;
+    // The data that was written for the write transaction.
+    V3WriteData context = 3;
 
-    // The status of the transaction. This describes what stage of processing
-    // the transaction is at.
-    WriteStatus status = 4;
-
-    // The state of the transaction. This describes the so called "health"
-    // of the transaction.
-    WriteState state = 5;
-
-    // The message field will be used to specify any context information
-    // when the state is ERROR. If the state is OK, this field will
-    // remain empty.
-    string message = 6;
-}
-
-// TransactionFilter is a filter for transaction checks. If its id field is
-// set, the plugin will only check the state for that transaction. If the id
-// field is empty, the plugin will return the state for all active transactions.
-message TransactionFilter {
-
-    // The id of the transaction to check.
-    string id = 1;
-}
-
-// Transactions specifies the asynchronous transactions for each of the writes
-// for a `Write` rpc call. Each transaction identifies a single write action
-// with a unique transaction id and context to help identify which transaction
-// that id corresponds to.
-//
-// The transaction id can later be passed back to the `Transaction` rpc call
-// to get the status of that write.
-message Transactions {
-
-    // A map where the key is the transaction id for a `WriteData` within the
-    // `WriteInfo`, and the value is that same `WriteData`, provided as context.
-    map<string, WriteData> transactions = 1;
-}
-
-// Device is the response to the `Devices` rpc call. It provides all of the
-// info that synse gets to describe a device. This is used by Synse Server for
-// its 'scan' and 'info' endpoints.
-message Device {
-    // The time at which the device info was gathered.
-    string timestamp = 1;
-
-    // The unique id for the device.
-    string uid = 2;
-
-    // The device kind. This can also be thought of as 'device type'.
-    string kind = 3;
-
-    // Any metadata associated with the device.
-    map<string,string> metadata = 4;
-
-    // The name of the plugin that the device is managed by.
-    string plugin = 5;
-
-    // Any additional information specified for the device.
-    string info = 6;
-
-    // The location of the device, as specified by rack and board
-    // identifiers.
-    Location location = 7;
-
-    // The one based sort ordinal for a device in the scan. Zero (default)
-    // for don't care.
-    int32 sortOrdinal = 8;
-
-    // The reading output of the device. This specifies all of the
-    // outputs a device can generate when read. Many devices will have
-    // a single output, but some devices (e.g. a humidity sensor) could
-    // return multiple data points from a single reading (e.g.
-    // temperature and humidity).
-    repeated Output output = 9;
-}
-
-// Location is the location specification for a device.
-message Location {
-
-    // The rack which the device belongs to.
-    string rack = 1;
-
-    // The board which the device belongs to.
-    string board = 2;
-}
-
-// Output is the specification for one of a device's reading outputs.
-message Output {
-
-    // The name of the output. This is namespaced.
-    string name = 1;
-
-    // The type of the output. This is the last element of the namespace.
-    string type = 2;
-
-    // The decimal precision of the output. This is ignored if the output
-    // dataType is not a float.
-    int32 precision = 3;
-
-    // The scaling factor to multiply the reading result by. This can be
-    // positive or negative, whole or decimal.
-    double scalingFactor = 4;
-
-    // The unit of measure for the reading.
-    Unit unit = 5;
-}
-
-// Unit is the unit specification for a reading output.
-message Unit {
-
-    // The full name of the unit, e.g. "degrees celsius".
-    string name = 1;
-
-    // The symbol for the unit, e.g. "C".
-    string symbol = 2;
+    // The timeout within which the transaction remains valid.
+    string timeout = 4;
 }

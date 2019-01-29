@@ -3,6 +3,7 @@
 
 import sys
 _b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
@@ -19,14 +20,12 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='synse.proto',
   package='synse',
   syntax='proto3',
-  serialized_pb=_b('\n\x0bsynse.proto\x12\x05synse\"$\n\x06\x42ounds\x12\r\n\x05start\x18\x01 \x01(\t\x12\x0b\n\x03\x65nd\x18\x02 \x01(\t\";\n\x0c\x44\x65viceFilter\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x03 \x01(\t\"\x07\n\x05\x45mpty\"\x14\n\x06Status\x12\n\n\x02ok\x18\x01 \x01(\x08\"\xb5\x01\n\x0cPluginHealth\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12*\n\x06status\x18\x02 \x01(\x0e\x32\x1a.synse.PluginHealth.Status\x12\"\n\x06\x63hecks\x18\x03 \x03(\x0b\x32\x12.synse.HealthCheck\"B\n\x06Status\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x16\n\x12PARTIALLY_DEGRADED\x10\x03\x12\x0b\n\x07\x46\x41ILING\x10\x04\"y\n\x0bHealthCheck\x12\x0c\n\x04name\x18\x01 \x01(\t\x12*\n\x06status\x18\x02 \x01(\x0e\x32\x1a.synse.PluginHealth.Status\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\"1\n\x10\x44\x65viceCapability\x12\x0c\n\x04kind\x18\x01 \x01(\t\x12\x0f\n\x07outputs\x18\x02 \x03(\t\"\x80\x01\n\x08Metadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nmaintainer\x18\x02 \x01(\t\x12\x0b\n\x03tag\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x0b\n\x03vcs\x18\x05 \x01(\t\x12#\n\x07version\x18\x06 \x01(\x0b\x32\x12.synse.VersionInfo\"\x88\x01\n\x0bVersionInfo\x12\x15\n\rpluginVersion\x18\x01 \x01(\t\x12\x12\n\nsdkVersion\x18\x02 \x01(\t\x12\x11\n\tbuildDate\x18\x03 \x01(\t\x12\x11\n\tgitCommit\x18\x04 \x01(\t\x12\x0e\n\x06gitTag\x18\x05 \x01(\t\x12\x0c\n\x04\x61rch\x18\x06 \x01(\t\x12\n\n\x02os\x18\x07 \x01(\t\"\xb1\x02\n\x07Reading\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x0c\n\x04info\x18\x03 \x01(\t\x12\x19\n\x04unit\x18\x04 \x01(\x0b\x32\x0b.synse.Unit\x12\x16\n\x0cstring_value\x18\x05 \x01(\tH\x00\x12\x14\n\nbool_value\x18\x06 \x01(\x08H\x00\x12\x17\n\rfloat32_value\x18\x07 \x01(\x02H\x00\x12\x17\n\rfloat64_value\x18\x08 \x01(\x01H\x00\x12\x15\n\x0bint32_value\x18\t \x01(\x05H\x00\x12\x15\n\x0bint64_value\x18\n \x01(\x03H\x00\x12\x15\n\x0b\x62ytes_value\x18\x0b \x01(\x0cH\x00\x12\x16\n\x0cuint32_value\x18\x0c \x01(\rH\x00\x12\x16\n\x0cuint64_value\x18\r \x01(\x04H\x00\x42\x07\n\x05value\"]\n\rDeviceReading\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x03 \x01(\t\x12\x1f\n\x07reading\x18\x04 \x01(\x0b\x32\x0e.synse.Reading\"V\n\tWriteInfo\x12)\n\x0c\x64\x65viceFilter\x18\x01 \x01(\x0b\x32\x13.synse.DeviceFilter\x12\x1e\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x10.synse.WriteData\")\n\tWriteData\x12\x0e\n\x06\x61\x63tion\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\x91\x02\n\rWriteResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07\x63reated\x18\x02 \x01(\t\x12\x0f\n\x07updated\x18\x03 \x01(\t\x12\x30\n\x06status\x18\x04 \x01(\x0e\x32 .synse.WriteResponse.WriteStatus\x12.\n\x05state\x18\x05 \x01(\x0e\x32\x1f.synse.WriteResponse.WriteState\x12\x0f\n\x07message\x18\x06 \x01(\t\">\n\x0bWriteStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0b\n\x07WRITING\x10\x02\x12\x08\n\x04\x44ONE\x10\x03\"\x1f\n\nWriteState\x12\x06\n\x02OK\x10\x00\x12\t\n\x05\x45RROR\x10\x01\"\x1f\n\x11TransactionFilter\x12\n\n\x02id\x18\x01 \x01(\t\"\x92\x01\n\x0cTransactions\x12;\n\x0ctransactions\x18\x01 \x03(\x0b\x32%.synse.Transactions.TransactionsEntry\x1a\x45\n\x11TransactionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1f\n\x05value\x18\x02 \x01(\x0b\x32\x10.synse.WriteData:\x02\x38\x01\"\x8b\x02\n\x06\x44\x65vice\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\x0b\n\x03uid\x18\x02 \x01(\t\x12\x0c\n\x04kind\x18\x03 \x01(\t\x12-\n\x08metadata\x18\x04 \x03(\x0b\x32\x1b.synse.Device.MetadataEntry\x12\x0e\n\x06plugin\x18\x05 \x01(\t\x12\x0c\n\x04info\x18\x06 \x01(\t\x12!\n\x08location\x18\x07 \x01(\x0b\x32\x0f.synse.Location\x12\x13\n\x0bsortOrdinal\x18\x08 \x01(\x05\x12\x1d\n\x06output\x18\t \x03(\x0b\x32\r.synse.Output\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\'\n\x08Location\x12\x0c\n\x04rack\x18\x01 \x01(\t\x12\r\n\x05\x62oard\x18\x02 \x01(\t\"i\n\x06Output\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x11\n\tprecision\x18\x03 \x01(\x05\x12\x15\n\rscalingFactor\x18\x04 \x01(\x01\x12\x19\n\x04unit\x18\x05 \x01(\x0b\x32\x0b.synse.Unit\"$\n\x04Unit\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t2\x85\x04\n\x06Plugin\x12%\n\x04Test\x12\x0c.synse.Empty\x1a\r.synse.Status\"\x00\x12-\n\x07Version\x12\x0c.synse.Empty\x1a\x12.synse.VersionInfo\"\x00\x12-\n\x06Health\x12\x0c.synse.Empty\x1a\x13.synse.PluginHealth\"\x00\x12+\n\x08Metainfo\x12\x0c.synse.Empty\x1a\x0f.synse.Metadata\"\x00\x12\x39\n\x0c\x43\x61pabilities\x12\x0c.synse.Empty\x1a\x17.synse.DeviceCapability\"\x00\x30\x01\x12\x31\n\x07\x44\x65vices\x12\x13.synse.DeviceFilter\x1a\r.synse.Device\"\x00\x30\x01\x12/\n\x04Read\x12\x13.synse.DeviceFilter\x1a\x0e.synse.Reading\"\x00\x30\x01\x12\x35\n\nReadCached\x12\r.synse.Bounds\x1a\x14.synse.DeviceReading\"\x00\x30\x01\x12\x30\n\x05Write\x12\x10.synse.WriteInfo\x1a\x13.synse.Transactions\"\x00\x12\x41\n\x0bTransaction\x12\x18.synse.TransactionFilter\x1a\x14.synse.WriteResponse\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0bsynse.proto\x12\x05synse\"\x07\n\x05\x45mpty\"&\n\x08V3Bounds\x12\r\n\x05start\x18\x01 \x01(\t\x12\x0b\n\x03\x65nd\x18\x02 \x01(\t\"\xcd\x02\n\x08V3Device\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x0c\n\x04kind\x18\x03 \x01(\t\x12\x0c\n\x04type\x18\x04 \x01(\t\x12\x0e\n\x06plugin\x18\x05 \x01(\t\x12\x0c\n\x04info\x18\x06 \x01(\t\x12/\n\x08metadata\x18\x07 \x03(\x0b\x32\x1d.synse.V3Device.MetadataEntry\x12/\n\x0c\x63\x61pabilities\x18\x08 \x01(\x0b\x32\x19.synse.V3DeviceCapability\x12\x1a\n\x04tags\x18\t \x03(\x0b\x32\x0c.synse.V3Tag\x12&\n\x07outputs\x18\n \x03(\x0b\x32\x15.synse.V3DeviceOutput\x12\x11\n\tsortIndex\x18\x0b \x01(\x05\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"K\n\x12V3DeviceCapability\x12\x0c\n\x04mode\x18\x01 \x01(\t\x12\'\n\x05write\x18\x02 \x01(\x0b\x32\x18.synse.V3WriteCapability\"y\n\x0eV3DeviceOutput\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x11\n\tprecision\x18\x03 \x01(\x05\x12\x15\n\rscalingFactor\x18\x04 \x01(\x01\x12!\n\x04unit\x18\x05 \x01(\x0b\x32\x13.synse.V3OutputUnit\".\n\x10V3DeviceSelector\x12\x1a\n\x04tags\x18\x01 \x03(\x0b\x32\x0c.synse.V3Tag\"h\n\x08V3Health\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12#\n\x06status\x18\x02 \x01(\x0e\x32\x13.synse.HealthStatus\x12$\n\x06\x63hecks\x18\x03 \x03(\x0b\x32\x14.synse.V3HealthCheck\"t\n\rV3HealthCheck\x12\x0c\n\x04name\x18\x01 \x01(\t\x12#\n\x06status\x18\x02 \x01(\x0e\x32\x13.synse.HealthStatus\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\"]\n\nV3Metadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nmaintainer\x18\x02 \x01(\t\x12\x0b\n\x03tag\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x0b\n\x03vcs\x18\x05 \x01(\t\",\n\x0cV3OutputUnit\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t\"\xa7\x03\n\tV3Reading\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0c\n\x04kind\x18\x04 \x01(\t\x12.\n\x07\x63ontext\x18\x05 \x03(\x0b\x32\x1d.synse.V3Reading.ContextEntry\x12!\n\x04unit\x18\x06 \x01(\x0b\x32\x13.synse.V3OutputUnit\x12\x16\n\x0cstring_value\x18\x07 \x01(\tH\x00\x12\x14\n\nbool_value\x18\x08 \x01(\x08H\x00\x12\x17\n\rfloat32_value\x18\t \x01(\x02H\x00\x12\x17\n\rfloat64_value\x18\n \x01(\x01H\x00\x12\x15\n\x0bint32_value\x18\x0b \x01(\x05H\x00\x12\x15\n\x0bint64_value\x18\x0c \x01(\x03H\x00\x12\x15\n\x0b\x62ytes_value\x18\r \x01(\x0cH\x00\x12\x16\n\x0cuint32_value\x18\x0e \x01(\rH\x00\x12\x16\n\x0cuint64_value\x18\x0f \x01(\x04H\x00\x1a.\n\x0c\x43ontextEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x07\n\x05value\"=\n\x05V3Tag\x12\x11\n\tnamespace\x18\x01 \x01(\t\x12\x12\n\nannotation\x18\x02 \x01(\t\x12\r\n\x05label\x18\x03 \x01(\t\"\x1a\n\x0cV3TestStatus\x12\n\n\x02ok\x18\x01 \x01(\x08\"#\n\x15V3TransactionSelector\x12\n\n\x02id\x18\x01 \x01(\t\"\xae\x01\n\x13V3TransactionStatus\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07\x63reated\x18\x02 \x01(\t\x12\x0f\n\x07updated\x18\x03 \x01(\t\x12\x0f\n\x07message\x18\x04 \x01(\t\x12\x0f\n\x07timeout\x18\x05 \x01(\t\x12\"\n\x06status\x18\x06 \x01(\x0e\x32\x12.synse.WriteStatus\x12#\n\x07\x63ontext\x18\x07 \x01(\x0b\x32\x12.synse.V3WriteData\"\x86\x01\n\tV3Version\x12\x15\n\rpluginVersion\x18\x01 \x01(\t\x12\x12\n\nsdkVersion\x18\x02 \x01(\t\x12\x11\n\tbuildDate\x18\x03 \x01(\t\x12\x11\n\tgitCommit\x18\x04 \x01(\t\x12\x0e\n\x06gitTag\x18\x05 \x01(\t\x12\x0c\n\x04\x61rch\x18\x06 \x01(\t\x12\n\n\x02os\x18\x07 \x01(\t\"$\n\x11V3WriteCapability\x12\x0f\n\x07\x61\x63tions\x18\x01 \x03(\t\"+\n\x0bV3WriteData\x12\x0e\n\x06\x61\x63tion\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"]\n\x0eV3WritePayload\x12)\n\x08selector\x18\x01 \x01(\x0b\x32\x17.synse.V3DeviceSelector\x12 \n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x12.synse.V3WriteData\"f\n\x12V3WriteTransaction\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x02 \x01(\t\x12#\n\x07\x63ontext\x18\x03 \x01(\x0b\x32\x12.synse.V3WriteData\x12\x0f\n\x07timeout\x18\x04 \x01(\t*0\n\x0cHealthStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0b\n\x07\x46\x41ILING\x10\x02*<\n\x0bWriteStatus\x12\x0b\n\x07PENDING\x10\x00\x12\x0b\n\x07WRITING\x10\x01\x12\x08\n\x04\x44ONE\x10\x03\x12\t\n\x05\x45RROR\x10\x04\x32\xb5\x04\n\x08V3Plugin\x12\x37\n\x07\x44\x65vices\x12\x17.synse.V3DeviceSelector\x1a\x0f.synse.V3Device\"\x00\x30\x01\x12)\n\x06Health\x12\x0c.synse.Empty\x1a\x0f.synse.V3Health\"\x00\x12-\n\x08Metadata\x12\x0c.synse.Empty\x1a\x11.synse.V3Metadata\"\x00\x12\x35\n\x04Read\x12\x17.synse.V3DeviceSelector\x1a\x10.synse.V3Reading\"\x00\x30\x01\x12\x32\n\tReadCache\x12\x0f.synse.V3Bounds\x1a\x10.synse.V3Reading\"\x00\x30\x01\x12+\n\x04Test\x12\x0c.synse.Empty\x1a\x13.synse.V3TestStatus\"\x00\x12K\n\x0bTransaction\x12\x1c.synse.V3TransactionSelector\x1a\x1a.synse.V3TransactionStatus\"\x00\x30\x01\x12+\n\x07Version\x12\x0c.synse.Empty\x1a\x10.synse.V3Version\"\x00\x12@\n\nWriteAsync\x12\x15.synse.V3WritePayload\x1a\x19.synse.V3WriteTransaction\"\x00\x12\x42\n\tWriteSync\x12\x15.synse.V3WritePayload\x1a\x1a.synse.V3TransactionStatus\"\x00\x30\x01\x62\x06proto3')
 )
 
-
-
-_PLUGINHEALTH_STATUS = _descriptor.EnumDescriptor(
-  name='Status',
-  full_name='synse.PluginHealth.Status',
+_HEALTHSTATUS = _descriptor.EnumDescriptor(
+  name='HealthStatus',
+  full_name='synse.HealthStatus',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -39,155 +38,57 @@ _PLUGINHEALTH_STATUS = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PARTIALLY_DEGRADED', index=2, number=3,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='FAILING', index=3, number=4,
+      name='FAILING', index=2, number=2,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=268,
-  serialized_end=334,
+  serialized_start=2170,
+  serialized_end=2218,
 )
-_sym_db.RegisterEnumDescriptor(_PLUGINHEALTH_STATUS)
+_sym_db.RegisterEnumDescriptor(_HEALTHSTATUS)
 
-_WRITERESPONSE_WRITESTATUS = _descriptor.EnumDescriptor(
+HealthStatus = enum_type_wrapper.EnumTypeWrapper(_HEALTHSTATUS)
+_WRITESTATUS = _descriptor.EnumDescriptor(
   name='WriteStatus',
-  full_name='synse.WriteResponse.WriteStatus',
+  full_name='synse.WriteStatus',
   filename=None,
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='UNKNOWN', index=0, number=0,
+      name='PENDING', index=0, number=0,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PENDING', index=1, number=1,
+      name='WRITING', index=1, number=1,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='WRITING', index=2, number=2,
+      name='DONE', index=2, number=3,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DONE', index=3, number=3,
+      name='ERROR', index=3, number=4,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=1493,
-  serialized_end=1555,
+  serialized_start=2220,
+  serialized_end=2280,
 )
-_sym_db.RegisterEnumDescriptor(_WRITERESPONSE_WRITESTATUS)
+_sym_db.RegisterEnumDescriptor(_WRITESTATUS)
 
-_WRITERESPONSE_WRITESTATE = _descriptor.EnumDescriptor(
-  name='WriteState',
-  full_name='synse.WriteResponse.WriteState',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='OK', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ERROR', index=1, number=1,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=1557,
-  serialized_end=1588,
-)
-_sym_db.RegisterEnumDescriptor(_WRITERESPONSE_WRITESTATE)
+WriteStatus = enum_type_wrapper.EnumTypeWrapper(_WRITESTATUS)
+UNKNOWN = 0
+OK = 1
+FAILING = 2
+PENDING = 0
+WRITING = 1
+DONE = 3
+ERROR = 4
 
-
-_BOUNDS = _descriptor.Descriptor(
-  name='Bounds',
-  full_name='synse.Bounds',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='start', full_name='synse.Bounds.start', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='end', full_name='synse.Bounds.end', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=22,
-  serialized_end=58,
-)
-
-
-_DEVICEFILTER = _descriptor.Descriptor(
-  name='DeviceFilter',
-  full_name='synse.DeviceFilter',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='rack', full_name='synse.DeviceFilter.rack', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='board', full_name='synse.DeviceFilter.board', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='device', full_name='synse.DeviceFilter.device', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=60,
-  serialized_end=119,
-)
 
 
 _EMPTY = _descriptor.Descriptor(
@@ -209,126 +110,28 @@ _EMPTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=121,
-  serialized_end=128,
+  serialized_start=22,
+  serialized_end=29,
 )
 
 
-_STATUS = _descriptor.Descriptor(
-  name='Status',
-  full_name='synse.Status',
+_V3BOUNDS = _descriptor.Descriptor(
+  name='V3Bounds',
+  full_name='synse.V3Bounds',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ok', full_name='synse.Status.ok', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=130,
-  serialized_end=150,
-)
-
-
-_PLUGINHEALTH = _descriptor.Descriptor(
-  name='PluginHealth',
-  full_name='synse.PluginHealth',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='timestamp', full_name='synse.PluginHealth.timestamp', index=0,
+      name='start', full_name='synse.V3Bounds.start', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='status', full_name='synse.PluginHealth.status', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='checks', full_name='synse.PluginHealth.checks', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _PLUGINHEALTH_STATUS,
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=153,
-  serialized_end=334,
-)
-
-
-_HEALTHCHECK = _descriptor.Descriptor(
-  name='HealthCheck',
-  full_name='synse.HealthCheck',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='synse.HealthCheck.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='status', full_name='synse.HealthCheck.status', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='message', full_name='synse.HealthCheck.message', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='timestamp', full_name='synse.HealthCheck.timestamp', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='type', full_name='synse.HealthCheck.type', index=4,
-      number=5, type=9, cpp_type=9, label=1,
+      name='end', full_name='synse.V3Bounds.end', index=1,
+      number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -345,29 +148,29 @@ _HEALTHCHECK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=336,
-  serialized_end=457,
+  serialized_start=31,
+  serialized_end=69,
 )
 
 
-_DEVICECAPABILITY = _descriptor.Descriptor(
-  name='DeviceCapability',
-  full_name='synse.DeviceCapability',
+_V3DEVICE_METADATAENTRY = _descriptor.Descriptor(
+  name='MetadataEntry',
+  full_name='synse.V3Device.MetadataEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='kind', full_name='synse.DeviceCapability.kind', index=0,
+      name='key', full_name='synse.V3Device.MetadataEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='outputs', full_name='synse.DeviceCapability.outputs', index=1,
-      number=2, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
+      name='value', full_name='synse.V3Device.MetadataEntry.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -377,488 +180,104 @@ _DEVICECAPABILITY = _descriptor.Descriptor(
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  options=_descriptor._ParseOptions(descriptor_pb2.MessageOptions(), _b('8\001')),
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=459,
-  serialized_end=508,
+  serialized_start=358,
+  serialized_end=405,
 )
 
-
-_METADATA = _descriptor.Descriptor(
-  name='Metadata',
-  full_name='synse.Metadata',
+_V3DEVICE = _descriptor.Descriptor(
+  name='V3Device',
+  full_name='synse.V3Device',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='name', full_name='synse.Metadata.name', index=0,
+      name='timestamp', full_name='synse.V3Device.timestamp', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='maintainer', full_name='synse.Metadata.maintainer', index=1,
+      name='id', full_name='synse.V3Device.id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='tag', full_name='synse.Metadata.tag', index=2,
+      name='kind', full_name='synse.V3Device.kind', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='description', full_name='synse.Metadata.description', index=3,
+      name='type', full_name='synse.V3Device.type', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='vcs', full_name='synse.Metadata.vcs', index=4,
+      name='plugin', full_name='synse.V3Device.plugin', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='version', full_name='synse.Metadata.version', index=5,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=511,
-  serialized_end=639,
-)
-
-
-_VERSIONINFO = _descriptor.Descriptor(
-  name='VersionInfo',
-  full_name='synse.VersionInfo',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='pluginVersion', full_name='synse.VersionInfo.pluginVersion', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='sdkVersion', full_name='synse.VersionInfo.sdkVersion', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='buildDate', full_name='synse.VersionInfo.buildDate', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='gitCommit', full_name='synse.VersionInfo.gitCommit', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='gitTag', full_name='synse.VersionInfo.gitTag', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='arch', full_name='synse.VersionInfo.arch', index=5,
+      name='info', full_name='synse.V3Device.info', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='os', full_name='synse.VersionInfo.os', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=642,
-  serialized_end=778,
-)
-
-
-_READING = _descriptor.Descriptor(
-  name='Reading',
-  full_name='synse.Reading',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='timestamp', full_name='synse.Reading.timestamp', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='type', full_name='synse.Reading.type', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='info', full_name='synse.Reading.info', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='unit', full_name='synse.Reading.unit', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='string_value', full_name='synse.Reading.string_value', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='bool_value', full_name='synse.Reading.bool_value', index=5,
-      number=6, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='float32_value', full_name='synse.Reading.float32_value', index=6,
-      number=7, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='float64_value', full_name='synse.Reading.float64_value', index=7,
-      number=8, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='int32_value', full_name='synse.Reading.int32_value', index=8,
-      number=9, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='int64_value', full_name='synse.Reading.int64_value', index=9,
-      number=10, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='bytes_value', full_name='synse.Reading.bytes_value', index=10,
-      number=11, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='uint32_value', full_name='synse.Reading.uint32_value', index=11,
-      number=12, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='uint64_value', full_name='synse.Reading.uint64_value', index=12,
-      number=13, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='value', full_name='synse.Reading.value',
-      index=0, containing_type=None, fields=[]),
-  ],
-  serialized_start=781,
-  serialized_end=1086,
-)
-
-
-_DEVICEREADING = _descriptor.Descriptor(
-  name='DeviceReading',
-  full_name='synse.DeviceReading',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='rack', full_name='synse.DeviceReading.rack', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='board', full_name='synse.DeviceReading.board', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='device', full_name='synse.DeviceReading.device', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='reading', full_name='synse.DeviceReading.reading', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1088,
-  serialized_end=1181,
-)
-
-
-_WRITEINFO = _descriptor.Descriptor(
-  name='WriteInfo',
-  full_name='synse.WriteInfo',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='deviceFilter', full_name='synse.WriteInfo.deviceFilter', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='data', full_name='synse.WriteInfo.data', index=1,
-      number=2, type=11, cpp_type=10, label=3,
+      name='metadata', full_name='synse.V3Device.metadata', index=6,
+      number=7, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1183,
-  serialized_end=1269,
-)
-
-
-_WRITEDATA = _descriptor.Descriptor(
-  name='WriteData',
-  full_name='synse.WriteData',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
     _descriptor.FieldDescriptor(
-      name='action', full_name='synse.WriteData.action', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='capabilities', full_name='synse.V3Device.capabilities', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='data', full_name='synse.WriteData.data', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1271,
-  serialized_end=1312,
-)
-
-
-_WRITERESPONSE = _descriptor.Descriptor(
-  name='WriteResponse',
-  full_name='synse.WriteResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='id', full_name='synse.WriteResponse.id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='tags', full_name='synse.V3Device.tags', index=8,
+      number=9, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='created', full_name='synse.WriteResponse.created', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='outputs', full_name='synse.V3Device.outputs', index=9,
+      number=10, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='updated', full_name='synse.WriteResponse.updated', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='status', full_name='synse.WriteResponse.status', index=3,
-      number=4, type=14, cpp_type=8, label=1,
+      name='sortIndex', full_name='synse.V3Device.sortIndex', index=10,
+      number=11, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
-    _descriptor.FieldDescriptor(
-      name='state', full_name='synse.WriteResponse.state', index=4,
-      number=5, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='message', full_name='synse.WriteResponse.message', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
   ],
   extensions=[
   ],
-  nested_types=[],
-  enum_types=[
-    _WRITERESPONSE_WRITESTATUS,
-    _WRITERESPONSE_WRITESTATE,
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1315,
-  serialized_end=1588,
-)
-
-
-_TRANSACTIONFILTER = _descriptor.Descriptor(
-  name='TransactionFilter',
-  full_name='synse.TransactionFilter',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='id', full_name='synse.TransactionFilter.id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
+  nested_types=[_V3DEVICE_METADATAENTRY, ],
   enum_types=[
   ],
   options=None,
@@ -867,27 +286,27 @@ _TRANSACTIONFILTER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1590,
-  serialized_end=1621,
+  serialized_start=72,
+  serialized_end=405,
 )
 
 
-_TRANSACTIONS_TRANSACTIONSENTRY = _descriptor.Descriptor(
-  name='TransactionsEntry',
-  full_name='synse.Transactions.TransactionsEntry',
+_V3DEVICECAPABILITY = _descriptor.Descriptor(
+  name='V3DeviceCapability',
+  full_name='synse.V3DeviceCapability',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='synse.Transactions.TransactionsEntry.key', index=0,
+      name='mode', full_name='synse.V3DeviceCapability.mode', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='value', full_name='synse.Transactions.TransactionsEntry.value', index=1,
+      name='write', full_name='synse.V3DeviceCapability.write', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -899,246 +318,54 @@ _TRANSACTIONS_TRANSACTIONSENTRY = _descriptor.Descriptor(
   nested_types=[],
   enum_types=[
   ],
-  options=_descriptor._ParseOptions(descriptor_pb2.MessageOptions(), _b('8\001')),
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1701,
-  serialized_end=1770,
-)
-
-_TRANSACTIONS = _descriptor.Descriptor(
-  name='Transactions',
-  full_name='synse.Transactions',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='transactions', full_name='synse.Transactions.transactions', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[_TRANSACTIONS_TRANSACTIONSENTRY, ],
-  enum_types=[
-  ],
   options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1624,
-  serialized_end=1770,
+  serialized_start=407,
+  serialized_end=482,
 )
 
 
-_DEVICE_METADATAENTRY = _descriptor.Descriptor(
-  name='MetadataEntry',
-  full_name='synse.Device.MetadataEntry',
+_V3DEVICEOUTPUT = _descriptor.Descriptor(
+  name='V3DeviceOutput',
+  full_name='synse.V3DeviceOutput',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='synse.Device.MetadataEntry.key', index=0,
+      name='name', full_name='synse.V3DeviceOutput.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='value', full_name='synse.Device.MetadataEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=_descriptor._ParseOptions(descriptor_pb2.MessageOptions(), _b('8\001')),
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1993,
-  serialized_end=2040,
-)
-
-_DEVICE = _descriptor.Descriptor(
-  name='Device',
-  full_name='synse.Device',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='timestamp', full_name='synse.Device.timestamp', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='uid', full_name='synse.Device.uid', index=1,
+      name='type', full_name='synse.V3DeviceOutput.type', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='kind', full_name='synse.Device.kind', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='metadata', full_name='synse.Device.metadata', index=3,
-      number=4, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='plugin', full_name='synse.Device.plugin', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='info', full_name='synse.Device.info', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='location', full_name='synse.Device.location', index=6,
-      number=7, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='sortOrdinal', full_name='synse.Device.sortOrdinal', index=7,
-      number=8, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='output', full_name='synse.Device.output', index=8,
-      number=9, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[_DEVICE_METADATAENTRY, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1773,
-  serialized_end=2040,
-)
-
-
-_LOCATION = _descriptor.Descriptor(
-  name='Location',
-  full_name='synse.Location',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='rack', full_name='synse.Location.rack', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='board', full_name='synse.Location.board', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2042,
-  serialized_end=2081,
-)
-
-
-_OUTPUT = _descriptor.Descriptor(
-  name='Output',
-  full_name='synse.Output',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='synse.Output.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='type', full_name='synse.Output.type', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='precision', full_name='synse.Output.precision', index=2,
+      name='precision', full_name='synse.V3DeviceOutput.precision', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='scalingFactor', full_name='synse.Output.scalingFactor', index=3,
+      name='scalingFactor', full_name='synse.V3DeviceOutput.scalingFactor', index=3,
       number=4, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='unit', full_name='synse.Output.unit', index=4,
+      name='unit', full_name='synse.V3DeviceOutput.unit', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -1156,27 +383,221 @@ _OUTPUT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2083,
-  serialized_end=2188,
+  serialized_start=484,
+  serialized_end=605,
 )
 
 
-_UNIT = _descriptor.Descriptor(
-  name='Unit',
-  full_name='synse.Unit',
+_V3DEVICESELECTOR = _descriptor.Descriptor(
+  name='V3DeviceSelector',
+  full_name='synse.V3DeviceSelector',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='name', full_name='synse.Unit.name', index=0,
+      name='tags', full_name='synse.V3DeviceSelector.tags', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=607,
+  serialized_end=653,
+)
+
+
+_V3HEALTH = _descriptor.Descriptor(
+  name='V3Health',
+  full_name='synse.V3Health',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='synse.V3Health.timestamp', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='symbol', full_name='synse.Unit.symbol', index=1,
+      name='status', full_name='synse.V3Health.status', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='checks', full_name='synse.V3Health.checks', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=655,
+  serialized_end=759,
+)
+
+
+_V3HEALTHCHECK = _descriptor.Descriptor(
+  name='V3HealthCheck',
+  full_name='synse.V3HealthCheck',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='synse.V3HealthCheck.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='synse.V3HealthCheck.status', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='message', full_name='synse.V3HealthCheck.message', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='synse.V3HealthCheck.timestamp', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='synse.V3HealthCheck.type', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=761,
+  serialized_end=877,
+)
+
+
+_V3METADATA = _descriptor.Descriptor(
+  name='V3Metadata',
+  full_name='synse.V3Metadata',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='synse.V3Metadata.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maintainer', full_name='synse.V3Metadata.maintainer', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='tag', full_name='synse.V3Metadata.tag', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='description', full_name='synse.V3Metadata.description', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='vcs', full_name='synse.V3Metadata.vcs', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=879,
+  serialized_end=972,
+)
+
+
+_V3OUTPUTUNIT = _descriptor.Descriptor(
+  name='V3OutputUnit',
+  full_name='synse.V3OutputUnit',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='synse.V3OutputUnit.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='symbol', full_name='synse.V3OutputUnit.symbol', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1194,93 +615,660 @@ _UNIT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2190,
-  serialized_end=2226,
+  serialized_start=974,
+  serialized_end=1018,
 )
 
-_PLUGINHEALTH.fields_by_name['status'].enum_type = _PLUGINHEALTH_STATUS
-_PLUGINHEALTH.fields_by_name['checks'].message_type = _HEALTHCHECK
-_PLUGINHEALTH_STATUS.containing_type = _PLUGINHEALTH
-_HEALTHCHECK.fields_by_name['status'].enum_type = _PLUGINHEALTH_STATUS
-_METADATA.fields_by_name['version'].message_type = _VERSIONINFO
-_READING.fields_by_name['unit'].message_type = _UNIT
-_READING.oneofs_by_name['value'].fields.append(
-  _READING.fields_by_name['string_value'])
-_READING.fields_by_name['string_value'].containing_oneof = _READING.oneofs_by_name['value']
-_READING.oneofs_by_name['value'].fields.append(
-  _READING.fields_by_name['bool_value'])
-_READING.fields_by_name['bool_value'].containing_oneof = _READING.oneofs_by_name['value']
-_READING.oneofs_by_name['value'].fields.append(
-  _READING.fields_by_name['float32_value'])
-_READING.fields_by_name['float32_value'].containing_oneof = _READING.oneofs_by_name['value']
-_READING.oneofs_by_name['value'].fields.append(
-  _READING.fields_by_name['float64_value'])
-_READING.fields_by_name['float64_value'].containing_oneof = _READING.oneofs_by_name['value']
-_READING.oneofs_by_name['value'].fields.append(
-  _READING.fields_by_name['int32_value'])
-_READING.fields_by_name['int32_value'].containing_oneof = _READING.oneofs_by_name['value']
-_READING.oneofs_by_name['value'].fields.append(
-  _READING.fields_by_name['int64_value'])
-_READING.fields_by_name['int64_value'].containing_oneof = _READING.oneofs_by_name['value']
-_READING.oneofs_by_name['value'].fields.append(
-  _READING.fields_by_name['bytes_value'])
-_READING.fields_by_name['bytes_value'].containing_oneof = _READING.oneofs_by_name['value']
-_READING.oneofs_by_name['value'].fields.append(
-  _READING.fields_by_name['uint32_value'])
-_READING.fields_by_name['uint32_value'].containing_oneof = _READING.oneofs_by_name['value']
-_READING.oneofs_by_name['value'].fields.append(
-  _READING.fields_by_name['uint64_value'])
-_READING.fields_by_name['uint64_value'].containing_oneof = _READING.oneofs_by_name['value']
-_DEVICEREADING.fields_by_name['reading'].message_type = _READING
-_WRITEINFO.fields_by_name['deviceFilter'].message_type = _DEVICEFILTER
-_WRITEINFO.fields_by_name['data'].message_type = _WRITEDATA
-_WRITERESPONSE.fields_by_name['status'].enum_type = _WRITERESPONSE_WRITESTATUS
-_WRITERESPONSE.fields_by_name['state'].enum_type = _WRITERESPONSE_WRITESTATE
-_WRITERESPONSE_WRITESTATUS.containing_type = _WRITERESPONSE
-_WRITERESPONSE_WRITESTATE.containing_type = _WRITERESPONSE
-_TRANSACTIONS_TRANSACTIONSENTRY.fields_by_name['value'].message_type = _WRITEDATA
-_TRANSACTIONS_TRANSACTIONSENTRY.containing_type = _TRANSACTIONS
-_TRANSACTIONS.fields_by_name['transactions'].message_type = _TRANSACTIONS_TRANSACTIONSENTRY
-_DEVICE_METADATAENTRY.containing_type = _DEVICE
-_DEVICE.fields_by_name['metadata'].message_type = _DEVICE_METADATAENTRY
-_DEVICE.fields_by_name['location'].message_type = _LOCATION
-_DEVICE.fields_by_name['output'].message_type = _OUTPUT
-_OUTPUT.fields_by_name['unit'].message_type = _UNIT
-DESCRIPTOR.message_types_by_name['Bounds'] = _BOUNDS
-DESCRIPTOR.message_types_by_name['DeviceFilter'] = _DEVICEFILTER
+
+_V3READING_CONTEXTENTRY = _descriptor.Descriptor(
+  name='ContextEntry',
+  full_name='synse.V3Reading.ContextEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='synse.V3Reading.ContextEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='synse.V3Reading.ContextEntry.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=_descriptor._ParseOptions(descriptor_pb2.MessageOptions(), _b('8\001')),
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1389,
+  serialized_end=1435,
+)
+
+_V3READING = _descriptor.Descriptor(
+  name='V3Reading',
+  full_name='synse.V3Reading',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='synse.V3Reading.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='synse.V3Reading.timestamp', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='synse.V3Reading.type', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='kind', full_name='synse.V3Reading.kind', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='context', full_name='synse.V3Reading.context', index=4,
+      number=5, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='unit', full_name='synse.V3Reading.unit', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='string_value', full_name='synse.V3Reading.string_value', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='bool_value', full_name='synse.V3Reading.bool_value', index=7,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='float32_value', full_name='synse.V3Reading.float32_value', index=8,
+      number=9, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='float64_value', full_name='synse.V3Reading.float64_value', index=9,
+      number=10, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='int32_value', full_name='synse.V3Reading.int32_value', index=10,
+      number=11, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='int64_value', full_name='synse.V3Reading.int64_value', index=11,
+      number=12, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='bytes_value', full_name='synse.V3Reading.bytes_value', index=12,
+      number=13, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='uint32_value', full_name='synse.V3Reading.uint32_value', index=13,
+      number=14, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='uint64_value', full_name='synse.V3Reading.uint64_value', index=14,
+      number=15, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_V3READING_CONTEXTENTRY, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='value', full_name='synse.V3Reading.value',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=1021,
+  serialized_end=1444,
+)
+
+
+_V3TAG = _descriptor.Descriptor(
+  name='V3Tag',
+  full_name='synse.V3Tag',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='namespace', full_name='synse.V3Tag.namespace', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='annotation', full_name='synse.V3Tag.annotation', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='label', full_name='synse.V3Tag.label', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1446,
+  serialized_end=1507,
+)
+
+
+_V3TESTSTATUS = _descriptor.Descriptor(
+  name='V3TestStatus',
+  full_name='synse.V3TestStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ok', full_name='synse.V3TestStatus.ok', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1509,
+  serialized_end=1535,
+)
+
+
+_V3TRANSACTIONSELECTOR = _descriptor.Descriptor(
+  name='V3TransactionSelector',
+  full_name='synse.V3TransactionSelector',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='synse.V3TransactionSelector.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1537,
+  serialized_end=1572,
+)
+
+
+_V3TRANSACTIONSTATUS = _descriptor.Descriptor(
+  name='V3TransactionStatus',
+  full_name='synse.V3TransactionStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='synse.V3TransactionStatus.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='created', full_name='synse.V3TransactionStatus.created', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='updated', full_name='synse.V3TransactionStatus.updated', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='message', full_name='synse.V3TransactionStatus.message', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timeout', full_name='synse.V3TransactionStatus.timeout', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='synse.V3TransactionStatus.status', index=5,
+      number=6, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='context', full_name='synse.V3TransactionStatus.context', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1575,
+  serialized_end=1749,
+)
+
+
+_V3VERSION = _descriptor.Descriptor(
+  name='V3Version',
+  full_name='synse.V3Version',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='pluginVersion', full_name='synse.V3Version.pluginVersion', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sdkVersion', full_name='synse.V3Version.sdkVersion', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='buildDate', full_name='synse.V3Version.buildDate', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='gitCommit', full_name='synse.V3Version.gitCommit', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='gitTag', full_name='synse.V3Version.gitTag', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='arch', full_name='synse.V3Version.arch', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='os', full_name='synse.V3Version.os', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1752,
+  serialized_end=1886,
+)
+
+
+_V3WRITECAPABILITY = _descriptor.Descriptor(
+  name='V3WriteCapability',
+  full_name='synse.V3WriteCapability',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='actions', full_name='synse.V3WriteCapability.actions', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1888,
+  serialized_end=1924,
+)
+
+
+_V3WRITEDATA = _descriptor.Descriptor(
+  name='V3WriteData',
+  full_name='synse.V3WriteData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='action', full_name='synse.V3WriteData.action', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='synse.V3WriteData.data', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1926,
+  serialized_end=1969,
+)
+
+
+_V3WRITEPAYLOAD = _descriptor.Descriptor(
+  name='V3WritePayload',
+  full_name='synse.V3WritePayload',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='selector', full_name='synse.V3WritePayload.selector', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='synse.V3WritePayload.data', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1971,
+  serialized_end=2064,
+)
+
+
+_V3WRITETRANSACTION = _descriptor.Descriptor(
+  name='V3WriteTransaction',
+  full_name='synse.V3WriteTransaction',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='synse.V3WriteTransaction.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='device', full_name='synse.V3WriteTransaction.device', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='context', full_name='synse.V3WriteTransaction.context', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timeout', full_name='synse.V3WriteTransaction.timeout', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2066,
+  serialized_end=2168,
+)
+
+_V3DEVICE_METADATAENTRY.containing_type = _V3DEVICE
+_V3DEVICE.fields_by_name['metadata'].message_type = _V3DEVICE_METADATAENTRY
+_V3DEVICE.fields_by_name['capabilities'].message_type = _V3DEVICECAPABILITY
+_V3DEVICE.fields_by_name['tags'].message_type = _V3TAG
+_V3DEVICE.fields_by_name['outputs'].message_type = _V3DEVICEOUTPUT
+_V3DEVICECAPABILITY.fields_by_name['write'].message_type = _V3WRITECAPABILITY
+_V3DEVICEOUTPUT.fields_by_name['unit'].message_type = _V3OUTPUTUNIT
+_V3DEVICESELECTOR.fields_by_name['tags'].message_type = _V3TAG
+_V3HEALTH.fields_by_name['status'].enum_type = _HEALTHSTATUS
+_V3HEALTH.fields_by_name['checks'].message_type = _V3HEALTHCHECK
+_V3HEALTHCHECK.fields_by_name['status'].enum_type = _HEALTHSTATUS
+_V3READING_CONTEXTENTRY.containing_type = _V3READING
+_V3READING.fields_by_name['context'].message_type = _V3READING_CONTEXTENTRY
+_V3READING.fields_by_name['unit'].message_type = _V3OUTPUTUNIT
+_V3READING.oneofs_by_name['value'].fields.append(
+  _V3READING.fields_by_name['string_value'])
+_V3READING.fields_by_name['string_value'].containing_oneof = _V3READING.oneofs_by_name['value']
+_V3READING.oneofs_by_name['value'].fields.append(
+  _V3READING.fields_by_name['bool_value'])
+_V3READING.fields_by_name['bool_value'].containing_oneof = _V3READING.oneofs_by_name['value']
+_V3READING.oneofs_by_name['value'].fields.append(
+  _V3READING.fields_by_name['float32_value'])
+_V3READING.fields_by_name['float32_value'].containing_oneof = _V3READING.oneofs_by_name['value']
+_V3READING.oneofs_by_name['value'].fields.append(
+  _V3READING.fields_by_name['float64_value'])
+_V3READING.fields_by_name['float64_value'].containing_oneof = _V3READING.oneofs_by_name['value']
+_V3READING.oneofs_by_name['value'].fields.append(
+  _V3READING.fields_by_name['int32_value'])
+_V3READING.fields_by_name['int32_value'].containing_oneof = _V3READING.oneofs_by_name['value']
+_V3READING.oneofs_by_name['value'].fields.append(
+  _V3READING.fields_by_name['int64_value'])
+_V3READING.fields_by_name['int64_value'].containing_oneof = _V3READING.oneofs_by_name['value']
+_V3READING.oneofs_by_name['value'].fields.append(
+  _V3READING.fields_by_name['bytes_value'])
+_V3READING.fields_by_name['bytes_value'].containing_oneof = _V3READING.oneofs_by_name['value']
+_V3READING.oneofs_by_name['value'].fields.append(
+  _V3READING.fields_by_name['uint32_value'])
+_V3READING.fields_by_name['uint32_value'].containing_oneof = _V3READING.oneofs_by_name['value']
+_V3READING.oneofs_by_name['value'].fields.append(
+  _V3READING.fields_by_name['uint64_value'])
+_V3READING.fields_by_name['uint64_value'].containing_oneof = _V3READING.oneofs_by_name['value']
+_V3TRANSACTIONSTATUS.fields_by_name['status'].enum_type = _WRITESTATUS
+_V3TRANSACTIONSTATUS.fields_by_name['context'].message_type = _V3WRITEDATA
+_V3WRITEPAYLOAD.fields_by_name['selector'].message_type = _V3DEVICESELECTOR
+_V3WRITEPAYLOAD.fields_by_name['data'].message_type = _V3WRITEDATA
+_V3WRITETRANSACTION.fields_by_name['context'].message_type = _V3WRITEDATA
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
-DESCRIPTOR.message_types_by_name['Status'] = _STATUS
-DESCRIPTOR.message_types_by_name['PluginHealth'] = _PLUGINHEALTH
-DESCRIPTOR.message_types_by_name['HealthCheck'] = _HEALTHCHECK
-DESCRIPTOR.message_types_by_name['DeviceCapability'] = _DEVICECAPABILITY
-DESCRIPTOR.message_types_by_name['Metadata'] = _METADATA
-DESCRIPTOR.message_types_by_name['VersionInfo'] = _VERSIONINFO
-DESCRIPTOR.message_types_by_name['Reading'] = _READING
-DESCRIPTOR.message_types_by_name['DeviceReading'] = _DEVICEREADING
-DESCRIPTOR.message_types_by_name['WriteInfo'] = _WRITEINFO
-DESCRIPTOR.message_types_by_name['WriteData'] = _WRITEDATA
-DESCRIPTOR.message_types_by_name['WriteResponse'] = _WRITERESPONSE
-DESCRIPTOR.message_types_by_name['TransactionFilter'] = _TRANSACTIONFILTER
-DESCRIPTOR.message_types_by_name['Transactions'] = _TRANSACTIONS
-DESCRIPTOR.message_types_by_name['Device'] = _DEVICE
-DESCRIPTOR.message_types_by_name['Location'] = _LOCATION
-DESCRIPTOR.message_types_by_name['Output'] = _OUTPUT
-DESCRIPTOR.message_types_by_name['Unit'] = _UNIT
+DESCRIPTOR.message_types_by_name['V3Bounds'] = _V3BOUNDS
+DESCRIPTOR.message_types_by_name['V3Device'] = _V3DEVICE
+DESCRIPTOR.message_types_by_name['V3DeviceCapability'] = _V3DEVICECAPABILITY
+DESCRIPTOR.message_types_by_name['V3DeviceOutput'] = _V3DEVICEOUTPUT
+DESCRIPTOR.message_types_by_name['V3DeviceSelector'] = _V3DEVICESELECTOR
+DESCRIPTOR.message_types_by_name['V3Health'] = _V3HEALTH
+DESCRIPTOR.message_types_by_name['V3HealthCheck'] = _V3HEALTHCHECK
+DESCRIPTOR.message_types_by_name['V3Metadata'] = _V3METADATA
+DESCRIPTOR.message_types_by_name['V3OutputUnit'] = _V3OUTPUTUNIT
+DESCRIPTOR.message_types_by_name['V3Reading'] = _V3READING
+DESCRIPTOR.message_types_by_name['V3Tag'] = _V3TAG
+DESCRIPTOR.message_types_by_name['V3TestStatus'] = _V3TESTSTATUS
+DESCRIPTOR.message_types_by_name['V3TransactionSelector'] = _V3TRANSACTIONSELECTOR
+DESCRIPTOR.message_types_by_name['V3TransactionStatus'] = _V3TRANSACTIONSTATUS
+DESCRIPTOR.message_types_by_name['V3Version'] = _V3VERSION
+DESCRIPTOR.message_types_by_name['V3WriteCapability'] = _V3WRITECAPABILITY
+DESCRIPTOR.message_types_by_name['V3WriteData'] = _V3WRITEDATA
+DESCRIPTOR.message_types_by_name['V3WritePayload'] = _V3WRITEPAYLOAD
+DESCRIPTOR.message_types_by_name['V3WriteTransaction'] = _V3WRITETRANSACTION
+DESCRIPTOR.enum_types_by_name['HealthStatus'] = _HEALTHSTATUS
+DESCRIPTOR.enum_types_by_name['WriteStatus'] = _WRITESTATUS
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-Bounds = _reflection.GeneratedProtocolMessageType('Bounds', (_message.Message,), dict(
-  DESCRIPTOR = _BOUNDS,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.Bounds)
-  ))
-_sym_db.RegisterMessage(Bounds)
-
-DeviceFilter = _reflection.GeneratedProtocolMessageType('DeviceFilter', (_message.Message,), dict(
-  DESCRIPTOR = _DEVICEFILTER,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.DeviceFilter)
-  ))
-_sym_db.RegisterMessage(DeviceFilter)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
   DESCRIPTOR = _EMPTY,
@@ -1289,146 +1277,160 @@ Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), d
   ))
 _sym_db.RegisterMessage(Empty)
 
-Status = _reflection.GeneratedProtocolMessageType('Status', (_message.Message,), dict(
-  DESCRIPTOR = _STATUS,
+V3Bounds = _reflection.GeneratedProtocolMessageType('V3Bounds', (_message.Message,), dict(
+  DESCRIPTOR = _V3BOUNDS,
   __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.Status)
+  # @@protoc_insertion_point(class_scope:synse.V3Bounds)
   ))
-_sym_db.RegisterMessage(Status)
+_sym_db.RegisterMessage(V3Bounds)
 
-PluginHealth = _reflection.GeneratedProtocolMessageType('PluginHealth', (_message.Message,), dict(
-  DESCRIPTOR = _PLUGINHEALTH,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.PluginHealth)
-  ))
-_sym_db.RegisterMessage(PluginHealth)
-
-HealthCheck = _reflection.GeneratedProtocolMessageType('HealthCheck', (_message.Message,), dict(
-  DESCRIPTOR = _HEALTHCHECK,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.HealthCheck)
-  ))
-_sym_db.RegisterMessage(HealthCheck)
-
-DeviceCapability = _reflection.GeneratedProtocolMessageType('DeviceCapability', (_message.Message,), dict(
-  DESCRIPTOR = _DEVICECAPABILITY,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.DeviceCapability)
-  ))
-_sym_db.RegisterMessage(DeviceCapability)
-
-Metadata = _reflection.GeneratedProtocolMessageType('Metadata', (_message.Message,), dict(
-  DESCRIPTOR = _METADATA,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.Metadata)
-  ))
-_sym_db.RegisterMessage(Metadata)
-
-VersionInfo = _reflection.GeneratedProtocolMessageType('VersionInfo', (_message.Message,), dict(
-  DESCRIPTOR = _VERSIONINFO,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.VersionInfo)
-  ))
-_sym_db.RegisterMessage(VersionInfo)
-
-Reading = _reflection.GeneratedProtocolMessageType('Reading', (_message.Message,), dict(
-  DESCRIPTOR = _READING,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.Reading)
-  ))
-_sym_db.RegisterMessage(Reading)
-
-DeviceReading = _reflection.GeneratedProtocolMessageType('DeviceReading', (_message.Message,), dict(
-  DESCRIPTOR = _DEVICEREADING,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.DeviceReading)
-  ))
-_sym_db.RegisterMessage(DeviceReading)
-
-WriteInfo = _reflection.GeneratedProtocolMessageType('WriteInfo', (_message.Message,), dict(
-  DESCRIPTOR = _WRITEINFO,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.WriteInfo)
-  ))
-_sym_db.RegisterMessage(WriteInfo)
-
-WriteData = _reflection.GeneratedProtocolMessageType('WriteData', (_message.Message,), dict(
-  DESCRIPTOR = _WRITEDATA,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.WriteData)
-  ))
-_sym_db.RegisterMessage(WriteData)
-
-WriteResponse = _reflection.GeneratedProtocolMessageType('WriteResponse', (_message.Message,), dict(
-  DESCRIPTOR = _WRITERESPONSE,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.WriteResponse)
-  ))
-_sym_db.RegisterMessage(WriteResponse)
-
-TransactionFilter = _reflection.GeneratedProtocolMessageType('TransactionFilter', (_message.Message,), dict(
-  DESCRIPTOR = _TRANSACTIONFILTER,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.TransactionFilter)
-  ))
-_sym_db.RegisterMessage(TransactionFilter)
-
-Transactions = _reflection.GeneratedProtocolMessageType('Transactions', (_message.Message,), dict(
-
-  TransactionsEntry = _reflection.GeneratedProtocolMessageType('TransactionsEntry', (_message.Message,), dict(
-    DESCRIPTOR = _TRANSACTIONS_TRANSACTIONSENTRY,
-    __module__ = 'synse_pb2'
-    # @@protoc_insertion_point(class_scope:synse.Transactions.TransactionsEntry)
-    ))
-  ,
-  DESCRIPTOR = _TRANSACTIONS,
-  __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.Transactions)
-  ))
-_sym_db.RegisterMessage(Transactions)
-_sym_db.RegisterMessage(Transactions.TransactionsEntry)
-
-Device = _reflection.GeneratedProtocolMessageType('Device', (_message.Message,), dict(
+V3Device = _reflection.GeneratedProtocolMessageType('V3Device', (_message.Message,), dict(
 
   MetadataEntry = _reflection.GeneratedProtocolMessageType('MetadataEntry', (_message.Message,), dict(
-    DESCRIPTOR = _DEVICE_METADATAENTRY,
+    DESCRIPTOR = _V3DEVICE_METADATAENTRY,
     __module__ = 'synse_pb2'
-    # @@protoc_insertion_point(class_scope:synse.Device.MetadataEntry)
+    # @@protoc_insertion_point(class_scope:synse.V3Device.MetadataEntry)
     ))
   ,
-  DESCRIPTOR = _DEVICE,
+  DESCRIPTOR = _V3DEVICE,
   __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.Device)
+  # @@protoc_insertion_point(class_scope:synse.V3Device)
   ))
-_sym_db.RegisterMessage(Device)
-_sym_db.RegisterMessage(Device.MetadataEntry)
+_sym_db.RegisterMessage(V3Device)
+_sym_db.RegisterMessage(V3Device.MetadataEntry)
 
-Location = _reflection.GeneratedProtocolMessageType('Location', (_message.Message,), dict(
-  DESCRIPTOR = _LOCATION,
+V3DeviceCapability = _reflection.GeneratedProtocolMessageType('V3DeviceCapability', (_message.Message,), dict(
+  DESCRIPTOR = _V3DEVICECAPABILITY,
   __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.Location)
+  # @@protoc_insertion_point(class_scope:synse.V3DeviceCapability)
   ))
-_sym_db.RegisterMessage(Location)
+_sym_db.RegisterMessage(V3DeviceCapability)
 
-Output = _reflection.GeneratedProtocolMessageType('Output', (_message.Message,), dict(
-  DESCRIPTOR = _OUTPUT,
+V3DeviceOutput = _reflection.GeneratedProtocolMessageType('V3DeviceOutput', (_message.Message,), dict(
+  DESCRIPTOR = _V3DEVICEOUTPUT,
   __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.Output)
+  # @@protoc_insertion_point(class_scope:synse.V3DeviceOutput)
   ))
-_sym_db.RegisterMessage(Output)
+_sym_db.RegisterMessage(V3DeviceOutput)
 
-Unit = _reflection.GeneratedProtocolMessageType('Unit', (_message.Message,), dict(
-  DESCRIPTOR = _UNIT,
+V3DeviceSelector = _reflection.GeneratedProtocolMessageType('V3DeviceSelector', (_message.Message,), dict(
+  DESCRIPTOR = _V3DEVICESELECTOR,
   __module__ = 'synse_pb2'
-  # @@protoc_insertion_point(class_scope:synse.Unit)
+  # @@protoc_insertion_point(class_scope:synse.V3DeviceSelector)
   ))
-_sym_db.RegisterMessage(Unit)
+_sym_db.RegisterMessage(V3DeviceSelector)
+
+V3Health = _reflection.GeneratedProtocolMessageType('V3Health', (_message.Message,), dict(
+  DESCRIPTOR = _V3HEALTH,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3Health)
+  ))
+_sym_db.RegisterMessage(V3Health)
+
+V3HealthCheck = _reflection.GeneratedProtocolMessageType('V3HealthCheck', (_message.Message,), dict(
+  DESCRIPTOR = _V3HEALTHCHECK,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3HealthCheck)
+  ))
+_sym_db.RegisterMessage(V3HealthCheck)
+
+V3Metadata = _reflection.GeneratedProtocolMessageType('V3Metadata', (_message.Message,), dict(
+  DESCRIPTOR = _V3METADATA,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3Metadata)
+  ))
+_sym_db.RegisterMessage(V3Metadata)
+
+V3OutputUnit = _reflection.GeneratedProtocolMessageType('V3OutputUnit', (_message.Message,), dict(
+  DESCRIPTOR = _V3OUTPUTUNIT,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3OutputUnit)
+  ))
+_sym_db.RegisterMessage(V3OutputUnit)
+
+V3Reading = _reflection.GeneratedProtocolMessageType('V3Reading', (_message.Message,), dict(
+
+  ContextEntry = _reflection.GeneratedProtocolMessageType('ContextEntry', (_message.Message,), dict(
+    DESCRIPTOR = _V3READING_CONTEXTENTRY,
+    __module__ = 'synse_pb2'
+    # @@protoc_insertion_point(class_scope:synse.V3Reading.ContextEntry)
+    ))
+  ,
+  DESCRIPTOR = _V3READING,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3Reading)
+  ))
+_sym_db.RegisterMessage(V3Reading)
+_sym_db.RegisterMessage(V3Reading.ContextEntry)
+
+V3Tag = _reflection.GeneratedProtocolMessageType('V3Tag', (_message.Message,), dict(
+  DESCRIPTOR = _V3TAG,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3Tag)
+  ))
+_sym_db.RegisterMessage(V3Tag)
+
+V3TestStatus = _reflection.GeneratedProtocolMessageType('V3TestStatus', (_message.Message,), dict(
+  DESCRIPTOR = _V3TESTSTATUS,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3TestStatus)
+  ))
+_sym_db.RegisterMessage(V3TestStatus)
+
+V3TransactionSelector = _reflection.GeneratedProtocolMessageType('V3TransactionSelector', (_message.Message,), dict(
+  DESCRIPTOR = _V3TRANSACTIONSELECTOR,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3TransactionSelector)
+  ))
+_sym_db.RegisterMessage(V3TransactionSelector)
+
+V3TransactionStatus = _reflection.GeneratedProtocolMessageType('V3TransactionStatus', (_message.Message,), dict(
+  DESCRIPTOR = _V3TRANSACTIONSTATUS,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3TransactionStatus)
+  ))
+_sym_db.RegisterMessage(V3TransactionStatus)
+
+V3Version = _reflection.GeneratedProtocolMessageType('V3Version', (_message.Message,), dict(
+  DESCRIPTOR = _V3VERSION,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3Version)
+  ))
+_sym_db.RegisterMessage(V3Version)
+
+V3WriteCapability = _reflection.GeneratedProtocolMessageType('V3WriteCapability', (_message.Message,), dict(
+  DESCRIPTOR = _V3WRITECAPABILITY,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3WriteCapability)
+  ))
+_sym_db.RegisterMessage(V3WriteCapability)
+
+V3WriteData = _reflection.GeneratedProtocolMessageType('V3WriteData', (_message.Message,), dict(
+  DESCRIPTOR = _V3WRITEDATA,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3WriteData)
+  ))
+_sym_db.RegisterMessage(V3WriteData)
+
+V3WritePayload = _reflection.GeneratedProtocolMessageType('V3WritePayload', (_message.Message,), dict(
+  DESCRIPTOR = _V3WRITEPAYLOAD,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3WritePayload)
+  ))
+_sym_db.RegisterMessage(V3WritePayload)
+
+V3WriteTransaction = _reflection.GeneratedProtocolMessageType('V3WriteTransaction', (_message.Message,), dict(
+  DESCRIPTOR = _V3WRITETRANSACTION,
+  __module__ = 'synse_pb2'
+  # @@protoc_insertion_point(class_scope:synse.V3WriteTransaction)
+  ))
+_sym_db.RegisterMessage(V3WriteTransaction)
 
 
-_TRANSACTIONS_TRANSACTIONSENTRY.has_options = True
-_TRANSACTIONS_TRANSACTIONSENTRY._options = _descriptor._ParseOptions(descriptor_pb2.MessageOptions(), _b('8\001'))
-_DEVICE_METADATAENTRY.has_options = True
-_DEVICE_METADATAENTRY._options = _descriptor._ParseOptions(descriptor_pb2.MessageOptions(), _b('8\001'))
+_V3DEVICE_METADATAENTRY.has_options = True
+_V3DEVICE_METADATAENTRY._options = _descriptor._ParseOptions(descriptor_pb2.MessageOptions(), _b('8\001'))
+_V3READING_CONTEXTENTRY.has_options = True
+_V3READING_CONTEXTENTRY._options = _descriptor._ParseOptions(descriptor_pb2.MessageOptions(), _b('8\001'))
 try:
   # THESE ELEMENTS WILL BE DEPRECATED.
   # Please use the generated *_pb2_grpc.py files instead.
@@ -1439,9 +1441,9 @@ try:
   from grpc.framework.interfaces.face import utilities as face_utilities
 
 
-  class PluginStub(object):
-    # missing associated documentation comment in .proto file
-    pass
+  class V3PluginStub(object):
+    """V3Plugin is the API for plugin communication in Synse v3.
+    """
 
     def __init__(self, channel):
       """Constructor.
@@ -1449,413 +1451,401 @@ try:
       Args:
         channel: A grpc.Channel.
       """
-      self.Test = channel.unary_unary(
-          '/synse.Plugin/Test',
-          request_serializer=Empty.SerializeToString,
-          response_deserializer=Status.FromString,
-          )
-      self.Version = channel.unary_unary(
-          '/synse.Plugin/Version',
-          request_serializer=Empty.SerializeToString,
-          response_deserializer=VersionInfo.FromString,
+      self.Devices = channel.unary_stream(
+          '/synse.V3Plugin/Devices',
+          request_serializer=V3DeviceSelector.SerializeToString,
+          response_deserializer=V3Device.FromString,
           )
       self.Health = channel.unary_unary(
-          '/synse.Plugin/Health',
+          '/synse.V3Plugin/Health',
           request_serializer=Empty.SerializeToString,
-          response_deserializer=PluginHealth.FromString,
+          response_deserializer=V3Health.FromString,
           )
-      self.Metainfo = channel.unary_unary(
-          '/synse.Plugin/Metainfo',
+      self.Metadata = channel.unary_unary(
+          '/synse.V3Plugin/Metadata',
           request_serializer=Empty.SerializeToString,
-          response_deserializer=Metadata.FromString,
-          )
-      self.Capabilities = channel.unary_stream(
-          '/synse.Plugin/Capabilities',
-          request_serializer=Empty.SerializeToString,
-          response_deserializer=DeviceCapability.FromString,
-          )
-      self.Devices = channel.unary_stream(
-          '/synse.Plugin/Devices',
-          request_serializer=DeviceFilter.SerializeToString,
-          response_deserializer=Device.FromString,
+          response_deserializer=V3Metadata.FromString,
           )
       self.Read = channel.unary_stream(
-          '/synse.Plugin/Read',
-          request_serializer=DeviceFilter.SerializeToString,
-          response_deserializer=Reading.FromString,
+          '/synse.V3Plugin/Read',
+          request_serializer=V3DeviceSelector.SerializeToString,
+          response_deserializer=V3Reading.FromString,
           )
-      self.ReadCached = channel.unary_stream(
-          '/synse.Plugin/ReadCached',
-          request_serializer=Bounds.SerializeToString,
-          response_deserializer=DeviceReading.FromString,
+      self.ReadCache = channel.unary_stream(
+          '/synse.V3Plugin/ReadCache',
+          request_serializer=V3Bounds.SerializeToString,
+          response_deserializer=V3Reading.FromString,
           )
-      self.Write = channel.unary_unary(
-          '/synse.Plugin/Write',
-          request_serializer=WriteInfo.SerializeToString,
-          response_deserializer=Transactions.FromString,
+      self.Test = channel.unary_unary(
+          '/synse.V3Plugin/Test',
+          request_serializer=Empty.SerializeToString,
+          response_deserializer=V3TestStatus.FromString,
           )
       self.Transaction = channel.unary_stream(
-          '/synse.Plugin/Transaction',
-          request_serializer=TransactionFilter.SerializeToString,
-          response_deserializer=WriteResponse.FromString,
+          '/synse.V3Plugin/Transaction',
+          request_serializer=V3TransactionSelector.SerializeToString,
+          response_deserializer=V3TransactionStatus.FromString,
+          )
+      self.Version = channel.unary_unary(
+          '/synse.V3Plugin/Version',
+          request_serializer=Empty.SerializeToString,
+          response_deserializer=V3Version.FromString,
+          )
+      self.WriteAsync = channel.unary_unary(
+          '/synse.V3Plugin/WriteAsync',
+          request_serializer=V3WritePayload.SerializeToString,
+          response_deserializer=V3WriteTransaction.FromString,
+          )
+      self.WriteSync = channel.unary_stream(
+          '/synse.V3Plugin/WriteSync',
+          request_serializer=V3WritePayload.SerializeToString,
+          response_deserializer=V3TransactionStatus.FromString,
           )
 
 
-  class PluginServicer(object):
-    # missing associated documentation comment in .proto file
-    pass
+  class V3PluginServicer(object):
+    """V3Plugin is the API for plugin communication in Synse v3.
+    """
 
-    def Test(self, request, context):
-      """Test returns the status of the plugin. This call is intended to
-      be used in order to check if a plugin is reachable. The status
-      returned here designates plugin reachability, not plugin health.
-      """
-      context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-      context.set_details('Method not implemented!')
-      raise NotImplementedError('Method not implemented!')
-
-    def Version(self, request, context):
-      """Version returns the version info for the plugin. This is not used
-      by Synse Server, but can be used by the CLI/manual plugin interaction.
+    def Devices(self, request, context):
+      """Devices gets all devices that a plugin manages.
       """
       context.set_code(grpc.StatusCode.UNIMPLEMENTED)
       context.set_details('Method not implemented!')
       raise NotImplementedError('Method not implemented!')
 
     def Health(self, request, context):
-      """Health returns the health status of a plugin.
+      """Health gets the health status of a plugin.
       """
       context.set_code(grpc.StatusCode.UNIMPLEMENTED)
       context.set_details('Method not implemented!')
       raise NotImplementedError('Method not implemented!')
 
-    def Metainfo(self, request, context):
-      """Metainfo gets the metainfo for the plugin. This info provides details
-      about the plugin itself.
-      """
-      context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-      context.set_details('Method not implemented!')
-      raise NotImplementedError('Method not implemented!')
-
-    def Capabilities(self, request, context):
-      """Capabilities returns the collection of capabilities that a plugin
-      exposes. More specifically, this means types of devices supported
-      and the readings supported for each of those devices.
-      """
-      context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-      context.set_details('Method not implemented!')
-      raise NotImplementedError('Method not implemented!')
-
-    def Devices(self, request, context):
-      """Devices gets info for all of the devices that the plugin manages.
-      This rpc call is the plugin's equivalent to a Synse Server scan.
+    def Metadata(self, request, context):
+      """Metadata gets the plugin meta-information.
       """
       context.set_code(grpc.StatusCode.UNIMPLEMENTED)
       context.set_details('Method not implemented!')
       raise NotImplementedError('Method not implemented!')
 
     def Read(self, request, context):
-      """Read returns the reading data for the specified device.
+      """Read gets readings from the specified plugin device(s).
       """
       context.set_code(grpc.StatusCode.UNIMPLEMENTED)
       context.set_details('Method not implemented!')
       raise NotImplementedError('Method not implemented!')
 
-    def ReadCached(self, request, context):
-      """ReadCached returns the reading data that is cached by the plugin.
-      If caching is not enabled on the plugin, this will just return the
-      current readings.
+    def ReadCache(self, request, context):
+      """ReadCache gets the cached readings from the plugin. If the plugin
+      is not configured to cache readings, it will returned the entire
+      current read state.
       """
       context.set_code(grpc.StatusCode.UNIMPLEMENTED)
       context.set_details('Method not implemented!')
       raise NotImplementedError('Method not implemented!')
 
-    def Write(self, request, context):
-      """Write issues an asynchronous write command to the specified device.
+    def Test(self, request, context):
+      """Test checks whether the plugin is reachable and ready.
       """
       context.set_code(grpc.StatusCode.UNIMPLEMENTED)
       context.set_details('Method not implemented!')
       raise NotImplementedError('Method not implemented!')
 
     def Transaction(self, request, context):
-      """Transactiong gets the state/status of an asynchronous write transaction.
+      """Transaction gets the status of a write transaction for an
+      asynchronous write.
+      """
+      context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+      context.set_details('Method not implemented!')
+      raise NotImplementedError('Method not implemented!')
+
+    def Version(self, request, context):
+      """Version gets the version information for the plugin.
+      """
+      context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+      context.set_details('Method not implemented!')
+      raise NotImplementedError('Method not implemented!')
+
+    def WriteAsync(self, request, context):
+      """WriteAsync writes data to the specified plugin device. A transaction ID
+      is returned so the write status can be checked asynchronously.
+      """
+      context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+      context.set_details('Method not implemented!')
+      raise NotImplementedError('Method not implemented!')
+
+    def WriteSync(self, request, context):
+      """WriteSync writes data to the specified plugin device. The request blocks
+      until the write resolves so no asynchronous checking is required.
       """
       context.set_code(grpc.StatusCode.UNIMPLEMENTED)
       context.set_details('Method not implemented!')
       raise NotImplementedError('Method not implemented!')
 
 
-  def add_PluginServicer_to_server(servicer, server):
+  def add_V3PluginServicer_to_server(servicer, server):
     rpc_method_handlers = {
-        'Test': grpc.unary_unary_rpc_method_handler(
-            servicer.Test,
-            request_deserializer=Empty.FromString,
-            response_serializer=Status.SerializeToString,
-        ),
-        'Version': grpc.unary_unary_rpc_method_handler(
-            servicer.Version,
-            request_deserializer=Empty.FromString,
-            response_serializer=VersionInfo.SerializeToString,
+        'Devices': grpc.unary_stream_rpc_method_handler(
+            servicer.Devices,
+            request_deserializer=V3DeviceSelector.FromString,
+            response_serializer=V3Device.SerializeToString,
         ),
         'Health': grpc.unary_unary_rpc_method_handler(
             servicer.Health,
             request_deserializer=Empty.FromString,
-            response_serializer=PluginHealth.SerializeToString,
+            response_serializer=V3Health.SerializeToString,
         ),
-        'Metainfo': grpc.unary_unary_rpc_method_handler(
-            servicer.Metainfo,
+        'Metadata': grpc.unary_unary_rpc_method_handler(
+            servicer.Metadata,
             request_deserializer=Empty.FromString,
-            response_serializer=Metadata.SerializeToString,
-        ),
-        'Capabilities': grpc.unary_stream_rpc_method_handler(
-            servicer.Capabilities,
-            request_deserializer=Empty.FromString,
-            response_serializer=DeviceCapability.SerializeToString,
-        ),
-        'Devices': grpc.unary_stream_rpc_method_handler(
-            servicer.Devices,
-            request_deserializer=DeviceFilter.FromString,
-            response_serializer=Device.SerializeToString,
+            response_serializer=V3Metadata.SerializeToString,
         ),
         'Read': grpc.unary_stream_rpc_method_handler(
             servicer.Read,
-            request_deserializer=DeviceFilter.FromString,
-            response_serializer=Reading.SerializeToString,
+            request_deserializer=V3DeviceSelector.FromString,
+            response_serializer=V3Reading.SerializeToString,
         ),
-        'ReadCached': grpc.unary_stream_rpc_method_handler(
-            servicer.ReadCached,
-            request_deserializer=Bounds.FromString,
-            response_serializer=DeviceReading.SerializeToString,
+        'ReadCache': grpc.unary_stream_rpc_method_handler(
+            servicer.ReadCache,
+            request_deserializer=V3Bounds.FromString,
+            response_serializer=V3Reading.SerializeToString,
         ),
-        'Write': grpc.unary_unary_rpc_method_handler(
-            servicer.Write,
-            request_deserializer=WriteInfo.FromString,
-            response_serializer=Transactions.SerializeToString,
+        'Test': grpc.unary_unary_rpc_method_handler(
+            servicer.Test,
+            request_deserializer=Empty.FromString,
+            response_serializer=V3TestStatus.SerializeToString,
         ),
         'Transaction': grpc.unary_stream_rpc_method_handler(
             servicer.Transaction,
-            request_deserializer=TransactionFilter.FromString,
-            response_serializer=WriteResponse.SerializeToString,
+            request_deserializer=V3TransactionSelector.FromString,
+            response_serializer=V3TransactionStatus.SerializeToString,
+        ),
+        'Version': grpc.unary_unary_rpc_method_handler(
+            servicer.Version,
+            request_deserializer=Empty.FromString,
+            response_serializer=V3Version.SerializeToString,
+        ),
+        'WriteAsync': grpc.unary_unary_rpc_method_handler(
+            servicer.WriteAsync,
+            request_deserializer=V3WritePayload.FromString,
+            response_serializer=V3WriteTransaction.SerializeToString,
+        ),
+        'WriteSync': grpc.unary_stream_rpc_method_handler(
+            servicer.WriteSync,
+            request_deserializer=V3WritePayload.FromString,
+            response_serializer=V3TransactionStatus.SerializeToString,
         ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-        'synse.Plugin', rpc_method_handlers)
+        'synse.V3Plugin', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
-  class BetaPluginServicer(object):
+  class BetaV3PluginServicer(object):
     """The Beta API is deprecated for 0.15.0 and later.
 
     It is recommended to use the GA API (classes and functions in this
     file not marked beta) for all further purposes. This class was generated
     only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0."""
-    # missing associated documentation comment in .proto file
-    pass
-    def Test(self, request, context):
-      """Test returns the status of the plugin. This call is intended to
-      be used in order to check if a plugin is reachable. The status
-      returned here designates plugin reachability, not plugin health.
-      """
-      context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
-    def Version(self, request, context):
-      """Version returns the version info for the plugin. This is not used
-      by Synse Server, but can be used by the CLI/manual plugin interaction.
+    """V3Plugin is the API for plugin communication in Synse v3.
+    """
+    def Devices(self, request, context):
+      """Devices gets all devices that a plugin manages.
       """
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
     def Health(self, request, context):
-      """Health returns the health status of a plugin.
+      """Health gets the health status of a plugin.
       """
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
-    def Metainfo(self, request, context):
-      """Metainfo gets the metainfo for the plugin. This info provides details
-      about the plugin itself.
-      """
-      context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
-    def Capabilities(self, request, context):
-      """Capabilities returns the collection of capabilities that a plugin
-      exposes. More specifically, this means types of devices supported
-      and the readings supported for each of those devices.
-      """
-      context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
-    def Devices(self, request, context):
-      """Devices gets info for all of the devices that the plugin manages.
-      This rpc call is the plugin's equivalent to a Synse Server scan.
+    def Metadata(self, request, context):
+      """Metadata gets the plugin meta-information.
       """
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
     def Read(self, request, context):
-      """Read returns the reading data for the specified device.
+      """Read gets readings from the specified plugin device(s).
       """
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
-    def ReadCached(self, request, context):
-      """ReadCached returns the reading data that is cached by the plugin.
-      If caching is not enabled on the plugin, this will just return the
-      current readings.
+    def ReadCache(self, request, context):
+      """ReadCache gets the cached readings from the plugin. If the plugin
+      is not configured to cache readings, it will returned the entire
+      current read state.
       """
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
-    def Write(self, request, context):
-      """Write issues an asynchronous write command to the specified device.
+    def Test(self, request, context):
+      """Test checks whether the plugin is reachable and ready.
       """
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
     def Transaction(self, request, context):
-      """Transactiong gets the state/status of an asynchronous write transaction.
+      """Transaction gets the status of a write transaction for an
+      asynchronous write.
+      """
+      context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
+    def Version(self, request, context):
+      """Version gets the version information for the plugin.
+      """
+      context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
+    def WriteAsync(self, request, context):
+      """WriteAsync writes data to the specified plugin device. A transaction ID
+      is returned so the write status can be checked asynchronously.
+      """
+      context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
+    def WriteSync(self, request, context):
+      """WriteSync writes data to the specified plugin device. The request blocks
+      until the write resolves so no asynchronous checking is required.
       """
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
 
 
-  class BetaPluginStub(object):
+  class BetaV3PluginStub(object):
     """The Beta API is deprecated for 0.15.0 and later.
 
     It is recommended to use the GA API (classes and functions in this
     file not marked beta) for all further purposes. This class was generated
     only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0."""
-    # missing associated documentation comment in .proto file
-    pass
-    def Test(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
-      """Test returns the status of the plugin. This call is intended to
-      be used in order to check if a plugin is reachable. The status
-      returned here designates plugin reachability, not plugin health.
+    """V3Plugin is the API for plugin communication in Synse v3.
+    """
+    def Devices(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+      """Devices gets all devices that a plugin manages.
       """
       raise NotImplementedError()
-    Test.future = None
-    def Version(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
-      """Version returns the version info for the plugin. This is not used
-      by Synse Server, but can be used by the CLI/manual plugin interaction.
-      """
-      raise NotImplementedError()
-    Version.future = None
     def Health(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
-      """Health returns the health status of a plugin.
+      """Health gets the health status of a plugin.
       """
       raise NotImplementedError()
     Health.future = None
-    def Metainfo(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
-      """Metainfo gets the metainfo for the plugin. This info provides details
-      about the plugin itself.
+    def Metadata(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+      """Metadata gets the plugin meta-information.
       """
       raise NotImplementedError()
-    Metainfo.future = None
-    def Capabilities(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
-      """Capabilities returns the collection of capabilities that a plugin
-      exposes. More specifically, this means types of devices supported
-      and the readings supported for each of those devices.
-      """
-      raise NotImplementedError()
-    def Devices(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
-      """Devices gets info for all of the devices that the plugin manages.
-      This rpc call is the plugin's equivalent to a Synse Server scan.
-      """
-      raise NotImplementedError()
+    Metadata.future = None
     def Read(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
-      """Read returns the reading data for the specified device.
+      """Read gets readings from the specified plugin device(s).
       """
       raise NotImplementedError()
-    def ReadCached(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
-      """ReadCached returns the reading data that is cached by the plugin.
-      If caching is not enabled on the plugin, this will just return the
-      current readings.
+    def ReadCache(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+      """ReadCache gets the cached readings from the plugin. If the plugin
+      is not configured to cache readings, it will returned the entire
+      current read state.
       """
       raise NotImplementedError()
-    def Write(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
-      """Write issues an asynchronous write command to the specified device.
+    def Test(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+      """Test checks whether the plugin is reachable and ready.
       """
       raise NotImplementedError()
-    Write.future = None
+    Test.future = None
     def Transaction(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
-      """Transactiong gets the state/status of an asynchronous write transaction.
+      """Transaction gets the status of a write transaction for an
+      asynchronous write.
+      """
+      raise NotImplementedError()
+    def Version(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+      """Version gets the version information for the plugin.
+      """
+      raise NotImplementedError()
+    Version.future = None
+    def WriteAsync(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+      """WriteAsync writes data to the specified plugin device. A transaction ID
+      is returned so the write status can be checked asynchronously.
+      """
+      raise NotImplementedError()
+    WriteAsync.future = None
+    def WriteSync(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+      """WriteSync writes data to the specified plugin device. The request blocks
+      until the write resolves so no asynchronous checking is required.
       """
       raise NotImplementedError()
 
 
-  def beta_create_Plugin_server(servicer, pool=None, pool_size=None, default_timeout=None, maximum_timeout=None):
+  def beta_create_V3Plugin_server(servicer, pool=None, pool_size=None, default_timeout=None, maximum_timeout=None):
     """The Beta API is deprecated for 0.15.0 and later.
 
     It is recommended to use the GA API (classes and functions in this
     file not marked beta) for all further purposes. This function was
     generated only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0"""
     request_deserializers = {
-      ('synse.Plugin', 'Capabilities'): Empty.FromString,
-      ('synse.Plugin', 'Devices'): DeviceFilter.FromString,
-      ('synse.Plugin', 'Health'): Empty.FromString,
-      ('synse.Plugin', 'Metainfo'): Empty.FromString,
-      ('synse.Plugin', 'Read'): DeviceFilter.FromString,
-      ('synse.Plugin', 'ReadCached'): Bounds.FromString,
-      ('synse.Plugin', 'Test'): Empty.FromString,
-      ('synse.Plugin', 'Transaction'): TransactionFilter.FromString,
-      ('synse.Plugin', 'Version'): Empty.FromString,
-      ('synse.Plugin', 'Write'): WriteInfo.FromString,
+      ('synse.V3Plugin', 'Devices'): V3DeviceSelector.FromString,
+      ('synse.V3Plugin', 'Health'): Empty.FromString,
+      ('synse.V3Plugin', 'Metadata'): Empty.FromString,
+      ('synse.V3Plugin', 'Read'): V3DeviceSelector.FromString,
+      ('synse.V3Plugin', 'ReadCache'): V3Bounds.FromString,
+      ('synse.V3Plugin', 'Test'): Empty.FromString,
+      ('synse.V3Plugin', 'Transaction'): V3TransactionSelector.FromString,
+      ('synse.V3Plugin', 'Version'): Empty.FromString,
+      ('synse.V3Plugin', 'WriteAsync'): V3WritePayload.FromString,
+      ('synse.V3Plugin', 'WriteSync'): V3WritePayload.FromString,
     }
     response_serializers = {
-      ('synse.Plugin', 'Capabilities'): DeviceCapability.SerializeToString,
-      ('synse.Plugin', 'Devices'): Device.SerializeToString,
-      ('synse.Plugin', 'Health'): PluginHealth.SerializeToString,
-      ('synse.Plugin', 'Metainfo'): Metadata.SerializeToString,
-      ('synse.Plugin', 'Read'): Reading.SerializeToString,
-      ('synse.Plugin', 'ReadCached'): DeviceReading.SerializeToString,
-      ('synse.Plugin', 'Test'): Status.SerializeToString,
-      ('synse.Plugin', 'Transaction'): WriteResponse.SerializeToString,
-      ('synse.Plugin', 'Version'): VersionInfo.SerializeToString,
-      ('synse.Plugin', 'Write'): Transactions.SerializeToString,
+      ('synse.V3Plugin', 'Devices'): V3Device.SerializeToString,
+      ('synse.V3Plugin', 'Health'): V3Health.SerializeToString,
+      ('synse.V3Plugin', 'Metadata'): V3Metadata.SerializeToString,
+      ('synse.V3Plugin', 'Read'): V3Reading.SerializeToString,
+      ('synse.V3Plugin', 'ReadCache'): V3Reading.SerializeToString,
+      ('synse.V3Plugin', 'Test'): V3TestStatus.SerializeToString,
+      ('synse.V3Plugin', 'Transaction'): V3TransactionStatus.SerializeToString,
+      ('synse.V3Plugin', 'Version'): V3Version.SerializeToString,
+      ('synse.V3Plugin', 'WriteAsync'): V3WriteTransaction.SerializeToString,
+      ('synse.V3Plugin', 'WriteSync'): V3TransactionStatus.SerializeToString,
     }
     method_implementations = {
-      ('synse.Plugin', 'Capabilities'): face_utilities.unary_stream_inline(servicer.Capabilities),
-      ('synse.Plugin', 'Devices'): face_utilities.unary_stream_inline(servicer.Devices),
-      ('synse.Plugin', 'Health'): face_utilities.unary_unary_inline(servicer.Health),
-      ('synse.Plugin', 'Metainfo'): face_utilities.unary_unary_inline(servicer.Metainfo),
-      ('synse.Plugin', 'Read'): face_utilities.unary_stream_inline(servicer.Read),
-      ('synse.Plugin', 'ReadCached'): face_utilities.unary_stream_inline(servicer.ReadCached),
-      ('synse.Plugin', 'Test'): face_utilities.unary_unary_inline(servicer.Test),
-      ('synse.Plugin', 'Transaction'): face_utilities.unary_stream_inline(servicer.Transaction),
-      ('synse.Plugin', 'Version'): face_utilities.unary_unary_inline(servicer.Version),
-      ('synse.Plugin', 'Write'): face_utilities.unary_unary_inline(servicer.Write),
+      ('synse.V3Plugin', 'Devices'): face_utilities.unary_stream_inline(servicer.Devices),
+      ('synse.V3Plugin', 'Health'): face_utilities.unary_unary_inline(servicer.Health),
+      ('synse.V3Plugin', 'Metadata'): face_utilities.unary_unary_inline(servicer.Metadata),
+      ('synse.V3Plugin', 'Read'): face_utilities.unary_stream_inline(servicer.Read),
+      ('synse.V3Plugin', 'ReadCache'): face_utilities.unary_stream_inline(servicer.ReadCache),
+      ('synse.V3Plugin', 'Test'): face_utilities.unary_unary_inline(servicer.Test),
+      ('synse.V3Plugin', 'Transaction'): face_utilities.unary_stream_inline(servicer.Transaction),
+      ('synse.V3Plugin', 'Version'): face_utilities.unary_unary_inline(servicer.Version),
+      ('synse.V3Plugin', 'WriteAsync'): face_utilities.unary_unary_inline(servicer.WriteAsync),
+      ('synse.V3Plugin', 'WriteSync'): face_utilities.unary_stream_inline(servicer.WriteSync),
     }
     server_options = beta_implementations.server_options(request_deserializers=request_deserializers, response_serializers=response_serializers, thread_pool=pool, thread_pool_size=pool_size, default_timeout=default_timeout, maximum_timeout=maximum_timeout)
     return beta_implementations.server(method_implementations, options=server_options)
 
 
-  def beta_create_Plugin_stub(channel, host=None, metadata_transformer=None, pool=None, pool_size=None):
+  def beta_create_V3Plugin_stub(channel, host=None, metadata_transformer=None, pool=None, pool_size=None):
     """The Beta API is deprecated for 0.15.0 and later.
 
     It is recommended to use the GA API (classes and functions in this
     file not marked beta) for all further purposes. This function was
     generated only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0"""
     request_serializers = {
-      ('synse.Plugin', 'Capabilities'): Empty.SerializeToString,
-      ('synse.Plugin', 'Devices'): DeviceFilter.SerializeToString,
-      ('synse.Plugin', 'Health'): Empty.SerializeToString,
-      ('synse.Plugin', 'Metainfo'): Empty.SerializeToString,
-      ('synse.Plugin', 'Read'): DeviceFilter.SerializeToString,
-      ('synse.Plugin', 'ReadCached'): Bounds.SerializeToString,
-      ('synse.Plugin', 'Test'): Empty.SerializeToString,
-      ('synse.Plugin', 'Transaction'): TransactionFilter.SerializeToString,
-      ('synse.Plugin', 'Version'): Empty.SerializeToString,
-      ('synse.Plugin', 'Write'): WriteInfo.SerializeToString,
+      ('synse.V3Plugin', 'Devices'): V3DeviceSelector.SerializeToString,
+      ('synse.V3Plugin', 'Health'): Empty.SerializeToString,
+      ('synse.V3Plugin', 'Metadata'): Empty.SerializeToString,
+      ('synse.V3Plugin', 'Read'): V3DeviceSelector.SerializeToString,
+      ('synse.V3Plugin', 'ReadCache'): V3Bounds.SerializeToString,
+      ('synse.V3Plugin', 'Test'): Empty.SerializeToString,
+      ('synse.V3Plugin', 'Transaction'): V3TransactionSelector.SerializeToString,
+      ('synse.V3Plugin', 'Version'): Empty.SerializeToString,
+      ('synse.V3Plugin', 'WriteAsync'): V3WritePayload.SerializeToString,
+      ('synse.V3Plugin', 'WriteSync'): V3WritePayload.SerializeToString,
     }
     response_deserializers = {
-      ('synse.Plugin', 'Capabilities'): DeviceCapability.FromString,
-      ('synse.Plugin', 'Devices'): Device.FromString,
-      ('synse.Plugin', 'Health'): PluginHealth.FromString,
-      ('synse.Plugin', 'Metainfo'): Metadata.FromString,
-      ('synse.Plugin', 'Read'): Reading.FromString,
-      ('synse.Plugin', 'ReadCached'): DeviceReading.FromString,
-      ('synse.Plugin', 'Test'): Status.FromString,
-      ('synse.Plugin', 'Transaction'): WriteResponse.FromString,
-      ('synse.Plugin', 'Version'): VersionInfo.FromString,
-      ('synse.Plugin', 'Write'): Transactions.FromString,
+      ('synse.V3Plugin', 'Devices'): V3Device.FromString,
+      ('synse.V3Plugin', 'Health'): V3Health.FromString,
+      ('synse.V3Plugin', 'Metadata'): V3Metadata.FromString,
+      ('synse.V3Plugin', 'Read'): V3Reading.FromString,
+      ('synse.V3Plugin', 'ReadCache'): V3Reading.FromString,
+      ('synse.V3Plugin', 'Test'): V3TestStatus.FromString,
+      ('synse.V3Plugin', 'Transaction'): V3TransactionStatus.FromString,
+      ('synse.V3Plugin', 'Version'): V3Version.FromString,
+      ('synse.V3Plugin', 'WriteAsync'): V3WriteTransaction.FromString,
+      ('synse.V3Plugin', 'WriteSync'): V3TransactionStatus.FromString,
     }
     cardinalities = {
-      'Capabilities': cardinality.Cardinality.UNARY_STREAM,
       'Devices': cardinality.Cardinality.UNARY_STREAM,
       'Health': cardinality.Cardinality.UNARY_UNARY,
-      'Metainfo': cardinality.Cardinality.UNARY_UNARY,
+      'Metadata': cardinality.Cardinality.UNARY_UNARY,
       'Read': cardinality.Cardinality.UNARY_STREAM,
-      'ReadCached': cardinality.Cardinality.UNARY_STREAM,
+      'ReadCache': cardinality.Cardinality.UNARY_STREAM,
       'Test': cardinality.Cardinality.UNARY_UNARY,
       'Transaction': cardinality.Cardinality.UNARY_STREAM,
       'Version': cardinality.Cardinality.UNARY_UNARY,
-      'Write': cardinality.Cardinality.UNARY_UNARY,
+      'WriteAsync': cardinality.Cardinality.UNARY_UNARY,
+      'WriteSync': cardinality.Cardinality.UNARY_STREAM,
     }
     stub_options = beta_implementations.stub_options(host=host, metadata_transformer=metadata_transformer, request_serializers=request_serializers, response_deserializers=response_deserializers, thread_pool=pool, thread_pool_size=pool_size)
-    return beta_implementations.dynamic_stub(channel, 'synse.Plugin', cardinalities, options=stub_options)
+    return beta_implementations.dynamic_stub(channel, 'synse.V3Plugin', cardinalities, options=stub_options)
 except ImportError:
   pass
 # @@protoc_insertion_point(module_scope)
