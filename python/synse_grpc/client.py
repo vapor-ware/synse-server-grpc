@@ -8,6 +8,8 @@ from . import synse_pb2, synse_pb2_grpc
 # FIXME: map out a complete fs layout for synse to make sure it is all cohesive
 DEFAULT_SOCK_PATH = '/etc/synse/plugin/socket'
 
+# TODO: finish implementing - this is just a quick stub
+
 
 class PluginClientBase:
     """Base class for all Synse GRPC clients for interfacing with plugins.
