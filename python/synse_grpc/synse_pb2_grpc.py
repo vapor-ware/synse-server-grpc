@@ -31,7 +31,7 @@ class V3PluginStub(object):
         )
     self.Read = channel.unary_stream(
         '/synse.V3Plugin/Read',
-        request_serializer=synse__pb2.V3DeviceSelector.SerializeToString,
+        request_serializer=synse__pb2.V3ReadRequest.SerializeToString,
         response_deserializer=synse__pb2.V3Reading.FromString,
         )
     self.ReadCache = channel.unary_stream(
@@ -165,7 +165,7 @@ def add_V3PluginServicer_to_server(servicer, server):
       ),
       'Read': grpc.unary_stream_rpc_method_handler(
           servicer.Read,
-          request_deserializer=synse__pb2.V3DeviceSelector.FromString,
+          request_deserializer=synse__pb2.V3ReadRequest.FromString,
           response_serializer=synse__pb2.V3Reading.SerializeToString,
       ),
       'ReadCache': grpc.unary_stream_rpc_method_handler(

@@ -16,7 +16,7 @@ service V3Plugin {
     rpc Metadata(Empty) returns (V3Metadata) {}
 
     // Read gets readings from the specified plugin device(s).
-    rpc Read(V3DeviceSelector) returns (stream V3Reading) {}
+    rpc Read(V3ReadRequest) returns (stream V3Reading) {}
 
     // ReadCache gets the cached readings from the plugin. If the plugin
     // is not configured to cache readings, it will returned the entire
@@ -73,19 +73,37 @@ message V3Bounds {
 }
 
 // V3Device contains all of the pertinent known data associated with a device.
-// FIXME: this could still change
 message V3Device {
+    // RFC3339 timestamp for when the device info was gathered.
     string timestamp = 1;
+
+    // The globally unique ID for the device.
     string id = 2;
-    string kind = 3;
-    string type = 4;
-    string plugin = 5;
-    string info = 6;
-    map<string,string> metadata = 7;
-    V3DeviceCapability capabilities = 8;
-    repeated V3Tag tags = 9;
-    repeated V3DeviceOutput outputs = 10;
-    int32 sortIndex = 11;
+
+    // The type of device.
+    string type = 3;
+
+    // The name of the plugin that the device is managed by.
+    string plugin = 4;
+
+    // Additional information for the device.
+    string info = 5;
+
+    // Any arbitrary metadata associated with the device.
+    map<string,string> metadata = 6;
+
+    // The read/write capabilities of the device.
+    V3DeviceCapability capabilities = 7;
+
+    // The tags that are associated with the device.
+    repeated V3Tag tags = 8;
+
+    // The reading outputs that the device can generate on read.
+    repeated V3DeviceOutput outputs = 9;
+
+    // A 1-based sort ordinal for the device. This will help determine where
+    // the device shows up in the scan.
+    int32 sortIndex = 10;
 }
 
 // V3DeviceCapability specifies the capabilities that a device exposes via Synse.
@@ -98,12 +116,24 @@ message V3DeviceCapability {
 }
 
 // V3DeviceOutput specifies the output types for a device's reading(s).
-// FIXME: this may change
+// FIXME (etd): Some of the info exposed here may change based on changes
+//   to the SDK.
 message V3DeviceOutput {
+    // The name of the device output.
     string name = 1;
+
+    // The type of the output.
     string type = 2;
+
+    // The decimal precision of the output. A precision of 0 (default) means no
+    // precision is applied.
     int32 precision = 3;
+
+    // The factor to multiply the reading result returned from the device. This can be
+    // positive, negative, whole, or decimal.
     double scalingFactor = 4;
+
+    // The unit of measure for the reading output.
     V3OutputUnit unit = 5;
 }
 
@@ -111,11 +141,14 @@ message V3DeviceOutput {
 message V3DeviceSelector {
     // The tags to use as selectors.
     repeated V3Tag tags = 1;
+
+    // The ID of the device. If this is set, tags will be ignored.
+    string id = 2;
 }
 
 // V3Health is the health status for a plugin.
 message V3Health {
-    // FRC3339 formatted timestamp of the time when the health was checked.
+    // RFC3339 formatted timestamp of the time when the health was checked.
     string timestamp = 1;
 
     // The overall health status of a plugin.
@@ -169,6 +202,9 @@ message V3OutputUnit {
 
     // The symbolic representation of the unit.
     string symbol = 2;
+
+    // The system of measure for the unit. (imperial, metric)
+    string system = 3;
 }
 
 // V3Reading is a reading response from a device.
@@ -179,9 +215,11 @@ message V3Reading {
     // RFC3339 formatted timestamp for when the reading was taken.
     string timestamp = 2;
 
-    // FIXME: this may need updating
+    // The type of the reading.
     string type = 3;
-    string kind = 4;
+
+    // The type of the device the reading originated from.
+    string deviceType = 4;
 
     // Any additional information associated with a reading.
     map<string,string> context = 5;
@@ -201,6 +239,15 @@ message V3Reading {
         uint32 uint32_value  = 14;
         uint64 uint64_value  = 15;
     }
+}
+
+// V3ReadRequest is a request for device readings.
+message V3ReadRequest {
+    // The selector for the device(s) to read from.
+    V3DeviceSelector selector = 1;
+
+    // The system of measure (imperial, metric) to convert device readings to.
+    string systemOfMeasure = 2;
 }
 
 // V3Tag is a specification for a single tag.
