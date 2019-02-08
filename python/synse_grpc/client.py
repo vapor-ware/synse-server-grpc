@@ -1,6 +1,7 @@
 """A client wrapper around the auto-generated GRPC code."""
 
 import os
+
 import grpc
 
 from . import synse_pb2, synse_pb2_grpc, utils
