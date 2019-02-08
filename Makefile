@@ -26,7 +26,7 @@ go:  ## Build the GRPC source for Go
 	    -v `pwd`:/build \
 	    grpc/go:latest \
 	    protoc -I /build /build/synse.proto --go_out=plugins=grpc:/build/go
-	@printf " [done]\n"
+	@printf "     [done]\n"
 
 .PHONY: all
 all: python go  ## Build source for all supported languages

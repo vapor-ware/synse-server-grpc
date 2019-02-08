@@ -108,7 +108,7 @@ class PluginClientV3(PluginClientBase):
         if device_id:
             request.id = device_id
         elif tags:
-            request.tags = [utils.str_to_tag(tag) for tag in tags]
+            request.tags = [utils.tag_to_message(tag) for tag in tags]
 
         # TODO (etd): try and figure out the return type of client.Devices..
         #  is it a list? generator? depending on what it is, we could yield
@@ -158,7 +158,7 @@ class PluginClientV3(PluginClientBase):
             )
         elif tags:
             request.selector = synse_pb2.V3DeviceSelector(
-                tags=[utils.str_to_tag(tag) for tag in tags]
+                tags=[utils.tag_to_message(tag) for tag in tags]
             )
 
         for reading in self.client.Read(request, timeout=self.timeout):
@@ -233,15 +233,14 @@ class PluginClientV3(PluginClientBase):
 
         Args:
             device_id (str): The device to write to.
-            data (): The data to write to the device.
+            data (list[dict] | dict): The data to write to the device.
         """
 
-        # TODO (etd): write util to convert list/dict of data to the appropriate
-        #  data type for the write payload.
         request = synse_pb2.V3WritePayload(
             selector=synse_pb2.V3DeviceSelector(
                 id=device_id,
             ),
+            data=utils.write_data_to_messages(data),
         )
         return self.client.WriteAsync(request, timeout=self.timeout)
 
@@ -251,15 +250,14 @@ class PluginClientV3(PluginClientBase):
 
         Args:
             device_id (str): The device to write to.
-            data (): The data to write to the device.
+            data (list[dict] | dict): The data to write to the device.
         """
 
-        # TODO (etd): write util to convert list/dict of data to the appropriate
-        #  data type for the write payload.
         request = synse_pb2.V3WritePayload(
             selector=synse_pb2.V3DeviceSelector(
                 id=device_id,
             ),
+            data=utils.write_data_to_messages(data),
         )
         # TODO: figure out how to do this so it blocks until resolved.
         return self.client.WriteSync(request, timeout=self.timeout)

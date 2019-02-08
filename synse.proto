@@ -328,6 +328,9 @@ message V3WriteData {
 
     // Additional data for the write action.
     bytes data = 2;
+
+    // A custom transaction that can be associated with the write.
+    string transaction = 3;
 }
 
 // V3WritePayload the payload for a write which specifies the device to
