@@ -1,5 +1,9 @@
-""" Synse Server gRPC internal plugin API.
-"""
+"""Synse gRPC API for plugin communication."""
 
-from . import synse_pb2 as api
-from . import synse_pb2_grpc as grpc
+__title__ = 'synse_grpc'
+__version__ = '3.0.0'
+__description__ = 'The Synse gRPC API for plugin communication.'
+__author__ = 'Vapor IO'
+__author_email__ = 'vapor@vapor.io'
+__url__ = 'https://github.com/vapor-ware/synse-server-grpc'
+__license__ = 'GNU General Public License v3.0'
