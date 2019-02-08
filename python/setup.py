@@ -36,6 +36,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'grpcio>=1.8.6',
+        'protobuf',
     ],
     classifiers=[
         'Intended Audience :: Developers',
