@@ -35,7 +35,7 @@ service V3Plugin {
 
     // WriteAsync writes data to the specified plugin device. A transaction ID
     // is returned so the write status can be checked asynchronously.
-    rpc WriteAsync(V3WritePayload) returns (V3WriteTransaction) {}
+    rpc WriteAsync(V3WritePayload) returns (stream V3WriteTransaction) {}
 
     // WriteSync writes data to the specified plugin device. The request blocks
     // until the write resolves so no asynchronous checking is required.

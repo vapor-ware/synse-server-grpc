@@ -54,7 +54,7 @@ class V3PluginStub(object):
         request_serializer=synse__pb2.Empty.SerializeToString,
         response_deserializer=synse__pb2.V3Version.FromString,
         )
-    self.WriteAsync = channel.unary_unary(
+    self.WriteAsync = channel.unary_stream(
         '/synse.V3Plugin/WriteAsync',
         request_serializer=synse__pb2.V3WritePayload.SerializeToString,
         response_deserializer=synse__pb2.V3WriteTransaction.FromString,
@@ -188,7 +188,7 @@ def add_V3PluginServicer_to_server(servicer, server):
           request_deserializer=synse__pb2.Empty.FromString,
           response_serializer=synse__pb2.V3Version.SerializeToString,
       ),
-      'WriteAsync': grpc.unary_unary_rpc_method_handler(
+      'WriteAsync': grpc.unary_stream_rpc_method_handler(
           servicer.WriteAsync,
           request_deserializer=synse__pb2.V3WritePayload.FromString,
           response_serializer=synse__pb2.V3WriteTransaction.SerializeToString,
