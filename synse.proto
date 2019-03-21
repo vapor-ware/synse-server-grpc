@@ -116,8 +116,6 @@ message V3DeviceCapability {
 }
 
 // V3DeviceOutput specifies the output types for a device's reading(s).
-// FIXME (etd): Some of the info exposed here may change based on changes
-//   to the SDK.
 message V3DeviceOutput {
     // The name of the device output.
     string name = 1;
@@ -202,9 +200,6 @@ message V3OutputUnit {
 
     // The symbolic representation of the unit.
     string symbol = 2;
-
-    // The system of measure for the unit. (imperial, metric)
-    string system = 3;
 }
 
 // V3Reading is a reading response from a device.
@@ -245,9 +240,6 @@ message V3Reading {
 message V3ReadRequest {
     // The selector for the device(s) to read from.
     V3DeviceSelector selector = 1;
-
-    // The system of measure (imperial, metric) to convert device readings to.
-    string systemOfMeasure = 2;
 }
 
 // V3Tag is a specification for a single tag.
