@@ -3,7 +3,7 @@
 #
 
 PKG_NAME := synse_grpc
-PKG_VER  := $(shell python python/version.py)
+PKG_VER  := $(shell python python/setup.py --version)
 
 .PHONY: python
 python:  ## Build the GRPC source for Python
