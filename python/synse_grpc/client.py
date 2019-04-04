@@ -64,7 +64,7 @@ class PluginClientBase:
         """Make the channel for the gRPC client.
 
         Returns:
-            grpc.Channel: The channel over which the client will communicate with
+            grpclib.Channel: The channel over which the client will communicate with
             the plugin.
         """
         if self.tls:
@@ -119,7 +119,7 @@ class PluginClientV3(PluginClientBase):
         """Get the health status of the plugin.
 
         Returns:
-            synse_pb2.V3Health: The health status of the plugin.
+            api.V3Health: The health status of the plugin.
         """
 
         return self.client.Health(self.empty, timeout=self.timeout)
@@ -128,7 +128,7 @@ class PluginClientV3(PluginClientBase):
         """Get the static plugin meta-information.
 
         Returns:
-            synse_pb2.V3Metadata: The static plugin meta-information.
+            api.V3Metadata: The static plugin meta-information.
         """
 
         return self.client.Metadata(self.empty, timeout=self.timeout)
@@ -144,7 +144,7 @@ class PluginClientV3(PluginClientBase):
                 are returned.
 
         Yields:
-            synse_pb2.V3Reading: The reading(s) from the specified device(s).
+            api.V3Reading: The reading(s) from the specified device(s).
         """
 
         request = api.V3ReadRequest(
@@ -173,7 +173,7 @@ class PluginClientV3(PluginClientBase):
                 there will not be an ending bound. (default: None)
 
         Yields:
-            synse_pb2.V3Reading: The cached reading values for plugin devices.
+            api.V3Reading: The cached reading values for plugin devices.
         """
 
         request = api.V3Bounds(
@@ -188,7 +188,7 @@ class PluginClientV3(PluginClientBase):
         """Check whether the plugin is reachable and ready.
 
         Returns:
-            synse_pb2.V3TestStatus: The test status of the plugin.
+            api.V3TestStatus: The test status of the plugin.
         """
 
         return self.client.Test(self.empty, timeout=self.timeout)
@@ -200,7 +200,7 @@ class PluginClientV3(PluginClientBase):
             transaction_id (str): The ID of the transaction to check.
 
         Returns:
-            synse_pb2.V3TransactionStatus: The transaction status for the
+            api.V3TransactionStatus: The transaction status for the
             asynchronous write.
         """
 
@@ -214,7 +214,7 @@ class PluginClientV3(PluginClientBase):
         """Get all actively tracked transactions from the plugin.
 
         Yields:
-            synse.pb2.V3TransactionStatus: The transactions currently tracked
+            api.V3TransactionStatus: The transactions currently tracked
             by the plugin.
         """
 
@@ -225,7 +225,7 @@ class PluginClientV3(PluginClientBase):
         """Get the version information for the plugin.
 
         Returns:
-            synse_pb2.V3Version: The version information for the plugin.
+            api.V3Version: The version information for the plugin.
         """
 
         return self.client.Version(self.empty, timeout=self.timeout)
@@ -239,7 +239,7 @@ class PluginClientV3(PluginClientBase):
             data (list[dict] | dict): The data to write to the device.
 
         Yields:
-            synse_pb2.V3WriteTransaction: The transaction(s) generated for the
+            api.V3WriteTransaction: The transaction(s) generated for the
             asynchronous write request.
         """
 
@@ -262,7 +262,7 @@ class PluginClientV3(PluginClientBase):
             data (list[dict] | dict): The data to write to the device.
 
         Returns:
-            list[synse_pb2.V3TransactionStatus]: The status of the transaction(s)
+            list[api.V3TransactionStatus]: The status of the transaction(s)
             associated with the write.
         """
 
