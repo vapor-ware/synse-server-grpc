@@ -133,7 +133,7 @@ class PluginClientV3(PluginClientBase):
 
         return self.client.Metadata(self.empty, timeout=self.timeout)
 
-    def read(self, device_id=None, tags=None, system_of_measure=None):
+    def read(self, device_id=None, tags=None):
         """Get readings from specified plugin devices.
 
         Args:
@@ -142,24 +142,19 @@ class PluginClientV3(PluginClientBase):
             tags (list[str]): The tags matching the devices to get information
                 on. If this is empty and ``id`` is not specified, all devices
                 are returned.
-            system_of_measure (str): The system of measure to convert the read
-                responses to. (default: "metric")
 
         Yields:
             synse_pb2.V3Reading: The reading(s) from the specified device(s).
         """
 
         request = api.V3ReadRequest(
-            systemOfMeasure=system_of_measure or 'metric',
+            selector=api.V3DeviceSelector()
         )
+
         if device_id:
-            request.selector = api.V3DeviceSelector(
-                id=device_id
-            )
+            request.selector.id = device_id
         elif tags:
-            request.selector = api.V3DeviceSelector(
-                tags=[utils.tag_to_message(tag) for tag in tags]
-            )
+            request.selector.tags.extend([utils.tag_to_message(tag) for tag in tags])
 
         for reading in self.client.Read(request, timeout=self.timeout):
             yield reading
