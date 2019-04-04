@@ -87,6 +87,7 @@ class PluginClientV3(PluginClientBase):
 
     def make_grpc_client(self):
         """Initialize a new Synse v3 gRPC client to communicate with the plugin."""
+
         return grpc.V3PluginStub(self.make_channel())
 
     def devices(self, device_id=None, tags=None):
@@ -104,15 +105,13 @@ class PluginClientV3(PluginClientBase):
                 filter parameters. If no parameters are given, all devices are
                 returned.
         """
+
         request = api.V3DeviceSelector()
         if device_id:
             request.id = device_id
         elif tags:
-            request.tags = [utils.tag_to_message(tag) for tag in tags]
+            request.tags.extend([utils.tag_to_message(tag) for tag in tags])
 
-        # TODO (etd): try and figure out the return type of client.Devices..
-        #  is it a list? generator? depending on what it is, we could yield
-        #  in a more sane way.
         for device in self.client.Devices(request, timeout=self.timeout):
             yield device
 
@@ -149,6 +148,7 @@ class PluginClientV3(PluginClientBase):
         Yields:
             synse_pb2.V3Reading: The reading(s) from the specified device(s).
         """
+
         request = api.V3ReadRequest(
             systemOfMeasure=system_of_measure or 'metric',
         )
