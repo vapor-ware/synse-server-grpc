@@ -199,27 +199,26 @@ class PluginClientV3(PluginClientBase):
         Args:
             transaction_id (str): The ID of the transaction to check.
 
-        TODO (etd): does this need to return a stream? won't this just be returning
-          a single transaction status per ID...?
-
-        Yields:
+        Returns:
             synse_pb2.V3TransactionStatus: The transaction status for the
+            asynchronous write.
         """
 
         request = api.V3TransactionSelector(
             id=transaction_id,
         )
 
-        for status in self.client.Transaction(request, timeout=self.timeout):
-            yield status
+        return self.client.Transaction(request, timeout=self.timeout)
 
     def transactions(self):
         """Get all actively tracked transactions from the plugin.
 
+        Yields:
+            synse.pb2.V3TransactionStatus: The transactions currently tracked
+            by the plugin.
         """
 
-        request = api.V3TransactionSelector()
-        for status in self.client.Transaction(request=request, timeout=self.timeout):
+        for status in self.client.Transactions(request=self.empty, timeout=self.timeout):
             yield status
 
     def version(self):
@@ -238,6 +237,10 @@ class PluginClientV3(PluginClientBase):
         Args:
             device_id (str): The device to write to.
             data (list[dict] | dict): The data to write to the device.
+
+        Yields:
+            synse_pb2.V3WriteTransaction: The transaction(s) generated for the
+            asynchronous write request.
         """
 
         request = api.V3WritePayload(
@@ -246,7 +249,9 @@ class PluginClientV3(PluginClientBase):
             ),
             data=utils.write_data_to_messages(data),
         )
-        return self.client.WriteAsync(request, timeout=self.timeout)
+
+        for txn in self.client.WriteAsync(request, timeout=self.timeout):
+            yield txn
 
     def write_sync(self, device_id, data):
         """Write data to the specified plugin device. This request blocks until
@@ -255,6 +260,10 @@ class PluginClientV3(PluginClientBase):
         Args:
             device_id (str): The device to write to.
             data (list[dict] | dict): The data to write to the device.
+
+        Returns:
+            list[synse_pb2.V3TransactionStatus]: The status of the transaction(s)
+            associated with the write.
         """
 
         request = api.V3WritePayload(
@@ -263,5 +272,4 @@ class PluginClientV3(PluginClientBase):
             ),
             data=utils.write_data_to_messages(data),
         )
-        # TODO: figure out how to do this so it blocks until resolved.
-        return self.client.WriteSync(request, timeout=self.timeout)
+        return [x for x in self.client.WriteSync(request, timeout=self.timeout)]
