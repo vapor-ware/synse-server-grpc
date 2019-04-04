@@ -213,6 +213,15 @@ class PluginClientV3(PluginClientBase):
         for status in self.client.Transaction(request, timeout=self.timeout):
             yield status
 
+    def transactions(self):
+        """Get all actively tracked transactions from the plugin.
+
+        """
+
+        request = api.V3TransactionSelector()
+        for status in self.client.Transaction(request=request, timeout=self.timeout):
+            yield status
+
     def version(self):
         """Get the version information for the plugin.
 

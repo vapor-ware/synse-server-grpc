@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='synse.proto',
   package='synse',
   syntax='proto3',
-  serialized_pb=_b('\n\x0bsynse.proto\x12\x05synse\"\x07\n\x05\x45mpty\"&\n\x08V3Bounds\x12\r\n\x05start\x18\x01 \x01(\t\x12\x0b\n\x03\x65nd\x18\x02 \x01(\t\"\xbf\x02\n\x08V3Device\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0e\n\x06plugin\x18\x04 \x01(\t\x12\x0c\n\x04info\x18\x05 \x01(\t\x12/\n\x08metadata\x18\x06 \x03(\x0b\x32\x1d.synse.V3Device.MetadataEntry\x12/\n\x0c\x63\x61pabilities\x18\x07 \x01(\x0b\x32\x19.synse.V3DeviceCapability\x12\x1a\n\x04tags\x18\x08 \x03(\x0b\x32\x0c.synse.V3Tag\x12&\n\x07outputs\x18\t \x03(\x0b\x32\x15.synse.V3DeviceOutput\x12\x11\n\tsortIndex\x18\n \x01(\x05\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"K\n\x12V3DeviceCapability\x12\x0c\n\x04mode\x18\x01 \x01(\t\x12\'\n\x05write\x18\x02 \x01(\x0b\x32\x18.synse.V3WriteCapability\"y\n\x0eV3DeviceOutput\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x11\n\tprecision\x18\x03 \x01(\x05\x12\x15\n\rscalingFactor\x18\x04 \x01(\x01\x12!\n\x04unit\x18\x05 \x01(\x0b\x32\x13.synse.V3OutputUnit\":\n\x10V3DeviceSelector\x12\x1a\n\x04tags\x18\x01 \x03(\x0b\x32\x0c.synse.V3Tag\x12\n\n\x02id\x18\x02 \x01(\t\"h\n\x08V3Health\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12#\n\x06status\x18\x02 \x01(\x0e\x32\x13.synse.HealthStatus\x12$\n\x06\x63hecks\x18\x03 \x03(\x0b\x32\x14.synse.V3HealthCheck\"t\n\rV3HealthCheck\x12\x0c\n\x04name\x18\x01 \x01(\t\x12#\n\x06status\x18\x02 \x01(\x0e\x32\x13.synse.HealthStatus\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\"]\n\nV3Metadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nmaintainer\x18\x02 \x01(\t\x12\x0b\n\x03tag\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x0b\n\x03vcs\x18\x05 \x01(\t\",\n\x0cV3OutputUnit\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t\"\xad\x03\n\tV3Reading\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x12\n\ndeviceType\x18\x04 \x01(\t\x12.\n\x07\x63ontext\x18\x05 \x03(\x0b\x32\x1d.synse.V3Reading.ContextEntry\x12!\n\x04unit\x18\x06 \x01(\x0b\x32\x13.synse.V3OutputUnit\x12\x16\n\x0cstring_value\x18\x07 \x01(\tH\x00\x12\x14\n\nbool_value\x18\x08 \x01(\x08H\x00\x12\x17\n\rfloat32_value\x18\t \x01(\x02H\x00\x12\x17\n\rfloat64_value\x18\n \x01(\x01H\x00\x12\x15\n\x0bint32_value\x18\x0b \x01(\x05H\x00\x12\x15\n\x0bint64_value\x18\x0c \x01(\x03H\x00\x12\x15\n\x0b\x62ytes_value\x18\r \x01(\x0cH\x00\x12\x16\n\x0cuint32_value\x18\x0e \x01(\rH\x00\x12\x16\n\x0cuint64_value\x18\x0f \x01(\x04H\x00\x1a.\n\x0c\x43ontextEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x07\n\x05value\":\n\rV3ReadRequest\x12)\n\x08selector\x18\x01 \x01(\x0b\x32\x17.synse.V3DeviceSelector\"=\n\x05V3Tag\x12\x11\n\tnamespace\x18\x01 \x01(\t\x12\x12\n\nannotation\x18\x02 \x01(\t\x12\r\n\x05label\x18\x03 \x01(\t\"\x1a\n\x0cV3TestStatus\x12\n\n\x02ok\x18\x01 \x01(\x08\"#\n\x15V3TransactionSelector\x12\n\n\x02id\x18\x01 \x01(\t\"\xae\x01\n\x13V3TransactionStatus\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07\x63reated\x18\x02 \x01(\t\x12\x0f\n\x07updated\x18\x03 \x01(\t\x12\x0f\n\x07message\x18\x04 \x01(\t\x12\x0f\n\x07timeout\x18\x05 \x01(\t\x12\"\n\x06status\x18\x06 \x01(\x0e\x32\x12.synse.WriteStatus\x12#\n\x07\x63ontext\x18\x07 \x01(\x0b\x32\x12.synse.V3WriteData\"\x86\x01\n\tV3Version\x12\x15\n\rpluginVersion\x18\x01 \x01(\t\x12\x12\n\nsdkVersion\x18\x02 \x01(\t\x12\x11\n\tbuildDate\x18\x03 \x01(\t\x12\x11\n\tgitCommit\x18\x04 \x01(\t\x12\x0e\n\x06gitTag\x18\x05 \x01(\t\x12\x0c\n\x04\x61rch\x18\x06 \x01(\t\x12\n\n\x02os\x18\x07 \x01(\t\"$\n\x11V3WriteCapability\x12\x0f\n\x07\x61\x63tions\x18\x01 \x03(\t\"@\n\x0bV3WriteData\x12\x0e\n\x06\x61\x63tion\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x13\n\x0btransaction\x18\x03 \x01(\t\"]\n\x0eV3WritePayload\x12)\n\x08selector\x18\x01 \x01(\x0b\x32\x17.synse.V3DeviceSelector\x12 \n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x12.synse.V3WriteData\"f\n\x12V3WriteTransaction\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x02 \x01(\t\x12#\n\x07\x63ontext\x18\x03 \x01(\x0b\x32\x12.synse.V3WriteData\x12\x0f\n\x07timeout\x18\x04 \x01(\t*0\n\x0cHealthStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0b\n\x07\x46\x41ILING\x10\x02*<\n\x0bWriteStatus\x12\x0b\n\x07PENDING\x10\x00\x12\x0b\n\x07WRITING\x10\x01\x12\x08\n\x04\x44ONE\x10\x03\x12\t\n\x05\x45RROR\x10\x04\x32\xb4\x04\n\x08V3Plugin\x12\x37\n\x07\x44\x65vices\x12\x17.synse.V3DeviceSelector\x1a\x0f.synse.V3Device\"\x00\x30\x01\x12)\n\x06Health\x12\x0c.synse.Empty\x1a\x0f.synse.V3Health\"\x00\x12-\n\x08Metadata\x12\x0c.synse.Empty\x1a\x11.synse.V3Metadata\"\x00\x12\x32\n\x04Read\x12\x14.synse.V3ReadRequest\x1a\x10.synse.V3Reading\"\x00\x30\x01\x12\x32\n\tReadCache\x12\x0f.synse.V3Bounds\x1a\x10.synse.V3Reading\"\x00\x30\x01\x12+\n\x04Test\x12\x0c.synse.Empty\x1a\x13.synse.V3TestStatus\"\x00\x12K\n\x0bTransaction\x12\x1c.synse.V3TransactionSelector\x1a\x1a.synse.V3TransactionStatus\"\x00\x30\x01\x12+\n\x07Version\x12\x0c.synse.Empty\x1a\x10.synse.V3Version\"\x00\x12\x42\n\nWriteAsync\x12\x15.synse.V3WritePayload\x1a\x19.synse.V3WriteTransaction\"\x00\x30\x01\x12\x42\n\tWriteSync\x12\x15.synse.V3WritePayload\x1a\x1a.synse.V3TransactionStatus\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0bsynse.proto\x12\x05synse\"\x07\n\x05\x45mpty\"&\n\x08V3Bounds\x12\r\n\x05start\x18\x01 \x01(\t\x12\x0b\n\x03\x65nd\x18\x02 \x01(\t\"\xbf\x02\n\x08V3Device\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0e\n\x06plugin\x18\x04 \x01(\t\x12\x0c\n\x04info\x18\x05 \x01(\t\x12/\n\x08metadata\x18\x06 \x03(\x0b\x32\x1d.synse.V3Device.MetadataEntry\x12/\n\x0c\x63\x61pabilities\x18\x07 \x01(\x0b\x32\x19.synse.V3DeviceCapability\x12\x1a\n\x04tags\x18\x08 \x03(\x0b\x32\x0c.synse.V3Tag\x12&\n\x07outputs\x18\t \x03(\x0b\x32\x15.synse.V3DeviceOutput\x12\x11\n\tsortIndex\x18\n \x01(\x05\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"K\n\x12V3DeviceCapability\x12\x0c\n\x04mode\x18\x01 \x01(\t\x12\'\n\x05write\x18\x02 \x01(\x0b\x32\x18.synse.V3WriteCapability\"y\n\x0eV3DeviceOutput\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x11\n\tprecision\x18\x03 \x01(\x05\x12\x15\n\rscalingFactor\x18\x04 \x01(\x01\x12!\n\x04unit\x18\x05 \x01(\x0b\x32\x13.synse.V3OutputUnit\":\n\x10V3DeviceSelector\x12\x1a\n\x04tags\x18\x01 \x03(\x0b\x32\x0c.synse.V3Tag\x12\n\n\x02id\x18\x02 \x01(\t\"h\n\x08V3Health\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12#\n\x06status\x18\x02 \x01(\x0e\x32\x13.synse.HealthStatus\x12$\n\x06\x63hecks\x18\x03 \x03(\x0b\x32\x14.synse.V3HealthCheck\"t\n\rV3HealthCheck\x12\x0c\n\x04name\x18\x01 \x01(\t\x12#\n\x06status\x18\x02 \x01(\x0e\x32\x13.synse.HealthStatus\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\"]\n\nV3Metadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nmaintainer\x18\x02 \x01(\t\x12\x0b\n\x03tag\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x0b\n\x03vcs\x18\x05 \x01(\t\",\n\x0cV3OutputUnit\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t\"\xad\x03\n\tV3Reading\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x12\n\ndeviceType\x18\x04 \x01(\t\x12.\n\x07\x63ontext\x18\x05 \x03(\x0b\x32\x1d.synse.V3Reading.ContextEntry\x12!\n\x04unit\x18\x06 \x01(\x0b\x32\x13.synse.V3OutputUnit\x12\x16\n\x0cstring_value\x18\x07 \x01(\tH\x00\x12\x14\n\nbool_value\x18\x08 \x01(\x08H\x00\x12\x17\n\rfloat32_value\x18\t \x01(\x02H\x00\x12\x17\n\rfloat64_value\x18\n \x01(\x01H\x00\x12\x15\n\x0bint32_value\x18\x0b \x01(\x05H\x00\x12\x15\n\x0bint64_value\x18\x0c \x01(\x03H\x00\x12\x15\n\x0b\x62ytes_value\x18\r \x01(\x0cH\x00\x12\x16\n\x0cuint32_value\x18\x0e \x01(\rH\x00\x12\x16\n\x0cuint64_value\x18\x0f \x01(\x04H\x00\x1a.\n\x0c\x43ontextEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x07\n\x05value\":\n\rV3ReadRequest\x12)\n\x08selector\x18\x01 \x01(\x0b\x32\x17.synse.V3DeviceSelector\"=\n\x05V3Tag\x12\x11\n\tnamespace\x18\x01 \x01(\t\x12\x12\n\nannotation\x18\x02 \x01(\t\x12\r\n\x05label\x18\x03 \x01(\t\"\x1a\n\x0cV3TestStatus\x12\n\n\x02ok\x18\x01 \x01(\x08\"#\n\x15V3TransactionSelector\x12\n\n\x02id\x18\x01 \x01(\t\"\xae\x01\n\x13V3TransactionStatus\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07\x63reated\x18\x02 \x01(\t\x12\x0f\n\x07updated\x18\x03 \x01(\t\x12\x0f\n\x07message\x18\x04 \x01(\t\x12\x0f\n\x07timeout\x18\x05 \x01(\t\x12\"\n\x06status\x18\x06 \x01(\x0e\x32\x12.synse.WriteStatus\x12#\n\x07\x63ontext\x18\x07 \x01(\x0b\x32\x12.synse.V3WriteData\"\x86\x01\n\tV3Version\x12\x15\n\rpluginVersion\x18\x01 \x01(\t\x12\x12\n\nsdkVersion\x18\x02 \x01(\t\x12\x11\n\tbuildDate\x18\x03 \x01(\t\x12\x11\n\tgitCommit\x18\x04 \x01(\t\x12\x0e\n\x06gitTag\x18\x05 \x01(\t\x12\x0c\n\x04\x61rch\x18\x06 \x01(\t\x12\n\n\x02os\x18\x07 \x01(\t\"$\n\x11V3WriteCapability\x12\x0f\n\x07\x61\x63tions\x18\x01 \x03(\t\"@\n\x0bV3WriteData\x12\x0e\n\x06\x61\x63tion\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x13\n\x0btransaction\x18\x03 \x01(\t\"]\n\x0eV3WritePayload\x12)\n\x08selector\x18\x01 \x01(\x0b\x32\x17.synse.V3DeviceSelector\x12 \n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x12.synse.V3WriteData\"f\n\x12V3WriteTransaction\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x02 \x01(\t\x12#\n\x07\x63ontext\x18\x03 \x01(\x0b\x32\x12.synse.V3WriteData\x12\x0f\n\x07timeout\x18\x04 \x01(\t*0\n\x0cHealthStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0b\n\x07\x46\x41ILING\x10\x02*<\n\x0bWriteStatus\x12\x0b\n\x07PENDING\x10\x00\x12\x0b\n\x07WRITING\x10\x01\x12\x08\n\x04\x44ONE\x10\x03\x12\t\n\x05\x45RROR\x10\x04\x32\xf0\x04\n\x08V3Plugin\x12\x37\n\x07\x44\x65vices\x12\x17.synse.V3DeviceSelector\x1a\x0f.synse.V3Device\"\x00\x30\x01\x12)\n\x06Health\x12\x0c.synse.Empty\x1a\x0f.synse.V3Health\"\x00\x12-\n\x08Metadata\x12\x0c.synse.Empty\x1a\x11.synse.V3Metadata\"\x00\x12\x32\n\x04Read\x12\x14.synse.V3ReadRequest\x1a\x10.synse.V3Reading\"\x00\x30\x01\x12\x32\n\tReadCache\x12\x0f.synse.V3Bounds\x1a\x10.synse.V3Reading\"\x00\x30\x01\x12+\n\x04Test\x12\x0c.synse.Empty\x1a\x13.synse.V3TestStatus\"\x00\x12I\n\x0bTransaction\x12\x1c.synse.V3TransactionSelector\x1a\x1a.synse.V3TransactionStatus\"\x00\x12<\n\x0cTransactions\x12\x0c.synse.Empty\x1a\x1a.synse.V3TransactionStatus\"\x00\x30\x01\x12+\n\x07Version\x12\x0c.synse.Empty\x1a\x10.synse.V3Version\"\x00\x12\x42\n\nWriteAsync\x12\x15.synse.V3WritePayload\x1a\x19.synse.V3WriteTransaction\"\x00\x30\x01\x12\x42\n\tWriteSync\x12\x15.synse.V3WritePayload\x1a\x1a.synse.V3TransactionStatus\"\x00\x30\x01\x62\x06proto3')
 )
 
 _HEALTHSTATUS = _descriptor.EnumDescriptor(
@@ -1528,9 +1528,14 @@ try:
           request_serializer=Empty.SerializeToString,
           response_deserializer=V3TestStatus.FromString,
           )
-      self.Transaction = channel.unary_stream(
+      self.Transaction = channel.unary_unary(
           '/synse.V3Plugin/Transaction',
           request_serializer=V3TransactionSelector.SerializeToString,
+          response_deserializer=V3TransactionStatus.FromString,
+          )
+      self.Transactions = channel.unary_stream(
+          '/synse.V3Plugin/Transactions',
+          request_serializer=Empty.SerializeToString,
           response_deserializer=V3TransactionStatus.FromString,
           )
       self.Version = channel.unary_unary(
@@ -1606,6 +1611,14 @@ try:
       context.set_details('Method not implemented!')
       raise NotImplementedError('Method not implemented!')
 
+    def Transactions(self, request, context):
+      """Transactions gets all transactions which are currently kept
+      in the plugin's transaction cache.
+      """
+      context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+      context.set_details('Method not implemented!')
+      raise NotImplementedError('Method not implemented!')
+
     def Version(self, request, context):
       """Version gets the version information for the plugin.
       """
@@ -1662,9 +1675,14 @@ try:
             request_deserializer=Empty.FromString,
             response_serializer=V3TestStatus.SerializeToString,
         ),
-        'Transaction': grpc.unary_stream_rpc_method_handler(
+        'Transaction': grpc.unary_unary_rpc_method_handler(
             servicer.Transaction,
             request_deserializer=V3TransactionSelector.FromString,
+            response_serializer=V3TransactionStatus.SerializeToString,
+        ),
+        'Transactions': grpc.unary_stream_rpc_method_handler(
+            servicer.Transactions,
+            request_deserializer=Empty.FromString,
             response_serializer=V3TransactionStatus.SerializeToString,
         ),
         'Version': grpc.unary_unary_rpc_method_handler(
@@ -1727,6 +1745,11 @@ try:
       asynchronous write.
       """
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
+    def Transactions(self, request, context):
+      """Transactions gets all transactions which are currently kept
+      in the plugin's transaction cache.
+      """
+      context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
     def Version(self, request, context):
       """Version gets the version information for the plugin.
       """
@@ -1785,6 +1808,12 @@ try:
       asynchronous write.
       """
       raise NotImplementedError()
+    Transaction.future = None
+    def Transactions(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+      """Transactions gets all transactions which are currently kept
+      in the plugin's transaction cache.
+      """
+      raise NotImplementedError()
     def Version(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
       """Version gets the version information for the plugin.
       """
@@ -1816,6 +1845,7 @@ try:
       ('synse.V3Plugin', 'ReadCache'): V3Bounds.FromString,
       ('synse.V3Plugin', 'Test'): Empty.FromString,
       ('synse.V3Plugin', 'Transaction'): V3TransactionSelector.FromString,
+      ('synse.V3Plugin', 'Transactions'): Empty.FromString,
       ('synse.V3Plugin', 'Version'): Empty.FromString,
       ('synse.V3Plugin', 'WriteAsync'): V3WritePayload.FromString,
       ('synse.V3Plugin', 'WriteSync'): V3WritePayload.FromString,
@@ -1828,6 +1858,7 @@ try:
       ('synse.V3Plugin', 'ReadCache'): V3Reading.SerializeToString,
       ('synse.V3Plugin', 'Test'): V3TestStatus.SerializeToString,
       ('synse.V3Plugin', 'Transaction'): V3TransactionStatus.SerializeToString,
+      ('synse.V3Plugin', 'Transactions'): V3TransactionStatus.SerializeToString,
       ('synse.V3Plugin', 'Version'): V3Version.SerializeToString,
       ('synse.V3Plugin', 'WriteAsync'): V3WriteTransaction.SerializeToString,
       ('synse.V3Plugin', 'WriteSync'): V3TransactionStatus.SerializeToString,
@@ -1839,7 +1870,8 @@ try:
       ('synse.V3Plugin', 'Read'): face_utilities.unary_stream_inline(servicer.Read),
       ('synse.V3Plugin', 'ReadCache'): face_utilities.unary_stream_inline(servicer.ReadCache),
       ('synse.V3Plugin', 'Test'): face_utilities.unary_unary_inline(servicer.Test),
-      ('synse.V3Plugin', 'Transaction'): face_utilities.unary_stream_inline(servicer.Transaction),
+      ('synse.V3Plugin', 'Transaction'): face_utilities.unary_unary_inline(servicer.Transaction),
+      ('synse.V3Plugin', 'Transactions'): face_utilities.unary_stream_inline(servicer.Transactions),
       ('synse.V3Plugin', 'Version'): face_utilities.unary_unary_inline(servicer.Version),
       ('synse.V3Plugin', 'WriteAsync'): face_utilities.unary_stream_inline(servicer.WriteAsync),
       ('synse.V3Plugin', 'WriteSync'): face_utilities.unary_stream_inline(servicer.WriteSync),
@@ -1862,6 +1894,7 @@ try:
       ('synse.V3Plugin', 'ReadCache'): V3Bounds.SerializeToString,
       ('synse.V3Plugin', 'Test'): Empty.SerializeToString,
       ('synse.V3Plugin', 'Transaction'): V3TransactionSelector.SerializeToString,
+      ('synse.V3Plugin', 'Transactions'): Empty.SerializeToString,
       ('synse.V3Plugin', 'Version'): Empty.SerializeToString,
       ('synse.V3Plugin', 'WriteAsync'): V3WritePayload.SerializeToString,
       ('synse.V3Plugin', 'WriteSync'): V3WritePayload.SerializeToString,
@@ -1874,6 +1907,7 @@ try:
       ('synse.V3Plugin', 'ReadCache'): V3Reading.FromString,
       ('synse.V3Plugin', 'Test'): V3TestStatus.FromString,
       ('synse.V3Plugin', 'Transaction'): V3TransactionStatus.FromString,
+      ('synse.V3Plugin', 'Transactions'): V3TransactionStatus.FromString,
       ('synse.V3Plugin', 'Version'): V3Version.FromString,
       ('synse.V3Plugin', 'WriteAsync'): V3WriteTransaction.FromString,
       ('synse.V3Plugin', 'WriteSync'): V3TransactionStatus.FromString,
@@ -1885,7 +1919,8 @@ try:
       'Read': cardinality.Cardinality.UNARY_STREAM,
       'ReadCache': cardinality.Cardinality.UNARY_STREAM,
       'Test': cardinality.Cardinality.UNARY_UNARY,
-      'Transaction': cardinality.Cardinality.UNARY_STREAM,
+      'Transaction': cardinality.Cardinality.UNARY_UNARY,
+      'Transactions': cardinality.Cardinality.UNARY_STREAM,
       'Version': cardinality.Cardinality.UNARY_UNARY,
       'WriteAsync': cardinality.Cardinality.UNARY_STREAM,
       'WriteSync': cardinality.Cardinality.UNARY_STREAM,

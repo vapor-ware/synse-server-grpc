@@ -44,9 +44,14 @@ class V3PluginStub(object):
         request_serializer=synse__pb2.Empty.SerializeToString,
         response_deserializer=synse__pb2.V3TestStatus.FromString,
         )
-    self.Transaction = channel.unary_stream(
+    self.Transaction = channel.unary_unary(
         '/synse.V3Plugin/Transaction',
         request_serializer=synse__pb2.V3TransactionSelector.SerializeToString,
+        response_deserializer=synse__pb2.V3TransactionStatus.FromString,
+        )
+    self.Transactions = channel.unary_stream(
+        '/synse.V3Plugin/Transactions',
+        request_serializer=synse__pb2.Empty.SerializeToString,
         response_deserializer=synse__pb2.V3TransactionStatus.FromString,
         )
     self.Version = channel.unary_unary(
@@ -122,6 +127,14 @@ class V3PluginServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Transactions(self, request, context):
+    """Transactions gets all transactions which are currently kept
+    in the plugin's transaction cache.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def Version(self, request, context):
     """Version gets the version information for the plugin.
     """
@@ -178,9 +191,14 @@ def add_V3PluginServicer_to_server(servicer, server):
           request_deserializer=synse__pb2.Empty.FromString,
           response_serializer=synse__pb2.V3TestStatus.SerializeToString,
       ),
-      'Transaction': grpc.unary_stream_rpc_method_handler(
+      'Transaction': grpc.unary_unary_rpc_method_handler(
           servicer.Transaction,
           request_deserializer=synse__pb2.V3TransactionSelector.FromString,
+          response_serializer=synse__pb2.V3TransactionStatus.SerializeToString,
+      ),
+      'Transactions': grpc.unary_stream_rpc_method_handler(
+          servicer.Transactions,
+          request_deserializer=synse__pb2.Empty.FromString,
           response_serializer=synse__pb2.V3TransactionStatus.SerializeToString,
       ),
       'Version': grpc.unary_unary_rpc_method_handler(
