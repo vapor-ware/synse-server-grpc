@@ -1,5 +1,19 @@
 
-from .synse_pb2 import V3Tag, V3WriteData
+from google.protobuf.json_format import MessageToDict
+
+from .synse_pb2 import HealthStatus, WriteStatus, V3Tag, V3WriteData
+
+
+def to_dict(obj):
+    """Convert a gRPC message to its dictionary representation.
+
+    Args:
+        obj: The gRPC message to convert to dict.
+
+    Returns:
+        dict: A dictionary representation of the message.
+    """
+    return MessageToDict(obj)
 
 
 def tag_to_message(tag_string):
@@ -54,3 +68,27 @@ def write_data_to_messages(data):
         ))
 
     return messages
+
+
+def write_status_name(value):
+    """Get the name for a given write status value.
+
+    Args:
+        value (int): The value representing the write status.
+
+    Returns:
+        str: The string representation of the write status.
+    """
+    return WriteStatus.Name(value).lower()
+
+
+def health_status_name(value):
+    """Get the name for the given health status value.
+
+    Args:
+        value (int): The value representing the health status.
+
+    Returns:
+        str: The string representation of the health status.
+    """
+    return HealthStatus.Name(value).lower()
