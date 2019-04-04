@@ -2,4 +2,4 @@
 ``synse_pb2.py`` code.
 """
 
-from synse_grpc.synse_pb2 import *
+from .synse_pb2 import *

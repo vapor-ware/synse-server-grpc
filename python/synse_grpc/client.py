@@ -1,25 +1,25 @@
-"""A client wrapper around the auto-generated GRPC code."""
+"""A client wrapper around the auto-generated gRPC code."""
 
 import os
 
-import grpc
+import grpc as grpclib
 
-from . import synse_pb2, synse_pb2_grpc, utils
+from . import api, grpc, utils
 
 DEFAULT_SOCK_PATH = '/tmp/synse'
 
 
 class PluginClientBase:
-    """Base class for all Synse GRPC clients for interfacing with plugins.
+    """Base class for all Synse gRPC clients for interfacing with plugins.
 
-    These GRPC clients are convenience wrappers around the auto-generated
-    GRPC python code to make it easier for the client consumer to use.
+    These gRPC clients are convenience wrappers around the auto-generated
+    gRPC python code to make it easier for the client consumer to use.
 
     Args:
         address (str): The address of the plugin to connect to.
         protocol (str): The network protocol to use. This must be one of:
             'tcp', 'unix'.
-        timeout (int): The default timeout to use for the GRPC client.
+        timeout (int): The default timeout to use for the gRPC client.
         tls (str): The path to the TLS cert to use. If not using TLS,
             this can be left as None. (default: None)
 
@@ -28,11 +28,11 @@ class PluginClientBase:
     """
 
     # Define the supported transport protocols for the grpc client connection.
-    __protocols__ = ('tcp', 'unix')
+    _protocols = ('tcp', 'unix')
 
     # Define an empty message type that can be used for all routes that take
     # an empty request.
-    empty = synse_pb2.Empty()
+    empty = api.Empty()
 
     def __init__(self, address, protocol, timeout=None, tls=None):
         self.address = address
@@ -40,10 +40,10 @@ class PluginClientBase:
         self.timeout = timeout
         self.tls = tls
 
-        if self.protocol not in self.__protocols__:
+        if self.protocol not in self._protocols:
             raise ValueError(
-                'Invalid protocol specified for GRPC client: {} '
-                '(must be one of: {})'.format(protocol, self.__protocols__)
+                'Invalid protocol specified for gRPC client: {} '
+                '(must be one of: {})'.format(protocol, self._protocols)
             )
 
         self.client = self.make_grpc_client()
@@ -61,7 +61,7 @@ class PluginClientBase:
             return 'unix:{}'.format(os.path.join(DEFAULT_SOCK_PATH, self.address))
 
     def make_channel(self):
-        """Make the channel for the GRPC client.
+        """Make the channel for the gRPC client.
 
         Returns:
             grpc.Channel: The channel over which the client will communicate with
@@ -70,24 +70,24 @@ class PluginClientBase:
         if self.tls:
             with open(self.tls, 'rb') as f:
                 cert = f.read()
-            credentials = grpc.ssl_channel_credentials(root_certificates=cert)
-            return grpc.secure_channel(self.get_address(), credentials)
+            credentials = grpclib.ssl_channel_credentials(root_certificates=cert)
+            return grpclib.secure_channel(self.get_address(), credentials)
         else:
-            return grpc.insecure_channel(self.get_address())
+            return grpclib.insecure_channel(self.get_address())
 
     def make_grpc_client(self):
-        """Initialize a new GRPC client to communicate with the plugin."""
+        """Initialize a new gRPC client to communicate with the plugin."""
         # Each subclassed client should implement this on its own so it is using the
         # correct version of the client.
         raise NotImplementedError
 
 
 class PluginClientV3(PluginClientBase):
-    """Synse v3 GRPC client for interfacing with plugins."""
+    """Synse v3 gRPC client for interfacing with plugins."""
 
     def make_grpc_client(self):
-        """Initialize a new Synse v3 GRPC client to communicate with the plugin."""
-        return synse_pb2_grpc.V3PluginStub(self.make_channel())
+        """Initialize a new Synse v3 gRPC client to communicate with the plugin."""
+        return grpc.V3PluginStub(self.make_channel())
 
     def devices(self, device_id=None, tags=None):
         """Get devices that the plugin manages.
@@ -100,11 +100,11 @@ class PluginClientV3(PluginClientBase):
                 are returned.
 
         Yields:
-            synse_pb2.V3Device: The plugin-managed device(s) matching the provided
+            api.V3Device: The plugin-managed device(s) matching the provided
                 filter parameters. If no parameters are given, all devices are
                 returned.
         """
-        request = synse_pb2.V3DeviceSelector()
+        request = api.V3DeviceSelector()
         if device_id:
             request.id = device_id
         elif tags:
@@ -149,15 +149,15 @@ class PluginClientV3(PluginClientBase):
         Yields:
             synse_pb2.V3Reading: The reading(s) from the specified device(s).
         """
-        request = synse_pb2.V3ReadRequest(
+        request = api.V3ReadRequest(
             systemOfMeasure=system_of_measure or 'metric',
         )
         if device_id:
-            request.selector = synse_pb2.V3DeviceSelector(
+            request.selector = api.V3DeviceSelector(
                 id=device_id
             )
         elif tags:
-            request.selector = synse_pb2.V3DeviceSelector(
+            request.selector = api.V3DeviceSelector(
                 tags=[utils.tag_to_message(tag) for tag in tags]
             )
 
@@ -181,7 +181,7 @@ class PluginClientV3(PluginClientBase):
             synse_pb2.V3Reading: The cached reading values for plugin devices.
         """
 
-        request = synse_pb2.V3Bounds(
+        request = api.V3Bounds(
             start=start or '',
             end=end or '',
         )
@@ -211,7 +211,7 @@ class PluginClientV3(PluginClientBase):
             synse_pb2.V3TransactionStatus: The transaction status for the
         """
 
-        request = synse_pb2.V3TransactionSelector(
+        request = api.V3TransactionSelector(
             id=transaction_id,
         )
 
@@ -236,8 +236,8 @@ class PluginClientV3(PluginClientBase):
             data (list[dict] | dict): The data to write to the device.
         """
 
-        request = synse_pb2.V3WritePayload(
-            selector=synse_pb2.V3DeviceSelector(
+        request = api.V3WritePayload(
+            selector=api.V3DeviceSelector(
                 id=device_id,
             ),
             data=utils.write_data_to_messages(data),
@@ -253,8 +253,8 @@ class PluginClientV3(PluginClientBase):
             data (list[dict] | dict): The data to write to the device.
         """
 
-        request = synse_pb2.V3WritePayload(
-            selector=synse_pb2.V3DeviceSelector(
+        request = api.V3WritePayload(
+            selector=api.V3DeviceSelector(
                 id=device_id,
             ),
             data=utils.write_data_to_messages(data),
