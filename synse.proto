@@ -28,7 +28,11 @@ service V3Plugin {
 
     // Transaction gets the status of a write transaction for an
     // asynchronous write.
-    rpc Transaction(V3TransactionSelector) returns (stream V3TransactionStatus) {}
+    rpc Transaction(V3TransactionSelector) returns (V3TransactionStatus) {}
+
+    // Transactions gets all transactions which are currently kept
+    // in the plugin's transaction cache.
+    rpc Transactions(Empty) returns (stream V3TransactionStatus) {}
 
     // Version gets the version information for the plugin.
     rpc Version(Empty) returns (V3Version) {}
@@ -328,6 +332,9 @@ message V3WriteData {
 
     // Additional data for the write action.
     bytes data = 2;
+
+    // A custom transaction that can be associated with the write.
+    string transaction = 3;
 }
 
 // V3WritePayload the payload for a write which specifies the device to
