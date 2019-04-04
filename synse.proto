@@ -87,7 +87,7 @@ message V3Device {
     // The type of device.
     string type = 3;
 
-    // The name of the plugin that the device is managed by.
+    // The id of the plugin that the device is managed by.
     string plugin = 4;
 
     // Additional information for the device.
@@ -195,6 +195,9 @@ message V3Metadata {
 
     // A link to the plugin's VCS repo.
     string vcs = 5;
+
+    // The generated plugin namespace ID.
+    string id = 6;
 }
 
 // V3OutputUnit the unit of measure for a reading.
