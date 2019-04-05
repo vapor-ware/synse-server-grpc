@@ -1,7 +1,7 @@
 
 from google.protobuf.json_format import MessageToDict
 
-from .synse_pb2 import HealthStatus, WriteStatus, V3Tag, V3WriteData
+from .synse_pb2 import HealthStatus, V3Tag, V3WriteData, WriteStatus
 
 
 def to_dict(obj):
@@ -16,23 +16,23 @@ def to_dict(obj):
     return MessageToDict(obj)
 
 
-def tag_to_message(tag_string):
+def tag_to_message(tag):
     """Convert a tag string to a V3Tag message instance.
 
     Args:
-        tag_string (str): The tag in its string representation.
+        tag (str): The tag in its string representation.
 
     Returns:
         V3Tag: The tag string parsed into its proto model.
     """
     # Separate the namespace from the tag if it has one.
-    res = tag_string.split('/', maxsplit=1)
+    res = tag.split('/', maxsplit=1)
     if len(res) == 2:
-        ns, tag_string = res[0], res[1]
+        ns, tag = res[0], res[1]
     else:
-        ns, tag_string = '', res[0]
+        ns, tag = '', res[0]
 
-    res = tag_string.split(':', maxsplit=1)
+    res = tag.split(':', maxsplit=1)
     if len(res) == 2:
         annotation, label = res[0], res[1]
     else:
@@ -43,6 +43,26 @@ def tag_to_message(tag_string):
         annotation=annotation,
         label=label,
     )
+
+
+def tag_string(message):
+    """Convert a gRPC V3Tag message to its corresponding tag string.
+
+    Args:
+        message (V3Tag): The tag message to convert to its string representation.
+
+    Returns:
+        str: The string representation of the tag message.
+    """
+    tag = ''
+
+    if message.namespace:
+        tag += f'{message.namespace}/'
+    if message.annotation:
+        tag += f'{message.annotation}:'
+    tag += message.label
+
+    return tag
 
 
 def write_data_to_messages(data):
