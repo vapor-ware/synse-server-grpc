@@ -1,7 +1,7 @@
 
 from google.protobuf.json_format import MessageToDict
 
-from .synse_pb2 import HealthStatus, V3Tag, V3WriteData, WriteStatus
+from synse_grpc.synse_pb2 import HealthStatus, V3Tag, V3WriteData, WriteStatus
 
 
 def to_dict(obj):
@@ -13,7 +13,7 @@ def to_dict(obj):
     Returns:
         dict: A dictionary representation of the message.
     """
-    return MessageToDict(obj)
+    return MessageToDict(obj, including_default_value_fields=True)
 
 
 def tag_to_message(tag):

@@ -4,7 +4,7 @@ import os
 
 import grpc as grpclib
 
-from . import api, grpc, utils
+from synse_grpc import api, grpc, utils
 
 DEFAULT_SOCK_PATH = '/tmp/synse'
 
