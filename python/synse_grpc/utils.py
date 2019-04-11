@@ -81,10 +81,15 @@ def write_data_to_messages(data):
 
     messages = []
     for payload in data:
+        # Data is expected as bytes. If it is a string, encode it as bytes.
+        d = payload.get('data', b'')
+        if isinstance(d, str):
+            d = d.encode()
+
         messages.append(V3WriteData(
-            action=payload.get('action') or '',
-            data=payload.get('data') or b'',
-            transaction=payload.get('transaction') or '',
+            action=payload.get('action', ''),
+            data=d,
+            transaction=payload.get('transaction', ''),
         ))
 
     return messages
