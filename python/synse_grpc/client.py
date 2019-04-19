@@ -4,7 +4,7 @@ import os
 
 import grpc as grpclib
 
-from synse_grpc import api, grpc, utils
+from synse_grpc import api, errors,  grpc, utils
 
 DEFAULT_SOCK_PATH = '/tmp/synse'
 
@@ -112,8 +112,11 @@ class PluginClientV3(PluginClientBase):
         elif tags:
             request.tags.extend([utils.tag_to_message(tag) for tag in tags])
 
-        for device in self.client.Devices(request, timeout=self.timeout):
-            yield device
+        try:
+            for device in self.client.Devices(request, timeout=self.timeout):
+                yield device
+        except Exception as e:
+            errors.wrap_and_raise(e)
 
     def health(self):
         """Get the health status of the plugin.
@@ -122,7 +125,10 @@ class PluginClientV3(PluginClientBase):
             api.V3Health: The health status of the plugin.
         """
 
-        return self.client.Health(self.empty, timeout=self.timeout)
+        try:
+            return self.client.Health(self.empty, timeout=self.timeout)
+        except Exception as e:
+            errors.wrap_and_raise(e)
 
     def metadata(self):
         """Get the static plugin meta-information.
@@ -131,7 +137,10 @@ class PluginClientV3(PluginClientBase):
             api.V3Metadata: The static plugin meta-information.
         """
 
-        return self.client.Metadata(self.empty, timeout=self.timeout)
+        try:
+            return self.client.Metadata(self.empty, timeout=self.timeout)
+        except Exception as e:
+            errors.wrap_and_raise(e)
 
     def read(self, device_id=None, tags=None):
         """Get readings from specified plugin devices.
@@ -156,8 +165,11 @@ class PluginClientV3(PluginClientBase):
         elif tags:
             request.selector.tags.extend([utils.tag_to_message(tag) for tag in tags])
 
-        for reading in self.client.Read(request, timeout=self.timeout):
-            yield reading
+        try:
+            for reading in self.client.Read(request, timeout=self.timeout):
+                yield reading
+        except Exception as e:
+            errors.wrap_and_raise(e)
 
     def read_cache(self, start=None, end=None):
         """Get the cached readings from the plugin. If the plugin is not configured
@@ -181,8 +193,11 @@ class PluginClientV3(PluginClientBase):
             end=end or '',
         )
 
-        for reading in self.client.ReadCache(request, timeout=self.timeout):
-            yield reading
+        try:
+            for reading in self.client.ReadCache(request, timeout=self.timeout):
+                yield reading
+        except Exception as e:
+            errors.wrap_and_raise(e)
 
     def test(self):
         """Check whether the plugin is reachable and ready.
@@ -191,7 +206,10 @@ class PluginClientV3(PluginClientBase):
             api.V3TestStatus: The test status of the plugin.
         """
 
-        return self.client.Test(self.empty, timeout=self.timeout)
+        try:
+            return self.client.Test(self.empty, timeout=self.timeout)
+        except Exception as e:
+            errors.wrap_and_raise(e)
 
     def transaction(self, transaction_id):
         """Get the status of a write transaction for an asynchronous write action.
@@ -208,7 +226,10 @@ class PluginClientV3(PluginClientBase):
             id=transaction_id,
         )
 
-        return self.client.Transaction(request, timeout=self.timeout)
+        try:
+            return self.client.Transaction(request, timeout=self.timeout)
+        except Exception as e:
+            errors.wrap_and_raise(e)
 
     def transactions(self):
         """Get all actively tracked transactions from the plugin.
@@ -218,8 +239,11 @@ class PluginClientV3(PluginClientBase):
             by the plugin.
         """
 
-        for status in self.client.Transactions(request=self.empty, timeout=self.timeout):
-            yield status
+        try:
+            for status in self.client.Transactions(request=self.empty, timeout=self.timeout):
+                yield status
+        except Exception as e:
+            errors.wrap_and_raise(e)
 
     def version(self):
         """Get the version information for the plugin.
@@ -228,7 +252,10 @@ class PluginClientV3(PluginClientBase):
             api.V3Version: The version information for the plugin.
         """
 
-        return self.client.Version(self.empty, timeout=self.timeout)
+        try:
+            return self.client.Version(self.empty, timeout=self.timeout)
+        except Exception as e:
+            errors.wrap_and_raise(e)
 
     def write_async(self, device_id, data):
         """Write data to the specified plugin device. A transaction ID is returned
@@ -250,8 +277,11 @@ class PluginClientV3(PluginClientBase):
             data=utils.write_data_to_messages(data),
         )
 
-        for txn in self.client.WriteAsync(request, timeout=self.timeout):
-            yield txn
+        try:
+            for txn in self.client.WriteAsync(request, timeout=self.timeout):
+                yield txn
+        except Exception as e:
+            errors.wrap_and_raise(e)
 
     def write_sync(self, device_id, data):
         """Write data to the specified plugin device. This request blocks until
@@ -272,4 +302,8 @@ class PluginClientV3(PluginClientBase):
             ),
             data=utils.write_data_to_messages(data),
         )
-        return [x for x in self.client.WriteSync(request, timeout=self.timeout)]
+
+        try:
+            return [x for x in self.client.WriteSync(request, timeout=self.timeout)]
+        except Exception as e:
+            errors.wrap_and_raise(e)

@@ -1,7 +1,14 @@
 
+import re
+
 from google.protobuf.json_format import MessageToDict
 
 from synse_grpc.synse_pb2 import HealthStatus, V3Tag, V3WriteData, WriteStatus
+
+
+# Precompile regexes for dict key CamelCase to snake_case conversion
+_re_first = re.compile('(.)([A-Z][a-z]+)')
+_re_all = re.compile('([a-z0-9])([A-Z])')
 
 
 def to_dict(obj):
@@ -13,7 +20,13 @@ def to_dict(obj):
     Returns:
         dict: A dictionary representation of the message.
     """
-    return MessageToDict(obj, including_default_value_fields=True)
+    d = MessageToDict(obj, including_default_value_fields=True)
+    response = {}
+    for key, value in d.items():
+        new_key = _re_all.sub(r'\1_\2', _re_first.sub(r'\1_\2', key)).lower()
+        response[new_key] = value
+
+    return response
 
 
 def tag_to_message(tag):
