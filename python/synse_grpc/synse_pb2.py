@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='synse.proto',
   package='synse',
   syntax='proto3',
-  serialized_pb=_b('\n\x0bsynse.proto\x12\x05synse\"\x07\n\x05\x45mpty\"&\n\x08V3Bounds\x12\r\n\x05start\x18\x01 \x01(\t\x12\x0b\n\x03\x65nd\x18\x02 \x01(\t\"\xbf\x02\n\x08V3Device\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0e\n\x06plugin\x18\x04 \x01(\t\x12\x0c\n\x04info\x18\x05 \x01(\t\x12/\n\x08metadata\x18\x06 \x03(\x0b\x32\x1d.synse.V3Device.MetadataEntry\x12/\n\x0c\x63\x61pabilities\x18\x07 \x01(\x0b\x32\x19.synse.V3DeviceCapability\x12\x1a\n\x04tags\x18\x08 \x03(\x0b\x32\x0c.synse.V3Tag\x12&\n\x07outputs\x18\t \x03(\x0b\x32\x15.synse.V3DeviceOutput\x12\x11\n\tsortIndex\x18\n \x01(\x05\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"K\n\x12V3DeviceCapability\x12\x0c\n\x04mode\x18\x01 \x01(\t\x12\'\n\x05write\x18\x02 \x01(\x0b\x32\x18.synse.V3WriteCapability\"y\n\x0eV3DeviceOutput\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x11\n\tprecision\x18\x03 \x01(\x05\x12\x15\n\rscalingFactor\x18\x04 \x01(\x01\x12!\n\x04unit\x18\x05 \x01(\x0b\x32\x13.synse.V3OutputUnit\":\n\x10V3DeviceSelector\x12\x1a\n\x04tags\x18\x01 \x03(\x0b\x32\x0c.synse.V3Tag\x12\n\n\x02id\x18\x02 \x01(\t\"h\n\x08V3Health\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12#\n\x06status\x18\x02 \x01(\x0e\x32\x13.synse.HealthStatus\x12$\n\x06\x63hecks\x18\x03 \x03(\x0b\x32\x14.synse.V3HealthCheck\"t\n\rV3HealthCheck\x12\x0c\n\x04name\x18\x01 \x01(\t\x12#\n\x06status\x18\x02 \x01(\x0e\x32\x13.synse.HealthStatus\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\"i\n\nV3Metadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nmaintainer\x18\x02 \x01(\t\x12\x0b\n\x03tag\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x0b\n\x03vcs\x18\x05 \x01(\t\x12\n\n\x02id\x18\x06 \x01(\t\",\n\x0cV3OutputUnit\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t\"\xad\x03\n\tV3Reading\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x12\n\ndeviceType\x18\x04 \x01(\t\x12.\n\x07\x63ontext\x18\x05 \x03(\x0b\x32\x1d.synse.V3Reading.ContextEntry\x12!\n\x04unit\x18\x06 \x01(\x0b\x32\x13.synse.V3OutputUnit\x12\x16\n\x0cstring_value\x18\x07 \x01(\tH\x00\x12\x14\n\nbool_value\x18\x08 \x01(\x08H\x00\x12\x17\n\rfloat32_value\x18\t \x01(\x02H\x00\x12\x17\n\rfloat64_value\x18\n \x01(\x01H\x00\x12\x15\n\x0bint32_value\x18\x0b \x01(\x05H\x00\x12\x15\n\x0bint64_value\x18\x0c \x01(\x03H\x00\x12\x15\n\x0b\x62ytes_value\x18\r \x01(\x0cH\x00\x12\x16\n\x0cuint32_value\x18\x0e \x01(\rH\x00\x12\x16\n\x0cuint64_value\x18\x0f \x01(\x04H\x00\x1a.\n\x0c\x43ontextEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x07\n\x05value\":\n\rV3ReadRequest\x12)\n\x08selector\x18\x01 \x01(\x0b\x32\x17.synse.V3DeviceSelector\"=\n\x05V3Tag\x12\x11\n\tnamespace\x18\x01 \x01(\t\x12\x12\n\nannotation\x18\x02 \x01(\t\x12\r\n\x05label\x18\x03 \x01(\t\"\x1a\n\x0cV3TestStatus\x12\n\n\x02ok\x18\x01 \x01(\x08\"#\n\x15V3TransactionSelector\x12\n\n\x02id\x18\x01 \x01(\t\"\xae\x01\n\x13V3TransactionStatus\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07\x63reated\x18\x02 \x01(\t\x12\x0f\n\x07updated\x18\x03 \x01(\t\x12\x0f\n\x07message\x18\x04 \x01(\t\x12\x0f\n\x07timeout\x18\x05 \x01(\t\x12\"\n\x06status\x18\x06 \x01(\x0e\x32\x12.synse.WriteStatus\x12#\n\x07\x63ontext\x18\x07 \x01(\x0b\x32\x12.synse.V3WriteData\"\x86\x01\n\tV3Version\x12\x15\n\rpluginVersion\x18\x01 \x01(\t\x12\x12\n\nsdkVersion\x18\x02 \x01(\t\x12\x11\n\tbuildDate\x18\x03 \x01(\t\x12\x11\n\tgitCommit\x18\x04 \x01(\t\x12\x0e\n\x06gitTag\x18\x05 \x01(\t\x12\x0c\n\x04\x61rch\x18\x06 \x01(\t\x12\n\n\x02os\x18\x07 \x01(\t\"$\n\x11V3WriteCapability\x12\x0f\n\x07\x61\x63tions\x18\x01 \x03(\t\"@\n\x0bV3WriteData\x12\x0e\n\x06\x61\x63tion\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x13\n\x0btransaction\x18\x03 \x01(\t\"]\n\x0eV3WritePayload\x12)\n\x08selector\x18\x01 \x01(\x0b\x32\x17.synse.V3DeviceSelector\x12 \n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x12.synse.V3WriteData\"f\n\x12V3WriteTransaction\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x02 \x01(\t\x12#\n\x07\x63ontext\x18\x03 \x01(\x0b\x32\x12.synse.V3WriteData\x12\x0f\n\x07timeout\x18\x04 \x01(\t*0\n\x0cHealthStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0b\n\x07\x46\x41ILING\x10\x02*<\n\x0bWriteStatus\x12\x0b\n\x07PENDING\x10\x00\x12\x0b\n\x07WRITING\x10\x01\x12\x08\n\x04\x44ONE\x10\x03\x12\t\n\x05\x45RROR\x10\x04\x32\xf0\x04\n\x08V3Plugin\x12\x37\n\x07\x44\x65vices\x12\x17.synse.V3DeviceSelector\x1a\x0f.synse.V3Device\"\x00\x30\x01\x12)\n\x06Health\x12\x0c.synse.Empty\x1a\x0f.synse.V3Health\"\x00\x12-\n\x08Metadata\x12\x0c.synse.Empty\x1a\x11.synse.V3Metadata\"\x00\x12\x32\n\x04Read\x12\x14.synse.V3ReadRequest\x1a\x10.synse.V3Reading\"\x00\x30\x01\x12\x32\n\tReadCache\x12\x0f.synse.V3Bounds\x1a\x10.synse.V3Reading\"\x00\x30\x01\x12+\n\x04Test\x12\x0c.synse.Empty\x1a\x13.synse.V3TestStatus\"\x00\x12I\n\x0bTransaction\x12\x1c.synse.V3TransactionSelector\x1a\x1a.synse.V3TransactionStatus\"\x00\x12<\n\x0cTransactions\x12\x0c.synse.Empty\x1a\x1a.synse.V3TransactionStatus\"\x00\x30\x01\x12+\n\x07Version\x12\x0c.synse.Empty\x1a\x10.synse.V3Version\"\x00\x12\x42\n\nWriteAsync\x12\x15.synse.V3WritePayload\x1a\x19.synse.V3WriteTransaction\"\x00\x30\x01\x12\x42\n\tWriteSync\x12\x15.synse.V3WritePayload\x1a\x1a.synse.V3TransactionStatus\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0bsynse.proto\x12\x05synse\"\x07\n\x05\x45mpty\"&\n\x08V3Bounds\x12\r\n\x05start\x18\x01 \x01(\t\x12\x0b\n\x03\x65nd\x18\x02 \x01(\t\"\xce\x02\n\x08V3Device\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0e\n\x06plugin\x18\x04 \x01(\t\x12\x0c\n\x04info\x18\x05 \x01(\t\x12\r\n\x05\x61lias\x18\x06 \x01(\t\x12/\n\x08metadata\x18\x07 \x03(\x0b\x32\x1d.synse.V3Device.MetadataEntry\x12/\n\x0c\x63\x61pabilities\x18\x08 \x01(\x0b\x32\x19.synse.V3DeviceCapability\x12\x1a\n\x04tags\x18\t \x03(\x0b\x32\x0c.synse.V3Tag\x12&\n\x07outputs\x18\n \x03(\x0b\x32\x15.synse.V3DeviceOutput\x12\x11\n\tsortIndex\x18\x0b \x01(\x05\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"K\n\x12V3DeviceCapability\x12\x0c\n\x04mode\x18\x01 \x01(\t\x12\'\n\x05write\x18\x02 \x01(\x0b\x32\x18.synse.V3WriteCapability\"y\n\x0eV3DeviceOutput\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x11\n\tprecision\x18\x03 \x01(\x05\x12\x15\n\rscalingFactor\x18\x04 \x01(\x01\x12!\n\x04unit\x18\x05 \x01(\x0b\x32\x13.synse.V3OutputUnit\":\n\x10V3DeviceSelector\x12\x1a\n\x04tags\x18\x01 \x03(\x0b\x32\x0c.synse.V3Tag\x12\n\n\x02id\x18\x02 \x01(\t\"h\n\x08V3Health\x12\x11\n\ttimestamp\x18\x01 \x01(\t\x12#\n\x06status\x18\x02 \x01(\x0e\x32\x13.synse.HealthStatus\x12$\n\x06\x63hecks\x18\x03 \x03(\x0b\x32\x14.synse.V3HealthCheck\"t\n\rV3HealthCheck\x12\x0c\n\x04name\x18\x01 \x01(\t\x12#\n\x06status\x18\x02 \x01(\x0e\x32\x13.synse.HealthStatus\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\"i\n\nV3Metadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nmaintainer\x18\x02 \x01(\t\x12\x0b\n\x03tag\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x0b\n\x03vcs\x18\x05 \x01(\t\x12\n\n\x02id\x18\x06 \x01(\t\",\n\x0cV3OutputUnit\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t\"\xad\x03\n\tV3Reading\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x12\n\ndeviceType\x18\x04 \x01(\t\x12.\n\x07\x63ontext\x18\x05 \x03(\x0b\x32\x1d.synse.V3Reading.ContextEntry\x12!\n\x04unit\x18\x06 \x01(\x0b\x32\x13.synse.V3OutputUnit\x12\x16\n\x0cstring_value\x18\x07 \x01(\tH\x00\x12\x14\n\nbool_value\x18\x08 \x01(\x08H\x00\x12\x17\n\rfloat32_value\x18\t \x01(\x02H\x00\x12\x17\n\rfloat64_value\x18\n \x01(\x01H\x00\x12\x15\n\x0bint32_value\x18\x0b \x01(\x05H\x00\x12\x15\n\x0bint64_value\x18\x0c \x01(\x03H\x00\x12\x15\n\x0b\x62ytes_value\x18\r \x01(\x0cH\x00\x12\x16\n\x0cuint32_value\x18\x0e \x01(\rH\x00\x12\x16\n\x0cuint64_value\x18\x0f \x01(\x04H\x00\x1a.\n\x0c\x43ontextEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x07\n\x05value\":\n\rV3ReadRequest\x12)\n\x08selector\x18\x01 \x01(\x0b\x32\x17.synse.V3DeviceSelector\"=\n\x05V3Tag\x12\x11\n\tnamespace\x18\x01 \x01(\t\x12\x12\n\nannotation\x18\x02 \x01(\t\x12\r\n\x05label\x18\x03 \x01(\t\"\x1a\n\x0cV3TestStatus\x12\n\n\x02ok\x18\x01 \x01(\x08\"#\n\x15V3TransactionSelector\x12\n\n\x02id\x18\x01 \x01(\t\"\xae\x01\n\x13V3TransactionStatus\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07\x63reated\x18\x02 \x01(\t\x12\x0f\n\x07updated\x18\x03 \x01(\t\x12\x0f\n\x07message\x18\x04 \x01(\t\x12\x0f\n\x07timeout\x18\x05 \x01(\t\x12\"\n\x06status\x18\x06 \x01(\x0e\x32\x12.synse.WriteStatus\x12#\n\x07\x63ontext\x18\x07 \x01(\x0b\x32\x12.synse.V3WriteData\"\x86\x01\n\tV3Version\x12\x15\n\rpluginVersion\x18\x01 \x01(\t\x12\x12\n\nsdkVersion\x18\x02 \x01(\t\x12\x11\n\tbuildDate\x18\x03 \x01(\t\x12\x11\n\tgitCommit\x18\x04 \x01(\t\x12\x0e\n\x06gitTag\x18\x05 \x01(\t\x12\x0c\n\x04\x61rch\x18\x06 \x01(\t\x12\n\n\x02os\x18\x07 \x01(\t\"$\n\x11V3WriteCapability\x12\x0f\n\x07\x61\x63tions\x18\x01 \x03(\t\"@\n\x0bV3WriteData\x12\x0e\n\x06\x61\x63tion\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x13\n\x0btransaction\x18\x03 \x01(\t\"]\n\x0eV3WritePayload\x12)\n\x08selector\x18\x01 \x01(\x0b\x32\x17.synse.V3DeviceSelector\x12 \n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x12.synse.V3WriteData\"f\n\x12V3WriteTransaction\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x02 \x01(\t\x12#\n\x07\x63ontext\x18\x03 \x01(\x0b\x32\x12.synse.V3WriteData\x12\x0f\n\x07timeout\x18\x04 \x01(\t*0\n\x0cHealthStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0b\n\x07\x46\x41ILING\x10\x02*<\n\x0bWriteStatus\x12\x0b\n\x07PENDING\x10\x00\x12\x0b\n\x07WRITING\x10\x01\x12\x08\n\x04\x44ONE\x10\x03\x12\t\n\x05\x45RROR\x10\x04\x32\xf0\x04\n\x08V3Plugin\x12\x37\n\x07\x44\x65vices\x12\x17.synse.V3DeviceSelector\x1a\x0f.synse.V3Device\"\x00\x30\x01\x12)\n\x06Health\x12\x0c.synse.Empty\x1a\x0f.synse.V3Health\"\x00\x12-\n\x08Metadata\x12\x0c.synse.Empty\x1a\x11.synse.V3Metadata\"\x00\x12\x32\n\x04Read\x12\x14.synse.V3ReadRequest\x1a\x10.synse.V3Reading\"\x00\x30\x01\x12\x32\n\tReadCache\x12\x0f.synse.V3Bounds\x1a\x10.synse.V3Reading\"\x00\x30\x01\x12+\n\x04Test\x12\x0c.synse.Empty\x1a\x13.synse.V3TestStatus\"\x00\x12I\n\x0bTransaction\x12\x1c.synse.V3TransactionSelector\x1a\x1a.synse.V3TransactionStatus\"\x00\x12<\n\x0cTransactions\x12\x0c.synse.Empty\x1a\x1a.synse.V3TransactionStatus\"\x00\x30\x01\x12+\n\x07Version\x12\x0c.synse.Empty\x1a\x10.synse.V3Version\"\x00\x12\x42\n\nWriteAsync\x12\x15.synse.V3WritePayload\x1a\x19.synse.V3WriteTransaction\"\x00\x30\x01\x12\x42\n\tWriteSync\x12\x15.synse.V3WritePayload\x1a\x1a.synse.V3TransactionStatus\"\x00\x30\x01\x62\x06proto3')
 )
 
 _HEALTHSTATUS = _descriptor.EnumDescriptor(
@@ -44,8 +44,8 @@ _HEALTHSTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2267,
-  serialized_end=2315,
+  serialized_start=2282,
+  serialized_end=2330,
 )
 _sym_db.RegisterEnumDescriptor(_HEALTHSTATUS)
 
@@ -75,8 +75,8 @@ _WRITESTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2317,
-  serialized_end=2377,
+  serialized_start=2332,
+  serialized_end=2392,
 )
 _sym_db.RegisterEnumDescriptor(_WRITESTATUS)
 
@@ -186,8 +186,8 @@ _V3DEVICE_METADATAENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=344,
-  serialized_end=391,
+  serialized_start=359,
+  serialized_end=406,
 )
 
 _V3DEVICE = _descriptor.Descriptor(
@@ -233,36 +233,43 @@ _V3DEVICE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='metadata', full_name='synse.V3Device.metadata', index=5,
-      number=6, type=11, cpp_type=10, label=3,
+      name='alias', full_name='synse.V3Device.alias', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='metadata', full_name='synse.V3Device.metadata', index=6,
+      number=7, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='capabilities', full_name='synse.V3Device.capabilities', index=6,
-      number=7, type=11, cpp_type=10, label=1,
+      name='capabilities', full_name='synse.V3Device.capabilities', index=7,
+      number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='tags', full_name='synse.V3Device.tags', index=7,
-      number=8, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='outputs', full_name='synse.V3Device.outputs', index=8,
+      name='tags', full_name='synse.V3Device.tags', index=8,
       number=9, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sortIndex', full_name='synse.V3Device.sortIndex', index=9,
-      number=10, type=5, cpp_type=1, label=1,
+      name='outputs', full_name='synse.V3Device.outputs', index=9,
+      number=10, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sortIndex', full_name='synse.V3Device.sortIndex', index=10,
+      number=11, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -280,7 +287,7 @@ _V3DEVICE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=72,
-  serialized_end=391,
+  serialized_end=406,
 )
 
 
@@ -317,8 +324,8 @@ _V3DEVICECAPABILITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=393,
-  serialized_end=468,
+  serialized_start=408,
+  serialized_end=483,
 )
 
 
@@ -376,8 +383,8 @@ _V3DEVICEOUTPUT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=470,
-  serialized_end=591,
+  serialized_start=485,
+  serialized_end=606,
 )
 
 
@@ -414,8 +421,8 @@ _V3DEVICESELECTOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=593,
-  serialized_end=651,
+  serialized_start=608,
+  serialized_end=666,
 )
 
 
@@ -459,8 +466,8 @@ _V3HEALTH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=653,
-  serialized_end=757,
+  serialized_start=668,
+  serialized_end=772,
 )
 
 
@@ -518,8 +525,8 @@ _V3HEALTHCHECK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=759,
-  serialized_end=875,
+  serialized_start=774,
+  serialized_end=890,
 )
 
 
@@ -584,8 +591,8 @@ _V3METADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=877,
-  serialized_end=982,
+  serialized_start=892,
+  serialized_end=997,
 )
 
 
@@ -622,8 +629,8 @@ _V3OUTPUTUNIT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=984,
-  serialized_end=1028,
+  serialized_start=999,
+  serialized_end=1043,
 )
 
 
@@ -660,8 +667,8 @@ _V3READING_CONTEXTENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1405,
-  serialized_end=1451,
+  serialized_start=1420,
+  serialized_end=1466,
 )
 
 _V3READING = _descriptor.Descriptor(
@@ -791,8 +798,8 @@ _V3READING = _descriptor.Descriptor(
       name='value', full_name='synse.V3Reading.value',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1031,
-  serialized_end=1460,
+  serialized_start=1046,
+  serialized_end=1475,
 )
 
 
@@ -822,8 +829,8 @@ _V3READREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1462,
-  serialized_end=1520,
+  serialized_start=1477,
+  serialized_end=1535,
 )
 
 
@@ -867,8 +874,8 @@ _V3TAG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1522,
-  serialized_end=1583,
+  serialized_start=1537,
+  serialized_end=1598,
 )
 
 
@@ -898,8 +905,8 @@ _V3TESTSTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1585,
-  serialized_end=1611,
+  serialized_start=1600,
+  serialized_end=1626,
 )
 
 
@@ -929,8 +936,8 @@ _V3TRANSACTIONSELECTOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1613,
-  serialized_end=1648,
+  serialized_start=1628,
+  serialized_end=1663,
 )
 
 
@@ -1002,8 +1009,8 @@ _V3TRANSACTIONSTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1651,
-  serialized_end=1825,
+  serialized_start=1666,
+  serialized_end=1840,
 )
 
 
@@ -1075,8 +1082,8 @@ _V3VERSION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1828,
-  serialized_end=1962,
+  serialized_start=1843,
+  serialized_end=1977,
 )
 
 
@@ -1106,8 +1113,8 @@ _V3WRITECAPABILITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1964,
-  serialized_end=2000,
+  serialized_start=1979,
+  serialized_end=2015,
 )
 
 
@@ -1151,8 +1158,8 @@ _V3WRITEDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2002,
-  serialized_end=2066,
+  serialized_start=2017,
+  serialized_end=2081,
 )
 
 
@@ -1189,8 +1196,8 @@ _V3WRITEPAYLOAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2068,
-  serialized_end=2161,
+  serialized_start=2083,
+  serialized_end=2176,
 )
 
 
@@ -1241,8 +1248,8 @@ _V3WRITETRANSACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2163,
-  serialized_end=2265,
+  serialized_start=2178,
+  serialized_end=2280,
 )
 
 _V3DEVICE_METADATAENTRY.containing_type = _V3DEVICE
