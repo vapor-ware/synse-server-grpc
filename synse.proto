@@ -93,21 +93,24 @@ message V3Device {
     // Additional information for the device.
     string info = 5;
 
+    // A human-readable alias for the device.
+    string alias = 6;
+
     // Any arbitrary metadata associated with the device.
-    map<string,string> metadata = 6;
+    map<string,string> metadata = 7;
 
     // The read/write capabilities of the device.
-    V3DeviceCapability capabilities = 7;
+    V3DeviceCapability capabilities = 8;
 
     // The tags that are associated with the device.
-    repeated V3Tag tags = 8;
+    repeated V3Tag tags = 9;
 
     // The reading outputs that the device can generate on read.
-    repeated V3DeviceOutput outputs = 9;
+    repeated V3DeviceOutput outputs = 10;
 
     // A 1-based sort ordinal for the device. This will help determine where
     // the device shows up in the scan.
-    int32 sortIndex = 10;
+    int32 sortIndex = 11;
 }
 
 // V3DeviceCapability specifies the capabilities that a device exposes via Synse.
