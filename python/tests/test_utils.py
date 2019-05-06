@@ -111,7 +111,7 @@ def test_tag_string(tag, string):
         {'action': 'foo'},
         [api.V3WriteData(action='foo')]
     ),
-(
+    (
         {'action': 'foo', 'data': 'bar'},
         [api.V3WriteData(action='foo', data=b'bar')]
     ),

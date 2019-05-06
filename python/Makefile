@@ -12,10 +12,6 @@ clean:  ## Clean up build artifacts
 deps:  ## Update the frozen pip dependencies (requirements.txt)
 	tox -e deps
 
-.PHONY: docs
-docs:  ## Build project documentation locally
-	tox -e docs
-
 .PHONY: fmt
 fmt:  ## Run formatting checks on the project source code
 	tox -e format
