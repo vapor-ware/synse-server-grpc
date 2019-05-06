@@ -23,6 +23,12 @@ def to_dict(obj):
     d = MessageToDict(obj, including_default_value_fields=True)
     response = {}
     for key, value in d.items():
+        # This check is a bit of a hack to ensure that the []byte encoded
+        # in the V3WriteData's `data` field does not get serialized out
+        # when MessageToDict is called.
+        if isinstance(obj, V3WriteData) and key == 'data':
+            response[key] = obj.data
+            continue
         new_key = _re_all.sub(r'\1_\2', _re_first.sub(r'\1_\2', key)).lower()
         response[new_key] = value
 

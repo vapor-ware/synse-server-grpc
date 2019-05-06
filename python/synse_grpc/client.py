@@ -58,6 +58,7 @@ class PluginClientBase:
         if self.protocol == 'tcp':
             return self.address
         elif self.protocol == 'unix':
+            # FIXME: is this the right way to go about this? forcing default path?
             return 'unix:{}'.format(os.path.join(DEFAULT_SOCK_PATH, self.address))
 
     def make_channel(self):
