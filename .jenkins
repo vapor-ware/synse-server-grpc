@@ -18,7 +18,8 @@ pipeline {
         }
       }
       steps {
-        sh 'cd python && make fmt'
+        sh 'pip install tox'
+        sh 'cd python && tox -e format'
       }
     }
 
@@ -29,7 +30,8 @@ pipeline {
         }
       }
       steps {
-        sh 'cd python && make test'
+        sh 'pip install tox'
+        sh 'cd python && tox -e unit'
       }
     }
 
