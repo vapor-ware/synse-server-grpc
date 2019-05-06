@@ -5,7 +5,6 @@ from google.protobuf.json_format import MessageToDict
 
 from synse_grpc.synse_pb2 import HealthStatus, V3Tag, V3WriteData, WriteStatus
 
-
 # Precompile regexes for dict key CamelCase to snake_case conversion
 _re_first = re.compile('(.)([A-Z][a-z]+)')
 _re_all = re.compile('([a-z0-9])([A-Z])')
