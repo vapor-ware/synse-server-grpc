@@ -12,13 +12,7 @@ pipeline {
     }
 
     stage('Lint') {
-      agent {
-        docker {
-          image 'vaporio/python:3.6'
-        }
-      }
       steps {
-        sh 'pip install tox'
         sh 'cd python && tox -e format'
       }
     }
