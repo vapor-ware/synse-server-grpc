@@ -23,18 +23,11 @@ pipeline {
       }
     }
 
-    // Builds a python package for the release
-    stage('Package Python') {
-      //agent {
-      //  docker {
-      //    image 'vaporio/python:3.6'
-      //    reuseNode true
-      //  }
-      //}
-      //when {
-      //  // example matches: 1.2.3, 1.2.3-dev
-      //  tag pattern: '(0|[1-9]*)\\.(0|[1-9]*)\\.(0|[1-9]*)(-(\\S*))?$', comparator: "REGEXP"
-      //}
+    stage('Python: Package') {
+      when {
+        // example matches: 1.2.3, 1.2.3-dev
+        tag pattern: '(0|[1-9]*)\\.(0|[1-9]*)\\.(0|[1-9]*)(-(\\S*))?$', comparator: "REGEXP"
+      }
       steps {
         sh 'mkdir -p build/'
 
@@ -44,7 +37,6 @@ pipeline {
       }
     }
 
-    // Generates and drafts a GitHub release
     stage('Draft GitHub Release') {
       when {
         // example matches: 1.2.3, 1.2.3-dev
@@ -58,6 +50,20 @@ pipeline {
       steps {
         sh 'docker pull edaniszewski/ghr'
         sh 'docker run --rm -v ${WORKSPACE}:/repo edaniszewski/ghr -u ${GITHUB_USER} -r ${GITHUB_REPONAME} -t ${GITHUB_TOKEN} -replace -draft ${TAG_NAME} build/'
+      }
+    }
+
+    stage('Python: Publish to PyPi') {
+      when {
+        // example matches: 1.2.3, 1.2.3-dev
+        tag pattern: '(0|[1-9]*)\\.(0|[1-9]*)\\.(0|[1-9]*)(-(\\S*))?$', comparator: "REGEXP"
+      }
+      environment {
+        TWINE_USERNAME = 'vaporio'
+        TWINE_PASSWORD = credentials('twine-password')
+      }
+      steps {
+        sh 'cd python && tox -e publish'
       }
     }
   }
