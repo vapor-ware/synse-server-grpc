@@ -13,7 +13,9 @@ pipeline {
 
     stage('Lint') {
       agent {
-        image 'vaporio/python:3.6'
+        docker {
+          image 'vaporio/python:3.6'
+        }
       }
       steps {
         sh 'cd python && make fmt'
@@ -22,7 +24,9 @@ pipeline {
 
     stage('Test') {
       agent {
-        image 'vaporio/python:3.6'
+        docker {
+          image 'vaporio/python:3.6'
+        }
       }
       steps {
         sh 'cd python && make test'
