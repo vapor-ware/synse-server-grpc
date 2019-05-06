@@ -11,36 +11,30 @@ pipeline {
       }
     }
 
-    stage('Lint') {
+    stage('Python: Lint') {
       steps {
         sh 'cd python && tox -e format'
       }
     }
 
-    stage('Test') {
-      agent {
-        docker {
-          image 'vaporio/python:3.6'
-        }
-      }
+    stage('Python: Test') {
       steps {
-        sh 'pip install tox'
         sh 'cd python && tox -e unit'
       }
     }
 
     // Builds a python package for the release
     stage('Package Python') {
-      agent {
-        docker {
-          image 'vaporio/python:3.6'
-          reuseNode true
-        }
-      }
-      when {
-        // example matches: 1.2.3, 1.2.3-dev
-        tag pattern: '(0|[1-9]*)\\.(0|[1-9]*)\\.(0|[1-9]*)(-(\\S*))?$', comparator: "REGEXP"
-      }
+      //agent {
+      //  docker {
+      //    image 'vaporio/python:3.6'
+      //    reuseNode true
+      //  }
+      //}
+      //when {
+      //  // example matches: 1.2.3, 1.2.3-dev
+      //  tag pattern: '(0|[1-9]*)\\.(0|[1-9]*)\\.(0|[1-9]*)(-(\\S*))?$', comparator: "REGEXP"
+      //}
       steps {
         sh 'mkdir -p build/'
 
