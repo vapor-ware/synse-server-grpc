@@ -6,7 +6,7 @@ PKG_NAME := synse_grpc
 PKG_VER  := $(shell python python/setup.py --version)
 
 .PHONY: python
-python:  ## Build the GRPC source for Python
+python:  ## Build the gRPC source for Python
 	@printf "Generating Python source."
 	@docker run \
 	    -v `pwd`:/build \
@@ -20,7 +20,7 @@ python:  ## Build the GRPC source for Python
 	@printf " [done]\n"
 
 .PHONY: go
-go:  ## Build the GRPC source for Go
+go:  ## Build the gRPC source for Go
 	@printf "Generating Go source."
 	@docker run \
 	    -v `pwd`:/build \
@@ -36,16 +36,9 @@ github-tag:  ## Create and push a tag with the current version
 	git tag -a ${PKG_VER} -m "${PKG_NAME} version ${PKG_VER}"
 	git push -u origin ${PKG_VER}
 
-.PHONY: py-publish
-py-publish: ## Build and publish the python package to PyPi
-	pip install 'twine>=1.5.0'
-	cd python ; python setup.py sdist bdist_wheel --universal
-	cd python ; twine upload dist/*
-	cd python ; rm -rf build dist .egg synse_grpc.egg-info
-
 .PHONY: version
-version:  ## Print the current version of Synse Server gRPC
-	@echo "$(PKG_VER)"
+version:  ## Print the current version of Synse gRPC
+	@echo "${PKG_VER}"
 
 .PHONY: help
 help:  ## Print usage information
