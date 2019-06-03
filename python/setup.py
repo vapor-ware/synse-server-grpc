@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""Setup and packaging for the synse_grpc API client."""
+"""Setup and packaging for the Synse gRPC API client."""
 
 import os
 
