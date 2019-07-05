@@ -3,7 +3,17 @@
 #
 
 PKG_NAME := synse_grpc
-PKG_VER  := $(shell python python/setup.py --version)
+# FIXME: python setuptools is apparently not complaint with SemVer:
+#   .../python3.6/site-packages/setuptools/dist.py:472: UserWarning: Normalizing '3.0.0-alpha.1' to '3.0.0a1'
+#      normalized_version,
+#      3.0.0a1
+# https://github.com/pypa/setuptools/issues/308
+#
+# Since we build our tags off of this version, we can't get the version via the commented
+# out line below - instead, we'll just awk it from the file directly. Its fine if the
+# version on pypi is normalized for now.
+#PKG_VER  := $(shell python python/setup.py --version)
+PKG_VER := $(shell (cd python/ && python -c "import synse_grpc ; print(synse_grpc.__version__)"))
 
 .PHONY: python
 python:  ## Build the gRPC source for Python
