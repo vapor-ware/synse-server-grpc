@@ -23,6 +23,10 @@ service V3Plugin {
     // current read state.
     rpc ReadCache(V3Bounds) returns (stream V3Reading) {}
 
+    // ReadStream returns reading data for the specified devices as they
+    // are read by the plugin.
+    rpc ReadStream(V3StreamRequest) returns (stream V3Reading) {}
+
     // Test checks whether the plugin is reachable and ready.
     rpc Test(Empty) returns (V3TestStatus) {}
 
@@ -250,6 +254,13 @@ message V3Reading {
 message V3ReadRequest {
     // The selector for the device(s) to read from.
     V3DeviceSelector selector = 1;
+}
+
+// V3StreamRequest is a request to stream device readings. It allows the
+// requester to specify multiple device selectors to allow for additive
+// device selection.
+message V3StreamRequest {
+    repeated V3DeviceSelector selectors = 1;
 }
 
 // V3Tag is a specification for a single tag.

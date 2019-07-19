@@ -39,6 +39,11 @@ class V3PluginStub(object):
         request_serializer=synse__pb2.V3Bounds.SerializeToString,
         response_deserializer=synse__pb2.V3Reading.FromString,
         )
+    self.ReadStream = channel.unary_stream(
+        '/synse.V3Plugin/ReadStream',
+        request_serializer=synse__pb2.V3StreamRequest.SerializeToString,
+        response_deserializer=synse__pb2.V3Reading.FromString,
+        )
     self.Test = channel.unary_unary(
         '/synse.V3Plugin/Test',
         request_serializer=synse__pb2.Empty.SerializeToString,
@@ -107,6 +112,14 @@ class V3PluginServicer(object):
     """ReadCache gets the cached readings from the plugin. If the plugin
     is not configured to cache readings, it will returned the entire
     current read state.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ReadStream(self, request, context):
+    """ReadStream returns reading data for the specified devices as they
+    are read by the plugin.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -184,6 +197,11 @@ def add_V3PluginServicer_to_server(servicer, server):
       'ReadCache': grpc.unary_stream_rpc_method_handler(
           servicer.ReadCache,
           request_deserializer=synse__pb2.V3Bounds.FromString,
+          response_serializer=synse__pb2.V3Reading.SerializeToString,
+      ),
+      'ReadStream': grpc.unary_stream_rpc_method_handler(
+          servicer.ReadStream,
+          request_deserializer=synse__pb2.V3StreamRequest.FromString,
           response_serializer=synse__pb2.V3Reading.SerializeToString,
       ),
       'Test': grpc.unary_unary_rpc_method_handler(

@@ -200,6 +200,44 @@ class PluginClientV3(PluginClientBase):
         except Exception as e:
             errors.wrap_and_raise(e)
 
+    def read_stream(self, devices=None, tag_groups=None):
+        """Get a stream of device readings as plugins read from the devices.
+
+        Args:
+            devices (iterable[string]): An iterable which specifies the IDs of the
+                devices to stream reading data from.
+            tag_groups (iterable[tuple]): An iterable which specifies tuples containing
+                a set of tags to filter by. Each tag group on its own is subtractive (e.g.
+                all tags in the group refine the search space). The resulting set of
+                devices found by matching all tag groups is then collected and joined
+                to produce an additive set of devices to stream reading data from.
+
+        Yields:
+            api.V3Reading: The reading data being streamed from the targeted devices.
+        """
+
+        selectors = []
+
+        for device in devices:
+            selectors.append(api.V3DeviceSelector(
+                id=device,
+            ))
+
+        for group in tag_groups:
+            selectors.append(api.V3DeviceSelector(
+                tags=[utils.tag_to_message(tag) for tag in group],
+            ))
+
+        request = api.V3StreamRequest(
+            selectors=selectors,
+        )
+
+        try:
+            for reading in self.client.ReadStream(request, timeout=self.timeout):
+                yield reading
+        except Exception as e:
+            errors.wrap_and_raise(e)
+
     def test(self):
         """Check whether the plugin is reachable and ready.
 
