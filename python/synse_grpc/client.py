@@ -218,22 +218,24 @@ class PluginClientV3(PluginClientBase):
 
         selectors = []
 
-        for device in devices:
-            selectors.append(api.V3DeviceSelector(
-                id=device,
-            ))
+        if devices:
+            for device in devices:
+                selectors.append(api.V3DeviceSelector(
+                    id=device,
+                ))
 
-        for group in tag_groups:
-            selectors.append(api.V3DeviceSelector(
-                tags=[utils.tag_to_message(tag) for tag in group],
-            ))
+        if tag_groups:
+            for group in tag_groups:
+                selectors.append(api.V3DeviceSelector(
+                    tags=[utils.tag_to_message(tag) for tag in group],
+                ))
 
         request = api.V3StreamRequest(
             selectors=selectors,
         )
 
         try:
-            for reading in self.client.ReadStream(request, timeout=self.timeout):
+            for reading in self.client.ReadStream(request, timeout=None):
                 yield reading
         except Exception as e:
             errors.wrap_and_raise(e)
