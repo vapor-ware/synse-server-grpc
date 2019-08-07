@@ -3,7 +3,9 @@ import re
 
 from google.protobuf.json_format import MessageToDict
 
-from synse_grpc.synse_pb2 import HealthStatus, V3Tag, V3WriteData, WriteStatus
+from synse_grpc.synse_pb2 import (HealthStatus, V3Tag, V3TransactionStatus,
+                                  V3WriteData, V3WritePayload,
+                                  V3WriteTransaction, WriteStatus)
 
 # Precompile regexes for dict key CamelCase to snake_case conversion
 _re_first = re.compile('(.)([A-Z][a-z]+)')
@@ -28,6 +30,16 @@ def to_dict(obj):
         if isinstance(obj, V3WriteData) and key == 'data':
             response[key] = obj.data
             continue
+        elif isinstance(obj, V3TransactionStatus) and key == 'context':
+            response[key] = to_dict(obj.context)
+            continue
+        elif isinstance(obj, V3WritePayload) and key == 'data':
+            response[key] = [to_dict(o) for o in obj.data]
+            continue
+        elif isinstance(obj, V3WriteTransaction) and key == 'context':
+            response[key] = to_dict(obj.context)
+            continue
+
         new_key = _re_all.sub(r'\1_\2', _re_first.sub(r'\1_\2', key)).lower()
         response[new_key] = value
 

@@ -65,6 +65,112 @@ from synse_grpc import api, utils
             'status': 'DONE',
         },
     ),
+    (
+        api.V3TransactionStatus(
+            id='123',
+            timeout='5s',
+            status=api.DONE,
+            context=api.V3WriteData(
+                action='foo',
+                data=b'bar',
+            ),
+        ),
+        {
+            'id': '123',
+            'created': '',
+            'updated': '',
+            'message': '',
+            'timeout': '5s',
+            'status': 'DONE',
+            'context': {
+                'action': 'foo',
+                'data': b'bar',
+                'transaction': '',
+            },
+        },
+    ),
+    (
+        api.V3WriteTransaction(
+            id='123',
+            device='foo',
+            timeout='5s',
+        ),
+        {
+            'id': '123',
+            'device': 'foo',
+            'timeout': '5s',
+        },
+    ),
+    (
+        api.V3WriteTransaction(
+            id='123',
+            device='foo',
+            timeout='5s',
+            context=api.V3WriteData(
+                action='foo',
+                data=b'bar',
+            ),
+        ),
+        {
+            'id': '123',
+            'device': 'foo',
+            'timeout': '5s',
+            'context': {
+                'action': 'foo',
+                'data': b'bar',
+                'transaction': '',
+            },
+        },
+    ),
+    (
+        api.V3WritePayload(
+            selector=api.V3DeviceSelector(
+                id='123',
+            ),
+        ),
+        {
+            'selector': {
+                'id': '123',
+                'tags': [],
+            },
+            'data': [],
+        },
+    ),
+    (
+        api.V3WritePayload(
+            selector=api.V3DeviceSelector(
+                id='123',
+            ),
+            data=[
+                api.V3WriteData(
+                    action='foo1',
+                    data=b'bar1',
+                ),
+                api.V3WriteData(
+                    action='foo2',
+                    data=b'bar2',
+                ),
+            ],
+        ),
+        {
+            'selector': {
+                'id': '123',
+                'tags': [],
+            },
+            'data': [
+                {
+                    'action': 'foo1',
+                    'data': b'bar1',
+                    'transaction': '',
+                },
+                {
+                    'action': 'foo2',
+                    'data': b'bar2',
+                    'transaction': '',
+                },
+            ],
+        },
+    ),
 ])
 def test_to_dict(message, expected):
     """Convert gRPC messages to their dictionary representations."""
