@@ -22,6 +22,8 @@ class PluginClientBase:
         timeout (int): The default timeout to use for the gRPC client.
         tls (str): The path to the TLS cert to use. If not using TLS,
             this can be left as None. (default: None)
+        interceptors: A collection of gRPC client interceptors that will
+            be applied to the channel.
 
     Raises:
         ValueError: An unsupported network protocol was specified.
@@ -34,11 +36,12 @@ class PluginClientBase:
     # an empty request.
     empty = api.Empty()
 
-    def __init__(self, address, protocol, timeout=None, tls=None):
+    def __init__(self, address, protocol, timeout=None, tls=None, interceptors=None):
         self.address = address
         self.protocol = protocol.lower()
         self.timeout = timeout
         self.tls = tls
+        self.interceptors = interceptors
 
         if self.protocol not in self._protocols:
             raise ValueError(
@@ -72,9 +75,14 @@ class PluginClientBase:
             with open(self.tls, 'rb') as f:
                 cert = f.read()
             credentials = grpclib.ssl_channel_credentials(root_certificates=cert)
-            return grpclib.secure_channel(self.get_address(), credentials)
+            channel = grpclib.secure_channel(self.get_address(), credentials)
         else:
-            return grpclib.insecure_channel(self.get_address())
+            channel = grpclib.insecure_channel(self.get_address())
+
+        if self.interceptors:
+            channel = grpclib.intercept_channel(channel, *self.interceptors)
+
+        return channel
 
     def make_grpc_client(self):
         """Initialize a new gRPC client to communicate with the plugin."""
