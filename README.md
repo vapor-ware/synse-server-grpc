@@ -63,11 +63,12 @@ A new release is triggered by GitHub tag. The version of the release is defined 
 corresponding tag is pushed (e.g. via `make github-tag`), CI will package, release,
 and publish any artifacts.
 
-Releasing and artifact publishing should not be done manually. 
+Releasing and artifact publishing should not be done manually.
 
 ### Troubleshooting
 
 To see a list of available make targets and a brief description, use
+
 ```bash
 make help
 ```
@@ -76,4 +77,5 @@ If there is a bug or other issue you would like to report, please open a GitHub 
 as much context around the bug/issue as possible.
 
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fvapor-ware%2Fsynse-server-grpc.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fvapor-ware%2Fsynse-server-grpc?ref=badge_large)
