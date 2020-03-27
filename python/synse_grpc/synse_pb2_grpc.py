@@ -4,9 +4,9 @@ import grpc
 from . import synse_pb2 as synse__pb2
 
 
-class PluginStub(object):
-  # missing associated documentation comment in .proto file
-  pass
+class V3PluginStub(object):
+  """V3Plugin is the API for plugin communication in Synse v3.
+  """
 
   def __init__(self, channel):
     """Constructor.
@@ -14,195 +14,227 @@ class PluginStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.Test = channel.unary_unary(
-        '/synse.Plugin/Test',
-        request_serializer=synse__pb2.Empty.SerializeToString,
-        response_deserializer=synse__pb2.Status.FromString,
-        )
-    self.Version = channel.unary_unary(
-        '/synse.Plugin/Version',
-        request_serializer=synse__pb2.Empty.SerializeToString,
-        response_deserializer=synse__pb2.VersionInfo.FromString,
+    self.Devices = channel.unary_stream(
+        '/synse.V3Plugin/Devices',
+        request_serializer=synse__pb2.V3DeviceSelector.SerializeToString,
+        response_deserializer=synse__pb2.V3Device.FromString,
         )
     self.Health = channel.unary_unary(
-        '/synse.Plugin/Health',
+        '/synse.V3Plugin/Health',
         request_serializer=synse__pb2.Empty.SerializeToString,
-        response_deserializer=synse__pb2.PluginHealth.FromString,
+        response_deserializer=synse__pb2.V3Health.FromString,
         )
-    self.Metainfo = channel.unary_unary(
-        '/synse.Plugin/Metainfo',
+    self.Metadata = channel.unary_unary(
+        '/synse.V3Plugin/Metadata',
         request_serializer=synse__pb2.Empty.SerializeToString,
-        response_deserializer=synse__pb2.Metadata.FromString,
-        )
-    self.Capabilities = channel.unary_stream(
-        '/synse.Plugin/Capabilities',
-        request_serializer=synse__pb2.Empty.SerializeToString,
-        response_deserializer=synse__pb2.DeviceCapability.FromString,
-        )
-    self.Devices = channel.unary_stream(
-        '/synse.Plugin/Devices',
-        request_serializer=synse__pb2.DeviceFilter.SerializeToString,
-        response_deserializer=synse__pb2.Device.FromString,
+        response_deserializer=synse__pb2.V3Metadata.FromString,
         )
     self.Read = channel.unary_stream(
-        '/synse.Plugin/Read',
-        request_serializer=synse__pb2.DeviceFilter.SerializeToString,
-        response_deserializer=synse__pb2.Reading.FromString,
+        '/synse.V3Plugin/Read',
+        request_serializer=synse__pb2.V3ReadRequest.SerializeToString,
+        response_deserializer=synse__pb2.V3Reading.FromString,
         )
-    self.ReadCached = channel.unary_stream(
-        '/synse.Plugin/ReadCached',
-        request_serializer=synse__pb2.Bounds.SerializeToString,
-        response_deserializer=synse__pb2.DeviceReading.FromString,
+    self.ReadCache = channel.unary_stream(
+        '/synse.V3Plugin/ReadCache',
+        request_serializer=synse__pb2.V3Bounds.SerializeToString,
+        response_deserializer=synse__pb2.V3Reading.FromString,
         )
-    self.Write = channel.unary_unary(
-        '/synse.Plugin/Write',
-        request_serializer=synse__pb2.WriteInfo.SerializeToString,
-        response_deserializer=synse__pb2.Transactions.FromString,
+    self.ReadStream = channel.unary_stream(
+        '/synse.V3Plugin/ReadStream',
+        request_serializer=synse__pb2.V3StreamRequest.SerializeToString,
+        response_deserializer=synse__pb2.V3Reading.FromString,
         )
-    self.Transaction = channel.unary_stream(
-        '/synse.Plugin/Transaction',
-        request_serializer=synse__pb2.TransactionFilter.SerializeToString,
-        response_deserializer=synse__pb2.WriteResponse.FromString,
+    self.Test = channel.unary_unary(
+        '/synse.V3Plugin/Test',
+        request_serializer=synse__pb2.Empty.SerializeToString,
+        response_deserializer=synse__pb2.V3TestStatus.FromString,
+        )
+    self.Transaction = channel.unary_unary(
+        '/synse.V3Plugin/Transaction',
+        request_serializer=synse__pb2.V3TransactionSelector.SerializeToString,
+        response_deserializer=synse__pb2.V3TransactionStatus.FromString,
+        )
+    self.Transactions = channel.unary_stream(
+        '/synse.V3Plugin/Transactions',
+        request_serializer=synse__pb2.Empty.SerializeToString,
+        response_deserializer=synse__pb2.V3TransactionStatus.FromString,
+        )
+    self.Version = channel.unary_unary(
+        '/synse.V3Plugin/Version',
+        request_serializer=synse__pb2.Empty.SerializeToString,
+        response_deserializer=synse__pb2.V3Version.FromString,
+        )
+    self.WriteAsync = channel.unary_stream(
+        '/synse.V3Plugin/WriteAsync',
+        request_serializer=synse__pb2.V3WritePayload.SerializeToString,
+        response_deserializer=synse__pb2.V3WriteTransaction.FromString,
+        )
+    self.WriteSync = channel.unary_stream(
+        '/synse.V3Plugin/WriteSync',
+        request_serializer=synse__pb2.V3WritePayload.SerializeToString,
+        response_deserializer=synse__pb2.V3TransactionStatus.FromString,
         )
 
 
-class PluginServicer(object):
-  # missing associated documentation comment in .proto file
-  pass
+class V3PluginServicer(object):
+  """V3Plugin is the API for plugin communication in Synse v3.
+  """
 
-  def Test(self, request, context):
-    """Test returns the status of the plugin. This call is intended to
-    be used in order to check if a plugin is reachable. The status
-    returned here designates plugin reachability, not plugin health.
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def Version(self, request, context):
-    """Version returns the version info for the plugin. This is not used
-    by Synse Server, but can be used by the CLI/manual plugin interaction.
+  def Devices(self, request, context):
+    """Devices gets all devices that a plugin manages.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def Health(self, request, context):
-    """Health returns the health status of a plugin.
+    """Health gets the health status of a plugin.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def Metainfo(self, request, context):
-    """Metainfo gets the metainfo for the plugin. This info provides details
-    about the plugin itself.
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def Capabilities(self, request, context):
-    """Capabilities returns the collection of capabilities that a plugin
-    exposes. More specifically, this means types of devices supported
-    and the readings supported for each of those devices.
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def Devices(self, request, context):
-    """Devices gets info for all of the devices that the plugin manages.
-    This rpc call is the plugin's equivalent to a Synse Server scan.
+  def Metadata(self, request, context):
+    """Metadata gets the plugin meta-information.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def Read(self, request, context):
-    """Read returns the reading data for the specified device.
+    """Read gets readings from the specified plugin device(s).
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def ReadCached(self, request, context):
-    """ReadCached returns the reading data that is cached by the plugin.
-    If caching is not enabled on the plugin, this will just return the
-    current readings.
+  def ReadCache(self, request, context):
+    """ReadCache gets the cached readings from the plugin. If the plugin
+    is not configured to cache readings, it will returned the entire
+    current read state.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def Write(self, request, context):
-    """Write issues an asynchronous write command to the specified device.
+  def ReadStream(self, request, context):
+    """ReadStream returns reading data for the specified devices as they
+    are read by the plugin.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def Test(self, request, context):
+    """Test checks whether the plugin is reachable and ready.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def Transaction(self, request, context):
-    """Transactiong gets the state/status of an asynchronous write transaction.
+    """Transaction gets the status of a write transaction for an
+    asynchronous write.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def Transactions(self, request, context):
+    """Transactions gets all transactions which are currently kept
+    in the plugin's transaction cache.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def Version(self, request, context):
+    """Version gets the version information for the plugin.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def WriteAsync(self, request, context):
+    """WriteAsync writes data to the specified plugin device. A transaction ID
+    is returned so the write status can be checked asynchronously.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def WriteSync(self, request, context):
+    """WriteSync writes data to the specified plugin device. The request blocks
+    until the write resolves so no asynchronous checking is required.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
 
-def add_PluginServicer_to_server(servicer, server):
+def add_V3PluginServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'Test': grpc.unary_unary_rpc_method_handler(
-          servicer.Test,
-          request_deserializer=synse__pb2.Empty.FromString,
-          response_serializer=synse__pb2.Status.SerializeToString,
-      ),
-      'Version': grpc.unary_unary_rpc_method_handler(
-          servicer.Version,
-          request_deserializer=synse__pb2.Empty.FromString,
-          response_serializer=synse__pb2.VersionInfo.SerializeToString,
+      'Devices': grpc.unary_stream_rpc_method_handler(
+          servicer.Devices,
+          request_deserializer=synse__pb2.V3DeviceSelector.FromString,
+          response_serializer=synse__pb2.V3Device.SerializeToString,
       ),
       'Health': grpc.unary_unary_rpc_method_handler(
           servicer.Health,
           request_deserializer=synse__pb2.Empty.FromString,
-          response_serializer=synse__pb2.PluginHealth.SerializeToString,
+          response_serializer=synse__pb2.V3Health.SerializeToString,
       ),
-      'Metainfo': grpc.unary_unary_rpc_method_handler(
-          servicer.Metainfo,
+      'Metadata': grpc.unary_unary_rpc_method_handler(
+          servicer.Metadata,
           request_deserializer=synse__pb2.Empty.FromString,
-          response_serializer=synse__pb2.Metadata.SerializeToString,
-      ),
-      'Capabilities': grpc.unary_stream_rpc_method_handler(
-          servicer.Capabilities,
-          request_deserializer=synse__pb2.Empty.FromString,
-          response_serializer=synse__pb2.DeviceCapability.SerializeToString,
-      ),
-      'Devices': grpc.unary_stream_rpc_method_handler(
-          servicer.Devices,
-          request_deserializer=synse__pb2.DeviceFilter.FromString,
-          response_serializer=synse__pb2.Device.SerializeToString,
+          response_serializer=synse__pb2.V3Metadata.SerializeToString,
       ),
       'Read': grpc.unary_stream_rpc_method_handler(
           servicer.Read,
-          request_deserializer=synse__pb2.DeviceFilter.FromString,
-          response_serializer=synse__pb2.Reading.SerializeToString,
+          request_deserializer=synse__pb2.V3ReadRequest.FromString,
+          response_serializer=synse__pb2.V3Reading.SerializeToString,
       ),
-      'ReadCached': grpc.unary_stream_rpc_method_handler(
-          servicer.ReadCached,
-          request_deserializer=synse__pb2.Bounds.FromString,
-          response_serializer=synse__pb2.DeviceReading.SerializeToString,
+      'ReadCache': grpc.unary_stream_rpc_method_handler(
+          servicer.ReadCache,
+          request_deserializer=synse__pb2.V3Bounds.FromString,
+          response_serializer=synse__pb2.V3Reading.SerializeToString,
       ),
-      'Write': grpc.unary_unary_rpc_method_handler(
-          servicer.Write,
-          request_deserializer=synse__pb2.WriteInfo.FromString,
-          response_serializer=synse__pb2.Transactions.SerializeToString,
+      'ReadStream': grpc.unary_stream_rpc_method_handler(
+          servicer.ReadStream,
+          request_deserializer=synse__pb2.V3StreamRequest.FromString,
+          response_serializer=synse__pb2.V3Reading.SerializeToString,
       ),
-      'Transaction': grpc.unary_stream_rpc_method_handler(
+      'Test': grpc.unary_unary_rpc_method_handler(
+          servicer.Test,
+          request_deserializer=synse__pb2.Empty.FromString,
+          response_serializer=synse__pb2.V3TestStatus.SerializeToString,
+      ),
+      'Transaction': grpc.unary_unary_rpc_method_handler(
           servicer.Transaction,
-          request_deserializer=synse__pb2.TransactionFilter.FromString,
-          response_serializer=synse__pb2.WriteResponse.SerializeToString,
+          request_deserializer=synse__pb2.V3TransactionSelector.FromString,
+          response_serializer=synse__pb2.V3TransactionStatus.SerializeToString,
+      ),
+      'Transactions': grpc.unary_stream_rpc_method_handler(
+          servicer.Transactions,
+          request_deserializer=synse__pb2.Empty.FromString,
+          response_serializer=synse__pb2.V3TransactionStatus.SerializeToString,
+      ),
+      'Version': grpc.unary_unary_rpc_method_handler(
+          servicer.Version,
+          request_deserializer=synse__pb2.Empty.FromString,
+          response_serializer=synse__pb2.V3Version.SerializeToString,
+      ),
+      'WriteAsync': grpc.unary_stream_rpc_method_handler(
+          servicer.WriteAsync,
+          request_deserializer=synse__pb2.V3WritePayload.FromString,
+          response_serializer=synse__pb2.V3WriteTransaction.SerializeToString,
+      ),
+      'WriteSync': grpc.unary_stream_rpc_method_handler(
+          servicer.WriteSync,
+          request_deserializer=synse__pb2.V3WritePayload.FromString,
+          response_serializer=synse__pb2.V3TransactionStatus.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'synse.Plugin', rpc_method_handlers)
+      'synse.V3Plugin', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

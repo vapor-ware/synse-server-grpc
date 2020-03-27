@@ -1,113 +1,74 @@
-<p align="center"><a href="https://www.vapor.io/"><img src="assets/logo.png" width="360"></a></p>
-<p align="center">
-    <a href="https://build.vio.sh/blue/organizations/jenkins/vapor-ware%2Fsynse-server-grpc/activity"><img src="https://build.vio.sh/buildStatus/icon?job=vapor-ware/synse-server-grpc/master" /></a>
-    <a href="https://pypi.python.org/pypi/synse-grpc"><img src="https://img.shields.io/pypi/v/synse-grpc.svg"></a>
-<a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fvapor-ware%2Fsynse-server-grpc?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fvapor-ware%2Fsynse-server-grpc.svg?type=shield"/></a>
-        
-<h1 align="center">Synse GRPC</h1>
-</p>
+# Synse gRPC
 
-<p align="center">The internal gRPC API for Synse Server and its plugins.</p>
+[![PyPI](https://img.shields.io/pypi/v/synse-grpc.svg)](https://pypi.python.org/pypi/synse-grpc)
+[![Build](https://build.vio.sh/buildStatus/icon?job=vapor-ware/synse-server-grpc/master)](https://build.vio.sh/blue/organizations/jenkins/vapor-ware%2Fsynse-server-grpc/activity)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fvapor-ware%2Fsynse-server-grpc.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fvapor-ware%2Fsynse-server-grpc?ref=badge_shield)
 
+The internal [gRPC](https://grpc.io/docs/) API for the [Synse](https://github.com/vapor-ware/synse) platform.
 
-As of version 2.0, Synse Server uses a gRPC API internally to communicate with
-plugins to get information and readings to/from configured devices. This repo contains the
-gRPC [API spec][api-spec] as well as auto-generated Python and Go packages for the gRPC
-API client/server.
+This API enables bi-directional communication between [Synse Server](https://github.com/vapor-ware/synse-server)
+and its registered data-providing plugins. This API is kept in its own repository
+since it is used by multiple components written in different languages. This repo
+contains:
 
-Since the gRPC API components are used in multiple places (e.g. Python client in Synse Server,
-Go server in Plugins), this repo serves as the common location for the shared pieces.
+- The Synse gRPC spec ([synse.proto](synse.proto))
+- The auto-generated gRPC code for Go ([go/](go))
+- The auto-generated gRPC code for Python with a simple client wrapper ([python/](python))
 
-## The Synse Ecosystem
-Synse Server is one component of the greater Synse Ecosystem.
+## Getting
 
-- [**vapor-ware/synse-server**][synse-server]: An HTTP server providing a uniform API to interact
-  with physical and virtual devices via plugin backends. This can be thought of as a 'front end'
-  for Synse Plugins.
-  
-- [**vapor-ware/synse-sdk**][synse-sdk]: The official SDK (written in Go) for Synse Plugin
-  development.
+### Go
 
-- [**vapor-ware/synse-cli**][synse-cli]: A CLI that allows you to easily interact with
-  Synse Server and Plugins directly from the command line.
+```
+go get github.com/vapor-ware/synse-server-gprc/go
+```
 
-- [**vapor-ware/synse-graphql**][synse-graphql]: A GraphQL wrapper around Synse Server's
-  HTTP API that provides a powerful query language enabling simple aggregations and
-  operations over multiple devices.
+### Python
 
-- [**vapor-ware/synse-emulator-plugin**][synse-emulator]: A simple plugin with no hardware
-  dependencies that can serve as a plugin backend for Synse Server for development,
-  testing, and just getting familiar with how Synse Server works.
+```
+pip install synse_grpc
+```
 
+## Developing
 
-## Building
-If changes need to be made to the gRPC API, the `go/` and `python/` (and any future supported
-language directory) should *not* be modified. Only the protobuf spec (synse.proto) should be 
-modified. Once changed as desired, the language specific code can be generated via the make 
-target:
+### Generating Language Sources
+
+If changes need to be made to the gRPC API, it is important to ensure backwards compatibility
+with the existing API spec. See the gRPC documentation for details on this. Additionally, the
+files within the `go/` directory and the `synse_pb2.py` and `synse_pb2_grpc.py` files in the
+`python/` directory are auto-generated and should **not** be modified manually. Instead, the
+[protobuf](https://developers.google.com/protocol-buffers/) spec ([synse.proto](synse.proto))
+should be modified and new source files should be generated. Makefile targets are provided to
+make this simple:
 
 ```bash
 make all
 ```
 
-Additionally, packages for a supported language can be built by passing `make` the name of 
-the language, e.g.
+Source files for a single supported language may be built with the language-specific target,
+e.g.
 
 ```bash
-# auto-generate the python source
+# auto-generate the Python source files
 make python
 
-# auto-generate the go source
+# auto-generate the Go source files
 make go
 ```
 
-## Using
+### Releasing
 
-### Go
-To use the generated client/server code for the Synse gRPC API, you simply just need to 
-get it as you would any other go package.
+A new release is triggered by GitHub tag. The version of the release is defined in
+`python/synse_grpc/__init__.py`. The version should follow the SemVer spec. Once a
+corresponding tag is pushed (e.g. via `make github-tag`), CI will package, release,
+and publish any artifacts.
 
-```bash
-go get -v github.com/vapor-ware/synse-server-grpc/go
-```
+Releasing and artifact publishing should not be done manually.
 
-It is then simple to import in a project.
+### Troubleshooting
 
-```go
-package plugin
-
-import (
-    synse "github.com/vapor-ware/synse-server-grpc/go"
-)
-```
-
-### Python
-To use the generated client/server code for the Synse gRPC API, you can get if from pypi
-with pip
-
-```bash
-pip install synse-grpc
-```
-
-It is then simple to import in a project.
-
-```python
-import synse_grpc
-```
-
-
-## Releasing
-GitHub releases are done via CI. The go source does not need to be published anywhere,
-as it can be imported directly from this repo. The python source does need to be published.
-A make target is provided to make it easy.
-
-```bash
-make py-publish
-```
-
-
-## Troubleshooting
 To see a list of available make targets and a brief description, use
+
 ```bash
 make help
 ```
@@ -115,17 +76,6 @@ make help
 If there is a bug or other issue you would like to report, please open a GitHub issue and provide
 as much context around the bug/issue as possible.
 
-
-
-[synse-server]: https://github.com/vapor-ware/synse-server
-[synse-cli]: https://github.com/vapor-ware/synse-cli
-[synse-emulator]: https://github.com/vapor-ware/synse-emulator-plugin
-[synse-graphql]: https://github.com/vapor-ware/synse-graphql
-[synse-sdk]: https://github.com/vapor-ware/synse-sdk
-
-
-[api-spec]: https://github.com/vapor-ware/synse-server-grpc/blob/master/synse.proto
-[release-page]: https://github.com/vapor-ware/synse-server-grpc/releases
-
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fvapor-ware%2Fsynse-server-grpc.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fvapor-ware%2Fsynse-server-grpc?ref=badge_large)
