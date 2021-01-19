@@ -42,6 +42,7 @@ from synse_grpc import api, utils
             'timestamp': '',
             'type': 'test',
             'device_type': '',
+            'device_info': '',
             'string_value': 'foo',
             'unit': {
                 'name': 'test',
