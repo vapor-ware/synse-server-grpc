@@ -248,6 +248,10 @@ message V3Reading {
         uint32 uint32_value  = 14;
         uint64 uint64_value  = 15;
     }
+
+    // Info string associated with the Reading's device. This provides
+    // additional human-readable context for the reading.
+    string deviceInfo = 16;
 }
 
 // V3ReadRequest is a request for device readings.
