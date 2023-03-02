@@ -1,0 +1,68 @@
+name: ci
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install tox tox-gh-actions
+      - name: Run Unit Test
+        run: |
+          cd python
+          tox -e unit
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install tox tox-gh-actions
+      - name: Run Link
+        run: |
+          cd python
+          tox -e format
+
+  release:
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    needs: [test, lint]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - name: Setup Go Environment
+        uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.20.0'
+      - name: Upload
+        run: |
+          mkdir -p build/
+          cd python && python setup.py sdist
+          go get github.com/tcnksm/ghr
+          ghr -r ${{ github.event.repository.name }} -t ${{ secrets.GITHUB_TOKEN }} -replace -draft ${{ TAG_NAME }} build/
+
+  pypi:
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    needs: [test, lint]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install tox tox-gh-actions
+      - name: Publish
+        env:
+          TWINE_USERNAME: vaporio
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+        run: |
+          cd python
+          tox -e publish
