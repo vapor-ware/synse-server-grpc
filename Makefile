@@ -9,12 +9,12 @@ PKG_VER  := $(shell python python/setup.py --version)
 python:  ## Build the gRPC source for Python
 	@printf "Generating Python source."
 	@docker run \
-	    -v `pwd`:/build \
-	    grpc/python:1.4 \
-	    python3 -m grpc_tools.protoc -I/build \
-	        --python_out=/build/python/synse_grpc \
-	        --grpc_python_out=/build/python/synse_grpc \
-	        /build/synse.proto && \
+		-v `pwd`:/defs \
+		namely/protoc-all \
+		-f synse.proto \
+		-o python/synse_grpc/ \
+		-l python
+	rm python/__init__.py
 	sed -i -e 's/import synse_pb2 as synse__pb2/from . import synse_pb2 as synse__pb2/g' python/synse_grpc/synse_pb2_grpc.py && \
 	if [ -f "python/synse_grpc/synse_pb2_grpc.py-e" ]; then rm python/synse_grpc/synse_pb2_grpc.py-e; fi;
 	@printf " [done]\n"
