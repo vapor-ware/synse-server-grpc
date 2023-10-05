@@ -1,7 +1,7 @@
 """Synse gRPC API for plugin communication."""
 
 __title__ = 'synse_grpc'
-__version__ = '3.1.0'
+__version__ = '3.2.0'
 __description__ = 'The Synse gRPC API for plugin communication.'
 __author__ = 'Vapor IO'
 __author_email__ = 'vapor@vapor.io'
